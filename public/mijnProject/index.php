@@ -13,6 +13,7 @@ else {
 // Dit gedeelte laat je normaliter weg, maar is hier ter illustratie toegevoegd
 echo '<i>verbinding database succesvol</i>';
 }
+
 ?>
 <!DOCTYPE html>
 <html>
