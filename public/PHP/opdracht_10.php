@@ -22,7 +22,7 @@ else {
 
 echo "<h2>Eenvoudige query</h2>";
 // Voer een query uit
-$sql = "SELECT * FROM artiest,titel WHERE artiest.id=titel.artiest_id AND artiest='Andre Hazes' order by jaar ASC";
+$sql = "SELECT * FROM artiest,titel WHERE artiest.id=titel.artiest_id AND artiest='Nirvana' order by jaar ASC";
 $records = mysqli_query($DBverbinding, $sql);
       
 if (mysqli_num_rows($records) > 0) {

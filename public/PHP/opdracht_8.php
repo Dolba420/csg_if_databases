@@ -8,8 +8,8 @@ TYP HIERONDER JOUW PHPCODE
 // Maak een tweedimenionale array, ofwel een array van arrays
 $speelveld=array(
                   array('X','O','O'),
-                  array('X','X','X'),
-                  array('O','X','O')
+                  array('X','O','X'),
+                  array('O','O','X')
                 );
 $winnaar='Niemand';
 
@@ -18,6 +18,14 @@ for ($n=0;$n<3;$n++) {
     $winnaar=$speelveld[$n][0];
   }
 }
+
+for ($kolom=0; $kolom < 3; $kolom++) { 
+    if ($speelveld[0][$kolom] == $speelveld[1][$kolom] && $speelveld[1][$kolom] == $speelveld[2][$kolom]) {
+        $winnaar=$speelveld[$kolom][0];
+    }
+}
+
+
 
 echo "<h1>".$winnaar." heeft gewonnen.</h1>";
 
