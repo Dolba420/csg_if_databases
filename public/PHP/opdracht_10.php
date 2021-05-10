@@ -35,6 +35,23 @@ else {
   echo "0 resultaten";
 }
 
+$sql = "SELECT * FROM artiest,titel,jaar WHERE artiest.id=titel.artiest_id AND artiest='Nirvana' AND jaar=2014 order by jaar ASC";
+$records = mysqli_query($DBverbinding, $sql);
+      
+if (mysqli_num_rows($records) > 0) {
+  // Voor elke rij uit de resultaattabel wordt een array aangemaakt
+  while($record = mysqli_fetch_assoc($records)) {
+    echo $record["titel"]." uit ".$record["jaar"].".<br>";
+  }
+}
+else {
+  echo "0 resultaten";
+}
+
+$straat = 'H.W. Mesdagplein';
+
+
+
 // Als je klaar bent dan sluit je de gemaakte verbinding met de database
 mysqli_close($DBverbinding);  
 
