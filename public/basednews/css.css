@@ -1,0 +1,16 @@
+html{
+    margin: 0px;
+}
+body{
+    margin: 0px;
+}
+.header{
+    background-color: #cf142b;
+    margin: 0px;
+}
+.buf{
+    float: right;
+}
+.logotext{
+    /*float: left;*/
+}
