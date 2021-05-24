@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<?php 
-require("head.php");
-?>
 <?php
-require("header.php");
+    require("php/database.php");
+    require("php/head.php");
+    require("php/header.php");
 ?>
-<html>
 <body>
+<?php
+require("php/uitgelicht.php");
+?>
 
 
+
+<?php
+require("php/footer.php");
+?>
 </body>
-</html>
-
-
 </html>
