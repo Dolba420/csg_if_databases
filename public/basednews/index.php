@@ -10,8 +10,6 @@
 require("php/uitgelicht.php");
 ?>
 
-
-
 <?php
 require("php/footer.php");
 ?>
