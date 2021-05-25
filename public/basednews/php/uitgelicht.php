@@ -11,7 +11,6 @@ if (mysqli_num_rows($records) > 0) {
 
 $sql = "SELECT * FROM berichten WHERE id=$nieuwste_artikel";
 $records = mysqli_query($DBverbinding, $sql);
-$rijen = ["id", "headline", "auteur", "bericht", "tags","datum", "image"];
 $artikel = [];
 if (mysqli_num_rows($records) > 0) {
     while($dbid = mysqli_fetch_assoc($records)) {
@@ -30,7 +29,7 @@ if (mysqli_num_rows($records) > 0) {
 <br>
 <a href="artikel.php?artikel=<?php echo $artikel[0]?>">
 <div class="container">
-  <img src="img/coomer.png" style="width:100%;">
+  <img src="<?php echo $artikel[6]; ?>" style="width:100%;">
   <div class="uitgelicht_datum">
   </div>
   <div class="top-left"><?php echo $artikel[5];?></div>
@@ -43,23 +42,21 @@ if (mysqli_num_rows($records) > 0) {
 </a>
 <br>
 
+<?php
 
-<a style="text-decoration:none;" href="artikel.php?artikel=x">
-<div class="lijst">
-    <img src="img/braai.jpg" height="100%">
-    <div class="lijstinfo">
-    <h3>Wanneer kan de braai weer aan?</h3>
-    <p>Geschreven door: Dolf Bosch 5/22/21</p>
-    </div>
-</div>
-</a>
-<br>
-<a style="text-decoration:none;" href="artikel.php?artikel=x">
-<div class="lijst">
-    <img src="img/baba.png" height="100%">
-    <div class="lijstinfo">
-    <h3>$BABA haalt nieuw hoogtepunt op $375 per aandeel</h3>
-    <p>Geschreven door: Dolf Bosch 5/22/21</p>
-    </div>
-</div>
-</a>
+$sql = "SELECT * FROM berichten WHERE NOT id=$nieuwste_artikel ORDER BY id DESC";
+$records = mysqli_query($DBverbinding, $sql);
+$lijst = [];
+if (mysqli_num_rows($records) > 0) {
+    while($dbid = mysqli_fetch_assoc($records)) {
+        //require("lijst.php?id=" . $dbid["id"] . "&headline=" . $dbid["headline"] . "&auteur=" . $dbid["auteur"] . "&datum=" . $dbid["datum"] . "&image=" . $dbid["image"]);
+        echo '<a style="text-decoration:none;" href="artikel.php?artikel=' . $dbid["id"] . '"><div class="lijst"><img class="lijstimage" src="' . $dbid["image"] . '"><div class="lijstinfo">';
+        echo '<h3>' . $dbid["headline"] . '</h3><p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p></div></div></a><br>';
+    }
+}
+
+
+?>
+
+
+
