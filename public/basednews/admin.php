@@ -10,6 +10,7 @@ require("php/head.php");
     <a>Nieuw artikel</a>
 </div>
 <br>
+<!--
 <form action="saveartikel.php" method="POST">
     <input type="file" name="picture">
     <br>
@@ -18,6 +19,16 @@ require("php/head.php");
     <textarea name="bericht" rows="10" cols=59></textarea><br>
     <input type="submit" name="submit" value="Submit">
 </form>
+-->
+<form action="saveartikel.php" method="post" enctype="multipart/form-data">
+  Select image to upload:
+  <input type="file" name="fileToUpload" id="fileToUpload">
+  
+    <input type="text" name="headline" placeholder="Titel">
+    <br>
+    <textarea name="bericht" rows="10" cols=59></textarea><br>
+<input type="submit" value="Upload Image" name="submit">
 
+</form>
 </body>
 </html>
