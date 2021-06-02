@@ -10,6 +10,11 @@ require("php/head.php");
     <a>Nieuw artikel</a>
 </div>
 <br>
+<?php
+session_start();
+echo "Welkom " . $_SESSION['gebruiker'];
+
+?>
 <!--
 <form action="saveartikel.php" method="POST">
     <input type="file" name="picture">
