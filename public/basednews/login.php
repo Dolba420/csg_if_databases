@@ -16,6 +16,7 @@ if (mysqli_num_rows($records) > 0) {
             $_SESSION["log"] = true;
             $_SESSION["gebruiker"] = $_POST['username'];
             echo "Welkom " . $_SESSION['gebruiker'];
+            echo '<a href="admin.php"><br>ga naar het adminscherm </a>';
         }
         else{
             echo "Combinatie is onjuist";
@@ -23,7 +24,10 @@ if (mysqli_num_rows($records) > 0) {
     }
 }
  }
+ else{
+     echo "Geen gebruiker aangegeven";
+ }
 ?>
-<a href="admin.php"><br>ga naar het adminscherm </a>
+
 </body>
  </html>

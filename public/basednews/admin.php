@@ -6,25 +6,24 @@ require("php/head.php");
 <body>
 
 <div class="header">
+    <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360"></a>
+    <div class="adminnav">
     <a class="red">Verwijder artikelen</a>
     <a>Nieuw artikel</a>
+    </div>
 </div>
 <br>
 <?php
 session_start();
-echo "Welkom " . $_SESSION['gebruiker'];
+
 
 ?>
-<!--
-<form action="saveartikel.php" method="POST">
-    <input type="file" name="picture">
-    <br>
-    <input type="text" name="headline" placeholder="Titel">
-    <br>
-    <textarea name="bericht" rows="10" cols=59></textarea><br>
-    <input type="submit" name="submit" value="Submit">
-</form>
--->
+
+<?php
+if(isset($_SESSION['gebruiker'])){
+
+echo "Welkom " . $_SESSION['gebruiker'];
+echo '
 <form action="saveartikel.php" method="post" enctype="multipart/form-data">
   Select image to upload:
   <input type="file" name="fileToUpload" id="fileToUpload">
@@ -36,4 +35,10 @@ echo "Welkom " . $_SESSION['gebruiker'];
 
 </form>
 </body>
-</html>
+</html>';
+}
+else{
+    echo "Log eem in jung";
+
+}
+?>

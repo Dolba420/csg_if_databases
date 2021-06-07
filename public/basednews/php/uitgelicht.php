@@ -49,9 +49,21 @@ $records = mysqli_query($DBverbinding, $sql);
 $lijst = [];
 if (mysqli_num_rows($records) > 0) {
     while($dbid = mysqli_fetch_assoc($records)) {
-        //require("lijst.php?id=" . $dbid["id"] . "&headline=" . $dbid["headline"] . "&auteur=" . $dbid["auteur"] . "&datum=" . $dbid["datum"] . "&image=" . $dbid["image"]);
         echo '<a style="text-decoration:none;" href="artikel.php?artikel=' . $dbid["id"] . '"><div class="lijst"><img class="lijstimage" src="' . $dbid["image"] . '"><div class="lijstinfo">';
         echo '<h3>' . $dbid["headline"] . '</h3><p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p></div></div></a><br>';
+    /*echo '<a href="artikel.php?artikel=' . $dbid["id"] . '">
+    <div class="container">
+  <img src="' . $dbid["image"] . '" style="width:100%;">
+  <div class="uitgelicht_datum">
+  </div>
+  <div class="top-left">' . $dbid["datum"] . '</div>
+  <div class="titel">
+  </div>
+  <div class="bottom-left"><h1 class="containerh1">Net binnen:</h1></div>
+  <div class="bottom-left"><b>' . $dbid["headline"] . '</b> Geschreven Door: ' . $dbid["auteur"] . '</div>
+
+</div>
+</a><br>';*/
     }
 }
 

@@ -86,7 +86,7 @@ footer {
     position: absolute;
     opacity: 0.7;
     background-color: white;
-    width: 10%;
+    width: 90px;
     height: 25px;
 }
 div.titel{
@@ -109,6 +109,7 @@ div.titel{
 }
 .lijstinfo{
     display: block;
+    margin-left: 10px;
 }
 .content{
     text-align: center;
@@ -122,7 +123,14 @@ div.titel{
 }
 .lijstimage{
     height: 100%;
+    max-width: 30%;
 }
+
+.adminnav{
+    float: right;
+}
+
+
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
@@ -138,13 +146,17 @@ div.titel{
   width: 100%;
   height: 200px;
   background-color: #cf142b;
-  color: #fff;
+  color: #fff;  
 }
 .containerh1{
     visibility: hidden;
 }
+p.foottext{
+    margin-left: 20px;
+    padding-left: 20px;
+}
 .lijst{
-    height: 200px;
+    height: 150px;
    border: 4px solid #001f7e; 
    width: 90%;
    margin-left: 5%;
@@ -154,7 +166,20 @@ div.titel{
 }
 .lijstimage{
     height: 70%;
+    display: none;
 }
+
+div.titel{
+    bottom: 8px;
+    /*margin-left: 16px;*/
+    position: absolute;
+    opacity: 0.7;
+    background-color: white;
+    width: 100%;
+    height: 100px;
+}
+
+
 }
 
 .dropdown {

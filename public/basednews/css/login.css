@@ -1,0 +1,15 @@
+body{
+    background-color: #cf142b;
+}
+.header {
+  overflow: hidden;
+  background-color: #cf142b;
+  padding: 0px 10px;
+    border-bottom: 2px solid #eb7f7f ;
+}
+.loginscreen{
+    background-color: #eb7f7f;
+    text-align: center;
+    width: 30%;
+    margin-left: 35%;
+}
