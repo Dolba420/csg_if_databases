@@ -1,10 +1,10 @@
 <?php
-    require("php/database.php");
-    require("php/head.php");
+session_start();
+session_destroy();
 ?>
-
 <html>
 <head>
+<meta http-equiv='refresh' content='2; URL=index.php'>
 <link rel="stylesheet"  href="css/login.css">
 <link rel='icon' href='logo/based.ico' type='image/x-icon'>
 </head>
@@ -18,12 +18,7 @@
 </div>
  
 <div class="loginscreen">
-        <form action="login.php" method="POST">
-        <h2>log in</h2>
-        <input type="text" name="username" placeholder="Gebruikersnaam">
-        <input type="password" name="password" placeholder="Wachtwoord">
-    <input type="submit">
-    </form>
+    <p style="font-size: 30px;">U bent uitgelogd en u zal spoedig doorverwezen worden.</p>
 <br>
 
 

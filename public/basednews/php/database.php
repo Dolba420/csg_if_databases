@@ -12,4 +12,3 @@ if (!$DBverbinding) {
 else {
     $check = $check.'connectie database gelukt.<br>';
 }
-?>

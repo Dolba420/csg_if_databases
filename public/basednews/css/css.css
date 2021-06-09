@@ -129,6 +129,13 @@ div.titel{
 .adminnav{
     float: right;
 }
+.maakartikel{
+    margin-left: 10px;
+}
+.footerinhoud{
+    padding-top: 5px;
+    margin-left: 10px;
+}
 
 
 @media screen and (max-width: 500px) {

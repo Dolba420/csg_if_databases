@@ -5,44 +5,44 @@ session_start();
 $target_dir = "img/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
+if (isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if ($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
 }
 
 // Check if file already exists
 if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
+    echo "Sorry, file already exists.";
+    $uploadOk = 0;
 }
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 500000) {
-  echo "Sorry, your file is too large.";
-  $uploadOk = 0;
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
 }
 
 
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
+    echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
 } else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
 }
 ?>
 <?php
@@ -51,18 +51,18 @@ $sql = "SELECT MAX(id) FROM berichten";
 $records = mysqli_query($DBverbinding, $sql);
 $nieuwste_artikel;
 if (mysqli_num_rows($records) > 0) {
-    while($dbid = mysqli_fetch_assoc($records)) {
+    while ($dbid = mysqli_fetch_assoc($records)) {
         $nieuwste_artikel = $dbid['MAX(id)'];
     }
 }
 
 $sql1 = "INSERT INTO `berichten`(`id`, `headline`, `auteur`, `bericht`, `tags`, `datum`, `image`) VALUES (";
-$sql2 =  $nieuwste_artikel+1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . "N/A" . "','" . date("Y/m/d") . "', 'img/" . basename( $_FILES["fileToUpload"]["name"]) ."')";
+$sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . "N/A" . "','" . date("Y/m/d") . "', 'img/" . basename($_FILES["fileToUpload"]["name"]) . "')";
 $sql = $sql1 . $sql2;
 if ($DBverbinding->query($sql) === TRUE) {
-  echo "New record created successfully";
+    echo "New record created successfully";
 } else {
-  echo "Error: " . $sql . "<br>" . $DBverbinding->error;
+    echo "Error: " . $sql . "<br>" . $DBverbinding->error;
 }
 
 ?>
