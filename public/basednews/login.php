@@ -1,8 +1,6 @@
  <html>
  <?php
     require('php/database.php');
-    /*require("php/head.php");
-require("php/header.php");*/
     ?>
 
  <head>

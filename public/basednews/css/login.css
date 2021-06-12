@@ -13,3 +13,17 @@ body{
     width: 30%;
     margin-left: 35%;
 }
+input{
+    display: inline-block;
+    margin-bottom: 50px;
+    width: 33%;
+}
+
+
+@media screen and (max-width: 1000px) {
+input{
+    display: inline-block;
+    margin-bottom: 50px;
+    width: 90%;
+}
+}

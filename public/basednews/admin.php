@@ -2,6 +2,7 @@
 <html>
 <?php
 require("php/head.php");
+require("php/database.php");
 ?>
 
 <body>
@@ -9,8 +10,8 @@ require("php/head.php");
     <div class="header">
         <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360"></a>
         <div class="adminnav">
-            <a class="red">Verwijder artikelen</a>
-            <a>Nieuw artikel</a>
+            <a href="delete.php">Verwijder artikelen</a>
+            <a href="admin.php">Nieuw artikel</a>
         </div>
     </div>
     <br>
