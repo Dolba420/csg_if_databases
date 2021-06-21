@@ -138,6 +138,7 @@ div.titel{
 }
 .adminnav{
     float: right;
+    padding-top: 20px;
 }
 .maakartikel{
     margin-left: 10px;
@@ -148,7 +149,7 @@ div.titel{
 }
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
   .header a {
     float: none;
     display: block;
@@ -158,6 +159,9 @@ div.titel{
   .header-right {
     float: none;
   }
+  .adminnav{
+    float: none;
+}
   footer {
   bottom: 0;
   width: 100%;

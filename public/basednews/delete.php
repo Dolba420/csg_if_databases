@@ -10,30 +10,51 @@ require("php/database.php");
     <div class="header">
         <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360"></a>
         <div class="adminnav">
-            <a class="red">Verwijder artikelen</a>
-            <a>Nieuw artikel</a>
+            <a href="delete.php" class="red">Verwijder artikelen</a>
+            <a href='admin.php'>Nieuw artikel</a>
         </div>
     </div>
     <br>
-    <h1 style="text-align: center;">Klik om te verwijderen</h1>
+
     <?php
     session_start();
-
 
     ?>
 
     <?php
-    if (isset($_SESSION['gebruiker'])) {
+    if (isset($_GET['art']) && isset($_SESSION['gebruiker']) && isset($_GET['confirm'])) {
+        if($_GET['confirm'] == 'ja'){
+            $sql = 'DELETE FROM `berichten` WHERE id=' . $_GET['art'];
+            echo $sql;
+        }
+        else{
+            echo "Ga terug naar homepagina";
+        }
+    }
+    else if (isset($_GET['art']) && isset($_SESSION['gebruiker'])) {
+        
+        $sql = "SELECT * FROM berichten " . "WHERE id=" . $_GET['art'];
+        $records = mysqli_query($DBverbinding, $sql);
+        if (mysqli_num_rows($records) > 0) {
+            while ($dbid = mysqli_fetch_assoc($records)) {
+                echo '<div style="text-align: center;">';
+                echo '<h1> weet je zeker dat je het artikel: ' . $dbid["headline"] . " wil verwijderen</h1>";
+                echo '<a href="delete.php?art=' . $_GET['art'] . "&confirm=ja" .  '"><input type="button" value="Ja"></a>';                
+                echo '<a href="delete.php?art=' . $_GET['art'] . "&confirm=nee" .  '"><input type="button" value="Nee"></a>';
+                echo '</div>';
+            }
+        }
+    } else if (isset($_SESSION['gebruiker'])) {
+        echo '<h1 style="text-align: center;">Klik om te verwijderen</h1>';
         $sql = "SELECT * FROM berichten ORDER BY id DESC";
-$records = mysqli_query($DBverbinding, $sql);
-if (mysqli_num_rows($records) > 0) {
-    while($dbid = mysqli_fetch_assoc($records)) {
-        echo '<a href="delete.php?=' . $dbid["id"] . '"><div class="deleteartikel"></a><img class="lijstimage" src="img/delete.png"><div class="lijstinfo">';
-        echo '<h3>' . $dbid["headline"] . '</h3><p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p></div></div></a><br>';
-    }
-}
-    }
-    else {
+        $records = mysqli_query($DBverbinding, $sql);
+        if (mysqli_num_rows($records) > 0) {
+            while ($dbid = mysqli_fetch_assoc($records)) {
+                echo '<a style="text-decoration: none;" href="delete.php?art=' . $dbid["id"] . '"><div class="deleteartikel"><img class="lijstimage" src="' . $dbid["image"] . '"><div class="lijstinfo">';
+                echo '<h3>' . $dbid["headline"] . '</h3><p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p></div></div></a><br>';
+            }
+        }
+    } else {
         echo "Log eem in jung";
     }
     ?>
