@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+require("php/head.php");
+require("php/header.php");
 //code gevonden op W3 schools
 $target_dir = "img/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -57,7 +58,7 @@ if (mysqli_num_rows($records) > 0) {
 }
 
 $sql1 = "INSERT INTO `berichten`(`id`, `headline`, `auteur`, `bericht`, `tags`, `datum`, `image`) VALUES (";
-$sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . "N/A" . "','" . date("Y/m/d") . "', 'img/" . basename($_FILES["fileToUpload"]["name"]) . "')";
+$sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . "N/A" . "','" . date("Y/d/m") . "', 'img/" . basename($_FILES["fileToUpload"]["name"]) . "')";
 $sql = $sql1 . $sql2;
 if ($DBverbinding->query($sql) === TRUE) {
     echo "New record created successfully";
