@@ -63,7 +63,7 @@ $sql = $sql1 . $sql2;
 if ($DBverbinding->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
-    echo "Error: " . $sql . "<br>" . $DBverbinding->error;
+    echo "Error: " . $sql . "" . $DBverbinding->error;
 }
 
 ?>

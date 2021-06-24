@@ -8,13 +8,13 @@ require("php/database.php");
 <body>
 
     <div class="header">
-        <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360"></a>
+        <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360" /></a>
         <div class="adminnav">
             <a href="delete.php">Verwijder artikelen</a>
             <a href="admin.php">Nieuw artikel</a>
         </div>
     </div>
-    <br>
+
     <?php
     session_start();
 
@@ -28,10 +28,10 @@ require("php/database.php");
 <form action="saveartikel.php" method="post" enctype="multipart/form-data">
   Foto:
   <input type="file" name="fileToUpload" id="fileToUpload">
-  <br><br>
-    <input type="text" name="headline" placeholder="Titel">
-    <br><br>
-    <textarea style="resize: none;" name="bericht" rows="27" cols=100></textarea><br>
+  
+    <input type="text" name="headline" placeholder="Titel"/>
+    
+    <textarea style="resize: none;" name="bericht" rows="27" cols=100></textarea>
 <input type="submit" value="Uploaden" name="submit">
 
 </form>

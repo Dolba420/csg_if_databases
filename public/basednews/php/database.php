@@ -1,5 +1,5 @@
 <?php
-$check = $check.'database.php geladen.<br>';
+$check = $check.'database.php geladen.';
 $servernaam = "localhost";
 $gebruikersnaam = "username";
 $wachtwoord = "password";
@@ -10,5 +10,5 @@ if (!$DBverbinding) {
     die("connectie database mislukt: " . mysqli_connect_error());
 }
 else {
-    $check = $check.'connectie database gelukt.<br>';
+    $check = $check.'connectie database gelukt.';
 }

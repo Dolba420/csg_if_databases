@@ -1,71 +1,112 @@
-html{
-    margin: 0px;
-}
-body{
-    margin: 0px;
-}
-* {box-sizing: border-box;}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&display=swap');
 
-body { 
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+* {
+    margin: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
 }
 
 .header {
   overflow: hidden;
   background-color: #cf142b;
-  padding: 0px 10px;
+  padding: 0px 160px;
+  height: 90px;
+  box-shadow: 0px 0px 16px #555;
+  margin-bottom: 36px;
 }
 
-.header a {
-  float: left;
+.footerinhoud {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+main {
+    margin: 0px 200px;
+}
+@media screen and (max-width: 1000px) {
+    header {
+        padding: 0px 16px;
+    }
+    .footerinhoud {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    main {
+        margin: 0px 16px;
+    }
+}
+
+footer {
+    margin-top: 36px;
+
+    bottom: 0;
+    width: 100%;
+    background-color: #cf142b;
+    color: #fff;  
+  box-shadow: 0px 0px 16px #555;
+  
+}
+
+.footerinhoud {
+    padding-top:  20px;
+    padding-bottom: 12px;
+}
+
+
+
+.menubtn {
   color: black;
   text-align: center;
-  padding: 12px;
   text-decoration: none;
-  font-size: 18px; 
-  line-height: 25px;
-  border-radius: 4px;
-}
-
-.header a.logo {
-  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem; 
   font-weight: bold;
+  text-transform: uppercase;
+  padding: 20px 40px;
+  color: #fff;
 }
 
-.header a:hover {
+.header .logo {
+    height: 80px;
+}
+
+.menubtn:hover {
   background-color: #eb7f7f;
   color: black;
 }
 
-.header a.active {
+.menubtn:active {
   background-color: #eb7f7f;
   color: white;
+}
+
+a:link, a:visited, a:hover, a:active { text-decoration: none; }
+
+article {
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 3px 3px 16px #555;
+    padding: 12px 16px;
+    margin: 46px;
+}
+
+article h3 {
+    color: #111;
+    font-size: 1.6rem;
+}
+
+article p {
+    color: #111;
 }
 
 .header-right {
   float: right;
-  padding:20px 10px;
-}
-footer {
-  bottom: 0;
-  width: 100%;
-  height: 150px;
-  background-color: #cf142b;
-  color: #fff;
-}
-
-.container {
-  text-align: center;
-  color: white;
-  height: 50%;
-  width: 50%;
-  left: 25%;
-  position: relative;
-  border: 4px solid #001f7e;
-  /*border-top: 4px solid #001f7e;
-  border-left: 4px solid #cf142b;
-  border-right: 4px solid #cf142b;*/
 }
 
 .bottom-left {
@@ -143,10 +184,7 @@ div.titel{
 .maakartikel{
     margin-left: 10px;
 }
-.footerinhoud{
-    padding-top: 5px;
-    margin-left: 10px;
-}
+
 
 
 @media screen and (max-width: 800px) {
@@ -161,21 +199,20 @@ div.titel{
   }
   .adminnav{
     float: none;
+  }
 }
-  footer {
-  bottom: 0;
-  width: 100%;
-  height: 200px;
-  background-color: #cf142b;
-  color: #fff;  
+
+
+
+.copyright {
+    margin-top: 16px;   
+    text-align: center; 
 }
+
 .containerh1{
     visibility: hidden;
 }
-p.foottext{
-    margin-left: 20px;
-    padding-left: 20px;
-}
+
 .lijst{
     height: 150px;
    border: 4px solid #001f7e; 
@@ -200,9 +237,6 @@ div.titel{
     height: 100px;
 }
 
-
-}
-
 .dropdown {
   position: relative;
   display: flex;
@@ -222,6 +256,6 @@ div.titel{
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.deleteimg{
+.deleteimg {
 float: right;
 }
