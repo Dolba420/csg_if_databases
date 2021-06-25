@@ -14,9 +14,10 @@ require("php/header.php");
         $artikel = [];
         if (mysqli_num_rows($records) > 0) {
             while ($dbid = mysqli_fetch_assoc($records)) {
-                echo '<p>' . $dbid["datum"] . '<p>';
-                echo '<div class="headlinepicture"><img src="' . $dbid["image"] . '" style="width:100%;"/></div>';
-                echo '<h2>' . $dbid["headline"] . '</h2>';
+                echo '<h1>' . $dbid["headline"] . '</h1>';
+                echo '<p>Door: <strong>' . $dbid["auteur"] . '</strong></p>';
+                echo '<p>Geschreven op: <strong>' . $dbid["datum"] . '</strong></p>';
+                echo '<div class="headlinepicture"><img src="' . $dbid["image"] . '"/></div>';
                 echo '<p>' . $dbid["bericht"] . '</p>';
             }
         }

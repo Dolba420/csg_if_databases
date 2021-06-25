@@ -27,8 +27,16 @@ h1, h2, h3, h4, h5 {
 }
 
 main {
-    margin: 0px 200px;
+    padding: 0px 40px;
+    display: flex; 
+    flex-flow: row wrap;
+    justify-content: center;
 }
+
+.content {
+    padding: 0px 200px;
+}
+
 @media screen and (max-width: 1000px) {
     header {
         padding: 0px 16px;
@@ -38,7 +46,10 @@ main {
         padding-right: 16px;
     }
     main {
-        margin: 0px 16px;
+        padding: 0px 16px;
+    }
+    .content {
+        padding: 0px 16px;
     }
 }
 
@@ -89,13 +100,27 @@ footer {
 a:link, a:visited, a:hover, a:active { text-decoration: none; }
 
 article {
-    width: 100%;
-    border-radius: 3px;
-    box-shadow: 3px 3px 16px #555;
-    padding: 12px 16px;
-    margin: 46px;
+    border-radius: 1%;
+    box-shadow: 0px 0px 12px rgb(156, 156, 156);
+    padding: 16px;
+    margin: 26px;
+    height: 400px;
+    width: 500px;
 }
 
+article:hover {
+    background-color: #eee;
+    box-shadow: 0px 0px 12px rgb(80, 80, 80);
+}
+
+.lijstinfo {
+    height: 20%;
+}
+
+.lijstimage {
+    width: 100%;
+    height: 300px;
+}
 article h3 {
     color: #111;
     font-size: 1.6rem;
@@ -103,6 +128,19 @@ article h3 {
 
 article p {
     color: #111;
+}
+
+.content {
+    margin-bottom: 140px;
+}
+
+.content p {
+    margin: 16px 0px;  
+}
+
+.headlinepicture{
+    width: 100%;
+    margin: 32px 0px;  
 }
 
 .header-right {
@@ -148,24 +186,11 @@ div.titel{
    color: black;
    text-decoration: none;
 }
-.lijstinfo{
-    display: block;
-    margin-left: 10px;
-}
-.content{
-    text-align: center;
-}
-.headlinepicture{
-  height: 50%;
-  width: 50%;
-  left: 25%;
-  position: relative;
-  border: 4px solid #001f7e;    
-}
-.lijstimage{
-    height: 100%;
-    max-width: 30%;
-}
+
+
+
+
+
 .deleteartikel{
      pointer-events: none;
          height: 100px;
@@ -211,20 +236,6 @@ div.titel{
 
 .containerh1{
     visibility: hidden;
-}
-
-.lijst{
-    height: 150px;
-   border: 4px solid #001f7e; 
-   width: 90%;
-   margin-left: 5%;
-   display: flex;
-   color: black;
-   text-decoration: none;
-}
-.lijstimage{
-    height: 70%;
-    display: none;
 }
 
 div.titel{

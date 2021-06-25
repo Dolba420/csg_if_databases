@@ -29,16 +29,10 @@ echo '<main>';
 
 <a href="artikel.php?artikel=<?php echo $artikel[0] ?>">
     <article>
-        <img src="<?php echo $artikel[6]; ?>" style="width:100%;" />
-        <div class="uitgelicht_datum">
-        </div>
-        <div class="top-left"><?php echo $artikel[5]; ?></div>
-        <div class="titel">
-        </div>
-        <div class="bottom-left">
-            <h1 class="containerh1">Net binnen:</h1>
-        </div>
-        <div class="bottom-left"><b><?php echo $artikel[1]; ?></b> Geschreven Door: <?php echo $artikel[2] ?></div>
+        <img class="lijstimage" src="<?php echo $artikel[6]; ?>">
+        <div class="lijstinfo">
+        <h3><?php echo $artikel[1]; ?></h3>
+        <p>Door: <strong><?php echo $artikel[2] ?></strong></p>
     </article>
 </a>
 
@@ -55,7 +49,7 @@ if (mysqli_num_rows($records) > 0) {
             <img class="lijstimage" src="' . $dbid["image"] . '">
             <div class="lijstinfo">
             <h3>' . $dbid["headline"] . '</h3>
-            <p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p>
+            <p>Door: <strong>' . $dbid["auteur"] . '</strong> op ' . $dbid["datum"] . '</p>
         </article>
         </a>
         ';
