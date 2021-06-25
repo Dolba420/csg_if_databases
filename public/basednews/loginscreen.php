@@ -9,13 +9,10 @@
 <link rel='icon' href='logo/based.ico' type='image/x-icon'>
 </head>
 <body>
-<div class="header">
-  <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360"/></a>
-  <div class="header-right">
-<div class="dropdown">
-</div>
-  </div>
-</div>
+<?php
+require("php/header.php");
+
+?>
  
 <div class="loginscreen">
         <form action="login.php" method="POST">
