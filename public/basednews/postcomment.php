@@ -10,6 +10,8 @@ if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
         $nieuwste_comment = $dbid['MAX(commentid)'];
     }
+} else{
+    $nieuwste_comment = 0;
 }
 $nieuwste_comment = $nieuwste_comment +1;
 

@@ -1,6 +1,5 @@
 <?php
 session_start();
-//echo password_hash("Moswald_Bosley", PASSWORD_DEFAULT);
 ?>
 <div class="header">
     <a href="index.php"><img src="logo/basednews.png" class="logo"/></a>

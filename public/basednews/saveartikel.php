@@ -70,10 +70,13 @@ if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
         $nieuwste_artikel = $dbid['MAX(id)'];
     }
+}else{
+    $nieuwste_artikel = 0;
 }
-
+$bericht = str_replace("'", '', $_POST['bericht']);
+$titel = str_replace("'", '', $_POST['headline']);
 $sql1 = "INSERT INTO `berichten`(`id`, `headline`, `auteur`, `bericht`, `datum`, `image`) VALUES (";
-$sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . date("Y/d/m") . "', 'img/" . basename($_FILES["headlinefoto"]["name"]) . "')";
+$sql2 =  $nieuwste_artikel + 1 . ",'" . $titel . "','" . $_SESSION['gebruiker'] . "','" . $bericht . "','" . date("Y/d/m") . "', 'img/" . basename($_FILES["headlinefoto"]["name"]) . "')";
 $sql = $sql1 . $sql2;
 if($uploadOk == 1){
 if ($DBverbinding->query($sql) === TRUE) {
