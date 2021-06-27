@@ -20,13 +20,9 @@ require("php/database.php");
 
 <body>
 
-    <div class="header">
-        <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360"/></a>
-        <div class="adminnav">
-            <a href="delete.php" class="red">Verwijder artikelen</a>
-            <a href='admin.php'>Nieuw artikel</a>
-        </div>
-    </div>
+<?php
+require("php/header.php");
+?>
     
 
     <?php
@@ -71,7 +67,7 @@ require("php/database.php");
         $records = mysqli_query($DBverbinding, $sql);
         if (mysqli_num_rows($records) > 0) {
             while ($dbid = mysqli_fetch_assoc($records)) {
-                echo '<a style="text-decoration: none;" href="delete.php?art=' . $dbid["id"] . '"><div class="deleteartikel"><img class="lijstimage" src="' . $dbid["image"] . '"/><div class="lijstinfo">';
+                echo '<a style="text-decoration: none;" href="delete.php?art=' . $dbid["id"] . '"><div class="deleteartikel"><div class="lijstinfo">';
                 echo '<h3>' . $dbid["headline"] . '</h3><p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p></div></div></a>';
             }
         }

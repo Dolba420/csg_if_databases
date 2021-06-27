@@ -2,33 +2,34 @@
 session_start();
 require("php/head.php");
 require("php/header.php");
+
 //code gevonden op W3 schools
+if($_POST['headline'] != "" && $_POST['bericht'] != ""){
 $target_dir = "img/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . basename($_FILES["headlinefoto"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-// Check if image file is a actual image or fake image
+
 if (isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    $check = getimagesize($_FILES["headlinefoto"]["tmp_name"]);
     if ($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
-        echo "File is not an image.";
+        echo "<p style='margin-left: 10px;'>Het bestand is geen foto </p>";
         $uploadOk = 0;
     }
 }
 
 // Check if file already exists
 if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
+    echo "<p style='margin-left: 10px;'>Sorry, de foto bestaat al </p>";
     $uploadOk = 0;
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
+if ($_FILES["headlinefoto"]["size"] > 500000) {
+    echo "<p style='margin-left: 10px;'>De foto is te groot</p>";
     $uploadOk = 0;
 }
 
@@ -36,17 +37,20 @@ if ($_FILES["fileToUpload"]["size"] > 500000) {
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    
     // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+    if (move_uploaded_file($_FILES["headlinefoto"]["tmp_name"], $target_file)) {
+        //echo htmlspecialchars(basename($_FILES["headlinefoto"]["name"])) . " is geupload";
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "<p style='margin-left: 10px;'>Sorry, er is iets misgegaan tijdens het uploaden</p>";
     }
 }
-?>
-<?php
+}
+else{
+    echo "<p style='margin-left: 10px;'>Je moet wel wat in het artikel schrijven</p>";
+}
+
 include("php/database.php");
 $sql = "SELECT MAX(id) FROM berichten";
 $records = mysqli_query($DBverbinding, $sql);
@@ -57,13 +61,15 @@ if (mysqli_num_rows($records) > 0) {
     }
 }
 
-$sql1 = "INSERT INTO `berichten`(`id`, `headline`, `auteur`, `bericht`, `tags`, `datum`, `image`) VALUES (";
-$sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . "N/A" . "','" . date("Y/d/m") . "', 'img/" . basename($_FILES["fileToUpload"]["name"]) . "')";
+$sql1 = "INSERT INTO `berichten`(`id`, `headline`, `auteur`, `bericht`, `datum`, `image`) VALUES (";
+$sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['gebruiker'] . "','" . $_POST['bericht'] . "','" . date("Y/d/m") . "', 'img/" . basename($_FILES["headlinefoto"]["name"]) . "')";
 $sql = $sql1 . $sql2;
+if($uploadOk == 1){
 if ($DBverbinding->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "<p style='margin-left: 10px;'>Artikel is geplaats!!</p>";
 } else {
-    echo "Error: " . $sql . "" . $DBverbinding->error;
+    echo "<br />Error: " . $sql . "" . $DBverbinding->error;
+}
 }
 
 ?>

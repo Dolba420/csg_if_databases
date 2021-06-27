@@ -6,7 +6,7 @@ $sql = "INSERT INTO `comments`(`artikel_id`, `datum`, `tijd`, `naam`, `bericht`)
 if(strlen($_POST['commentname']) < 30){
     if(strlen($_POST['bericht']) < 1000){
     $records = mysqli_query($DBverbinding, $sql);
-    echo "<meta http-equiv='refresh' content='2; URL=artikel.php?artikel=" . $_GET['artikel'] . "'>";
+    echo "<meta http-equiv='refresh' content='1; URL=artikel.php?artikel=" . $_GET['artikel'] . "'>";
     echo "<p style='margin-left: 20px;'>Comment geplaatst!</p>";
     }
     else{

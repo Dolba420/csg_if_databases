@@ -7,16 +7,10 @@ require("php/database.php");
 
 <body>
 <?php
-require("php/header.php");
 $adminscreen = true;
+require("php/header.php");
 ?>
-    <!--<div class="header">
-        <a href="index.php" class="logo"><img src="logo/basednews.png" height="110" width="360" /></a>
-        <div class="adminnav">
-            <a href="delete.php">Verwijder artikelen</a>
-            <a href="admin.php">Nieuw artikel</a>
-        </div>
-    </div>-->
+
 
     <?php
     session_start();
@@ -26,15 +20,16 @@ $adminscreen = true;
 
     <?php
     if (isset($_SESSION['gebruiker'])) {
-        echo '<div class="maakartikel">Welkom ' . $_SESSION['gebruiker'];
+        echo '<div class="maakartikel">Welkom <b>' . $_SESSION['gebruiker'] . "</b>";
         echo '
 <form action="saveartikel.php" method="post" enctype="multipart/form-data">
-  Foto:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  
-    <input type="text" name="headline" placeholder="Titel"/>
+
+  <p style="margin-top: 20px;">Foto:</p>
+  <input style="margin-right: 100%; margin-top: 20px" type="file" name="headlinefoto" id="fileToUpload">
+
+    <input style="margin-right: 100%; margin-top: 20px" type="text" name="headline" placeholder="Titel"/>
     
-    <textarea style="resize: none;" name="bericht" rows="27" cols=100></textarea>
+    <textarea style="resize: none; margin-right: 100%; margin-top: 20px" name="bericht" placeholder="Artikel" rows="27" cols=100></textarea>
 <input type="submit" value="Uploaden" name="submit">
 
 </form>
