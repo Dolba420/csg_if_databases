@@ -14,12 +14,12 @@ $records = mysqli_query($DBverbinding, $sql);
 $artikel = [];
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
-        array_push($artikel, $dbid["id"]);
-        array_push($artikel, $dbid["headline"]);
-        array_push($artikel, $dbid["auteur"]);
-        array_push($artikel, $dbid["bericht"]);
-        array_push($artikel, $dbid["tags"]);
-        array_push($artikel, $dbid["datum"]);
+        array_push($artikel, htmlspecialchars($dbid["id"]));
+        array_push($artikel, htmlspecialchars($dbid["headline"]));
+        array_push($artikel, htmlspecialchars($dbid["auteur"]));
+        array_push($artikel, htmlspecialchars($dbid["bericht"]));
+        array_push($artikel, htmlspecialchars($dbid["tags"]));
+        array_push($artikel, htmlspecialchars($dbid["datum"]));
         array_push($artikel, $dbid["image"]);
     }
 }
@@ -44,12 +44,12 @@ $lijst = [];
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
         echo '
-        <a href="artikel.php?artikel=' . $dbid["id"] . '">
+        <a href="artikel.php?artikel=' . htmlspecialchars($dbid["id"]) . '">
         <article>
             <img class="lijstimage" src="' . $dbid["image"] . '">
             <div class="lijstinfo">
-            <h3>' . $dbid["headline"] . '</h3>
-            <p>Door: <strong>' . $dbid["auteur"] . '</strong> op ' . $dbid["datum"] . '</p>
+            <h3>' . htmlspecialchars($dbid["headline"]) . '</h3>
+            <p>Door: <strong>' . htmlspecialchars($dbid["auteur"]) . '</strong> op ' . htmlspecialchars($dbid["datum"]) . '</p>
         </article>
         </a>
         ';

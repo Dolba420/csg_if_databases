@@ -41,6 +41,8 @@ require("php/header.php");
                 }
             $sql = 'DELETE FROM `berichten` WHERE id=' . $_GET['art'];
             $records = mysqli_query($DBverbinding, $sql);
+            $sql = 'DELETE FROM `comments` WHERE artikel_id=' . $_GET['art'];
+            $records = mysqli_query($DBverbinding, $sql);
             echo "<h1>Verwijderd!</h1>";
             echo "<a href='index.php'>Ga terug naar homepagina</a>";
             }
@@ -55,7 +57,7 @@ require("php/header.php");
         if (mysqli_num_rows($records) > 0) {
             while ($dbid = mysqli_fetch_assoc($records)) {
                 echo '<div style="text-align: center;">';
-                echo '<h1> weet je zeker dat je het artikel: ' . $dbid["headline"] . " wil verwijderen</h1>";
+                echo '<h1> weet je zeker dat je het artikel: ' . htmlspecialchars($dbid["headline"]) . " wil verwijderen</h1>";
                 echo '<a href="delete.php?art=' . $_GET['art'] . "&confirm=ja" .  '"><input type="button" value="Ja"></a>';
                 echo '<a href="delete.php?art=' . $_GET['art'] . "&confirm=nee" .  '"><input type="button" value="Nee"></a>';
                 echo '</div>';
@@ -68,7 +70,7 @@ require("php/header.php");
         if (mysqli_num_rows($records) > 0) {
             while ($dbid = mysqli_fetch_assoc($records)) {
                 echo '<a style="text-decoration: none;" href="delete.php?art=' . $dbid["id"] . '"><div class="deleteartikel"><div class="lijstinfo">';
-                echo '<h3>' . $dbid["headline"] . '</h3><p>Geschreven door: ' . $dbid["auteur"] . ' op ' . $dbid["datum"] . '</p></div></div></a>';
+                echo '<h3>' . htmlspecialchars($dbid["headline"]) . '</h3><p>Geschreven door: ' . htmlspecialchars($dbid["auteur"]) . ' op ' . $dbid["datum"] . '</p></div></div></a>';
             }
         }
     } else {

@@ -21,13 +21,13 @@ if (isset($_POST["submit"])) {
     }
 }
 
-// Check if file already exists
+
 if (file_exists($target_file)) {
     echo "<p style='margin-left: 10px;'>Sorry, de foto bestaat al </p>";
     $uploadOk = 0;
 }
 
-// Check file size
+
 if ($_FILES["headlinefoto"]["size"] > 500000) {
     echo "<p style='margin-left: 10px;'>De foto is te groot</p>";
     $uploadOk = 0;
@@ -35,13 +35,12 @@ if ($_FILES["headlinefoto"]["size"] > 500000) {
 
 
 
-// Check if $uploadOk is set to 0 by an error
+
 if ($uploadOk == 0) {
     
-    // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["headlinefoto"]["tmp_name"], $target_file)) {
-        //echo htmlspecialchars(basename($_FILES["headlinefoto"]["name"])) . " is geupload";
+
     } else {
         echo "<p style='margin-left: 10px;'>Sorry, er is iets misgegaan tijdens het uploaden</p>";
     }
@@ -68,7 +67,7 @@ if($uploadOk == 1){
 if ($DBverbinding->query($sql) === TRUE) {
     echo "<p style='margin-left: 10px;'>Artikel is geplaats!!</p>";
 } else {
-    echo "<br />Error: " . $sql . "" . $DBverbinding->error;
+    echo "<p style='margin-left: 10px;'>Error: " . $sql . "" . $DBverbinding->error . "</p>";
 }
 }
 
