@@ -21,6 +21,7 @@ require("php/database.php");
 <body>
 
 <?php
+$adminscreen = true;
 require("php/header.php");
 ?>
     

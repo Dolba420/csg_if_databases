@@ -28,10 +28,11 @@ if (file_exists($target_file)) {
 }
 
 
-if ($_FILES["headlinefoto"]["size"] > 500000) {
+if ($_FILES["headlinefoto"]["size"] > 5000000) {
     echo "<p style='margin-left: 10px;'>De foto is te groot</p>";
     $uploadOk = 0;
 }
+
 
 
 
@@ -49,6 +50,17 @@ if ($uploadOk == 0) {
 else{
     echo "<p style='margin-left: 10px;'>Je moet wel wat in het artikel schrijven</p>";
 }
+list($width, $height) = getimagesize($target_file);
+$htowratio = $height/$width;
+if($htowratio > 1.1 || $htowratio < 0.6){
+    echo "<p style='margin-left: 10px;'>foto heeft een te oneven vorm. zorg dat de hoogte gedeeld door de lengte tussen de 0.6 en 1.1 zit</p>";
+    unlink($target_file);
+    $uploadOk = 0;
+}
+if(strlen($_POST['headline']) > 60){
+    echo "<p style='margin-left: 10px;'>De titel mag maximaal 60 karakters lang zijn</p>";
+    $uploadOk = 0;
+}
 
 include("php/database.php");
 $sql = "SELECT MAX(id) FROM berichten";
@@ -65,10 +77,13 @@ $sql2 =  $nieuwste_artikel + 1 . ",'" . $_POST['headline'] . "','" . $_SESSION['
 $sql = $sql1 . $sql2;
 if($uploadOk == 1){
 if ($DBverbinding->query($sql) === TRUE) {
-    echo "<p style='margin-left: 10px;'>Artikel is geplaats!!</p>";
+    echo "<p style='margin-left: 10px;'>Artikel is geplaatst!!</p>";
 } else {
     echo "<p style='margin-left: 10px;'>Error: " . $sql . "" . $DBverbinding->error . "</p>";
+} 
 }
+else{
+    echo "<p style='margin-left: 10px;'>er is iets misgegaan</p>";
 }
 
 ?>

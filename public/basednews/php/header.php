@@ -1,5 +1,6 @@
 <?php
 session_start();
+//echo password_hash("Moswald_Bosley", PASSWORD_DEFAULT);
 ?>
 <div class="header">
     <a href="index.php"><img src="logo/basednews.png" class="logo"/></a>
@@ -22,7 +23,7 @@ session_start();
         echo '<a class="menubtn" href="delete.php">Verwijder artikelen</a>';
         }
         else if (isset($_SESSION['gebruiker'])) {
-            echo '<a class="menubtn" href="loguit.php">Log uit</a>';
+            echo '<a class="menubtn" href="loguit.php">uitloggen</a>';
         }?>
     </div>
 </div>

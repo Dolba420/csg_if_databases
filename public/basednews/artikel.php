@@ -17,7 +17,7 @@ require("php/header.php");
                 echo '<h1>' . htmlspecialchars($dbid["headline"]) . '</h1>';
                 echo '<p>Door: <strong>' . htmlspecialchars($dbid["auteur"]) . '</strong></p>';
                 echo '<p>Geschreven op: <strong>' . htmlspecialchars($dbid["datum"]) . '</strong></p>';
-                echo '<div class="headlinepicture"><img src="' . htmlspecialchars($dbid["image"]) . '"/></div>';
+                echo '<div class="headlinepicture"><img class="kopfoto" src="' . htmlspecialchars($dbid["image"]) . '"/></div>';
                 echo '<p>' . htmlspecialchars($dbid["bericht"]) . '</p>';
             }
         }
