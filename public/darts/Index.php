@@ -5,7 +5,6 @@
 
 </head>
 <body>
-<img src="css/logo.png">
 
 
 
