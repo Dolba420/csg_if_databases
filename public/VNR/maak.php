@@ -9,6 +9,9 @@ if (mysqli_num_rows($records) > 0) {
 else{
     $sql = 'INSERT INTO `login`(`gebruikersnaam`, `wachtwoord`) VALUES ("' . $_POST['username'] . '","' . password_hash($_POST['password'], PASSWORD_DEFAULT) . '")';
     $records = mysqli_query($DBverbinding, $sql);
+    //$_SESSION["username"] = $_POST['username'];
+    echo "Nieuw account aangemaakt! U wordt doorverwezen.";
+    echo '<head><meta http-equiv="refresh" content="2;url=dashboard.php" /></head>';
 }
 
 

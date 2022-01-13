@@ -1,4 +1,5 @@
 <?php
+session_start();
 $check = $check.'database.php geladen.';
 $servernaam = "localhost";
 $gebruikersnaam = "username";

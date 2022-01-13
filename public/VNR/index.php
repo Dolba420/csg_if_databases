@@ -7,6 +7,7 @@
 <body>
     <?php
     require 'php/database.php';
+
     ?>
 <img src="foto/logo2.png" class="logo">
 <form action="dashboard.php" method="post">
