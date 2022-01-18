@@ -7,7 +7,6 @@
 <body>
     <?php
     require 'php/database.php';
-
     ?>
 <img src="foto/logo2.png" class="logo">
 <form action="dashboard.php" method="post">
@@ -15,7 +14,7 @@
     <input type="name" name="username" placeholder="Gebruikersnaam">
     <input type="password" name="password" placeholder="Wachtwoord">
     <input type="submit" value="Log in"><br>
-    <a href="maakaccount.php"><h3>Maak een account</h3></a>
 </form>
+<a href="maakaccount.php"><h3>Maak een account</h3></a>
 </body>
 </html>

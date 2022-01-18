@@ -1,8 +1,42 @@
+html{
+    margin: 0;
+}
 body {
+    margin: 0;
     text-align: center;
-    background-color: green;
+    background-color: #33673B;
 }
 .logo{
     height: 40%;
     width: 40%;
+}
+.container{
+    display: flex;
+}
+nav{
+    color: white;
+    text-align: left;
+    margin: 0;
+    background-color: #9a6d38;
+}
+.sidebar{
+    height: 970px;
+    width: 20%;
+    color: white;
+    text-align: left;
+    margin: 0;
+    background-color: #19231a;
+}
+.username{
+    margin-left: 15px;
+    margin-bottom: 0px;
+}
+.modus{
+    margin: 0;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+.moduscontainer{
+    border: 2px solid white;
 }
