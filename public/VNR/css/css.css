@@ -1,5 +1,7 @@
 html{
     margin: 0;
+    height: 100%;
+    overflow: hidden;
 }
 body {
     margin: 0;
@@ -40,3 +42,23 @@ nav{
 .moduscontainer{
     border: 2px solid white;
 }
+.scherm{
+    width: 100%;
+}
+.dashboardfoto{
+    margin-top: 5%;
+    text-align: center;
+    width: 70%;
+    height: 70%;
+}
+a {
+    color: inherit; 
+    text-decoration: inherit; 
+  }
+  .statistiekenscherm{
+      overflow: scroll;
+      height: 100%;
+      background-color: white;
+      width: 90%;
+      margin-left: 5%;
+  }

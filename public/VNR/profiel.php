@@ -12,10 +12,13 @@ require('php/logincheck.php');
 <nav><h3 class="username"><?php echo $_SESSION['username'];?> (1236)</h3></nav>
 <div class="container">
 <?php
-require('php/moduscontainer.php');
+include 'php/moduscontainer.php';
 ?>
 <div class="scherm">
-        <img src="foto/logo2.png" class="dashboardfoto">
+        <div class="statistiekenscherm">
+            <h1>Statistieken</h1>
+        </div>
+
 </div>
-</div>
+
 </html>
