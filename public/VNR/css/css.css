@@ -56,9 +56,27 @@ a {
     text-decoration: inherit; 
   }
   .statistiekenscherm{
-      overflow: scroll;
+      overflow: auto;
       height: 100%;
       background-color: white;
       width: 90%;
       margin-left: 5%;
+  }
+  .tussenkopjeveiligheid{
+    font-size: 300%;
+  }
+  .tekstveiligheid{
+      margin-right: 20px;
+      margin-left: 25px;
+      font-size: 150%;
+  }
+  .statinhoud{
+      overflow-y: scroll;
+  }
+  .kopjeinstellingen{
+      color:white;
+  }
+  .spelinstellingeninhoud{
+      text-align: left;
+      margin-left: 25px;
   }

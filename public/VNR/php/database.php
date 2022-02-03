@@ -4,7 +4,7 @@ $check = $check.'database.php geladen.';
 $servernaam = "localhost";
 $gebruikersnaam = "username";
 $wachtwoord = "password";
-$database = "dart_spelers";
+$database = "project";
 $DBverbinding = mysqli_connect($servernaam, $gebruikersnaam, $wachtwoord, $database);
 
 if (!$DBverbinding) {
