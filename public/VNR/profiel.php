@@ -22,3 +22,7 @@ include 'php/moduscontainer.php';
 </div>
 
 </html>
+<?php
+//print_r($_SESSION);
+
+?>

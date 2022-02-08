@@ -14,9 +14,15 @@
     <h1 class="modus">Profiel</h1>
 </div>
 </a>
-<a href="veiligheid.php">
+<a href="logout.php">
+<div class="moduscontainer">
+    <h1 class="modus">Logout</h1>
+</div>
+</a>
+<!--<a href="veiligheid.php">
 <div class="moduscontainer">
     <h1 class="modus">Regels en Veiligheid</h1>
 </div>
 </a>
+-->
 </div>

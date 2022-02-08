@@ -1,6 +1,9 @@
+<?php
+session_start();
+?>
+
 <html>
 <head>
-
     <link rel="stylesheet" href="css/css.css">
 
 </head>
@@ -8,7 +11,7 @@
     <?php
     require 'php/database.php';
     ?>
-<img src="foto/logo2.png" class="logo">
+<img src="foto/logo4.png" class="logo">
 <form action="dashboard.php" method="post">
     <h2>Log in</h2>
     <input type="name" name="username" placeholder="Gebruikersnaam">

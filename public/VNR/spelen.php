@@ -17,6 +17,10 @@ require('php/moduscontainer.php');
 <div class="scherm">
         <div class="spelinstellingen">
             <div class="spelinstellingeninhoud">
+            <div class="speler2login">
+        <h1>Tegenstander</h1>
+        </div>
+        <div class="instellingeninhoud">
                 <h3 class="kopjeinstellingen">Beginspeler</h3>
                 <select name="begin" id="begin">
                         <option value="bull">Bullseye</option>
@@ -37,8 +41,14 @@ require('php/moduscontainer.php');
                         ?>
                 </select>
                 <input type="button" value="Nieuwe tegenstander">
+                <div class="nieuwe_tegenstander" id="nieuwe_tegenstander"></div>
+                <div class="rated">
+                <h3 class="kopjeinstellingen">Rated</h3>
+            <input class="ratedcheckbox" type="checkbox" checked="true">
+                </div>
             </div>
         </div>
+</div>
 </div>
 </div>
 </html>

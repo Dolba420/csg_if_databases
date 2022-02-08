@@ -1,4 +1,5 @@
 <?php
+
 require 'php/database.php';
         if(isset($_SESSION['username'])){
             $_SESSION['ingelogt'] = true;
@@ -11,7 +12,9 @@ require 'php/database.php';
             }
             if (password_verify($_POST['password'], $password)) {
                 $_SESSION['ingelogt'] = true;
-                $_SESSION['username'] = $_POST['username'];
+                if(isset($_POST['username'])){
+                    $_SESSION['username'] = $_POST['username'];
+                }
             } else {
                 echo "Wachtwoord onjuist, u wordt doorverwezen.";
                 echo '<head><meta http-equiv="refresh" content="1.5;url=index.php" /></head><!--';
