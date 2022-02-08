@@ -17,8 +17,8 @@ include 'php/moduscontainer.php';
 <div class="scherm">
         <div class="statistiekenscherm">
             <h1>Statistieken</h1>
+            <p> [elo] </p>
         </div>
-
 </div>
 
 </html>

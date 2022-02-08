@@ -17,10 +17,8 @@ require('php/moduscontainer.php');
 <div class="scherm">
         <div class="spelinstellingen">
             <div class="spelinstellingeninhoud">
-            <div class="speler2login">
-        <h1>Tegenstander</h1>
-        </div>
         <div class="instellingeninhoud">
+                <form action="start_spel.php" method="post">
                 <h3 class="kopjeinstellingen">Beginspeler</h3>
                 <select name="begin" id="begin">
                         <option value="bull">Bullseye</option>
@@ -37,18 +35,52 @@ require('php/moduscontainer.php');
                 <h3 class="kopjeinstellingen">Tegenstander</h3>
                 <select name="tegenstander" id="tegenstander">
                         <?php
-                        echo '<option value="null">Geen recente tegenstanders</option>';
+                        if(isset($_SESSION['speler2'])){
+                                echo '<option value="null">' . $_SESSION['speler2'] . '</option>';
+                        }
+                        else{
+                                echo '<option value="null">Geen recente tegenstanders</option>';
+                        }
+                        
                         ?>
                 </select>
-                <input type="button" value="Nieuwe tegenstander">
+                <input type="button" value="Nieuwe tegenstander" onclick="togglevisibility();">
                 <div class="nieuwe_tegenstander" id="nieuwe_tegenstander"></div>
                 <div class="rated">
                 <h3 class="kopjeinstellingen">Rated</h3>
             <input class="ratedcheckbox" type="checkbox" checked="true">
                 </div>
+                <input type="submit" value="Spelen"><br>
+</form>
+
             </div>
         </div>
 </div>
 </div>
+<div class="speler2login" style="visibility: visible;" id="speler2login">
+        <h1>Tegenstander</h1>
+        
+        <form action="speler2login.php" method="post">
+    <h2>Log in</h2>
+    <input type="name" name="username" placeholder="Gebruikersnaam">
+    <input type="password" name="password" placeholder="Wachtwoord">
+    <input type="submit" value="Log in"><br>
+</form>
+        </div>
 </div>
+
+<script>
+var vis = 0;
+function togglevisibility(){
+        if(vis == 0){
+                document.getElementById("speler2login").style = "visibility: visible;";
+                vis = 1
+        }
+        else{
+                document.getElementById("speler2login").style = "visibility: hidden;";
+                vis = 0;
+        }
+}
+
+</script>
 </html>

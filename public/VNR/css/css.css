@@ -80,3 +80,19 @@ a {
       text-align: left;
       margin-left: 25px;
   }
+  .rated{
+      display: flex;
+  }
+  .ratedcheckbox{
+      margin-top: 22px;
+      margin-left: 10px;
+  }
+  .speler2login{
+      height: 200px;
+      background-color: white;
+      width: 40%;
+      /*margin-left: 60%;*/
+  }
+  .instellingeninhoud{
+      width: 50%;
+  }
