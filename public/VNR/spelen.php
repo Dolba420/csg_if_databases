@@ -28,7 +28,7 @@ require('php/moduscontainer.php');
                 </select>
                 <h3 class="kopjeinstellingen">Spel</h3>
                 <select name="spel" id="spel">
-                        <option value="bull">Classic 501</option>
+                        <option value="classic 501">Classic 501</option>
                         <option value="minigame125">125 minigame</option>
                         <option value="killer">Killer</option>
                 </select>
@@ -36,7 +36,7 @@ require('php/moduscontainer.php');
                 <select name="tegenstander" id="tegenstander">
                         <?php
                         if(isset($_SESSION['speler2'])){
-                                echo '<option value="null">' . $_SESSION['speler2'] . '</option>';
+                                echo '<option value="' . $_SESSION['speler2'] . '">' . $_SESSION['speler2'] . '</option>';
                         }
                         else{
                                 echo '<option value="null">Geen recente tegenstanders</option>';
@@ -57,7 +57,7 @@ require('php/moduscontainer.php');
         </div>
 </div>
 </div>
-<div class="speler2login" style="visibility: visible;" id="speler2login">
+<div class="speler2login" style="visibility: hidden;" id="speler2login">
         <h1>Tegenstander</h1>
         
         <form action="speler2login.php" method="post">
