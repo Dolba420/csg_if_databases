@@ -16,6 +16,54 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Match`
+--
+
+DROP TABLE IF EXISTS `Match`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Match` (
+  `Ronde` text NOT NULL,
+  `Werper 1` text NOT NULL,
+  `Werper 2` text NOT NULL,
+  `Datum` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Match`
+--
+
+LOCK TABLES `Match` WRITE;
+/*!40000 ALTER TABLE `Match` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Match` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Worp`
+--
+
+DROP TABLE IF EXISTS `Worp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Worp` (
+  `Gebruikersnaam` text NOT NULL,
+  `Ronde` text NOT NULL,
+  `Aantal` text NOT NULL,
+  `Leg` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Worp`
+--
+
+LOCK TABLES `Worp` WRITE;
+/*!40000 ALTER TABLE `Worp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Worp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `login`
 --
 
@@ -34,7 +82,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('Dolf','$2y$10$4xYzLLjLNz7H9NUuCT/RG.Dnx0Dbh9Z5aoHR5gaEyUDlVmC6gN.K2'),('','$2y$10$4aBP1cFYxnJlAKQ4FhXpUuZJ6VHi2C3B9paStJrL4emf43P9MWA9e'),('Michel','$2y$10$rGVcXPLv/SFWR3Vcb.JbWuEQayt1NUpmuvgIL8sLqpHE50mjgNprS');
+INSERT INTO `login` VALUES ('Dolf','$2y$10$4xYzLLjLNz7H9NUuCT/RG.Dnx0Dbh9Z5aoHR5gaEyUDlVmC6gN.K2'),('Michel','$2y$10$rGVcXPLv/SFWR3Vcb.JbWuEQayt1NUpmuvgIL8sLqpHE50mjgNprS'),('VNR','$2y$10$L2s63iZTiqwIeIPwXCxYfeqY8dUyXYVWJf3T38dPOOuc3bLaT3Dx6');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -47,4 +95,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-03 14:18:27
+-- Dump completed on 2022-02-10 14:07:48

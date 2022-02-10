@@ -96,3 +96,16 @@ a {
   .instellingeninhoud{
       width: 40%;
   }
+  .startspeler{
+
+  }
+  .speler1{
+      text-align: center;
+      background-color: #33673B;
+      width: 50%;
+  }
+  .speler2{
+      text-align: center;
+      background-color: #67335F;
+      width: 50%;
+  }
