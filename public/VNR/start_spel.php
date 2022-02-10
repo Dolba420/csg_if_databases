@@ -10,10 +10,10 @@ require('php/logincheck.php');
 <h1>Wie gooide het dichts bij de Bullseye</h1>
 <div class="startspeler" id="startspeler">
     
-    <div class="speler1" id="speler1">
+    <div class="speler1" id="speler1" onclick="startspeler(1)">
         <h1 class="spelertekst"><?php echo $_SESSION['username']; ?></h1>
     </div>
-    <div class="speler2" id="speler2">
+    <div class="speler2" id="speler2" onclick="startspeler(2)">
     <h1 class="spelertekst"><?php echo $_POST['tegenstander']?></h1>
     </div>
 </div>
@@ -38,5 +38,11 @@ require('php/logincheck.php');
 ?>
 </table>
 -->
+<script>
+    function startspeler(speler){
+        console.log(speler);
+    }
+</script>
+
 </body>
 </html>
