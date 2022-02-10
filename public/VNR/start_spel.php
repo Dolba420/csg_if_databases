@@ -7,13 +7,14 @@ require('php/logincheck.php');
 
 </head>
 <body>
+<h1>Wie gooide het dichts bij de Bullseye</h1>
 <div class="startspeler" id="startspeler">
-    <h1>Wie gooide het dichts bij de Bullseye</h1>
+    
     <div class="speler1" id="speler1">
-        <h1><?php echo $_SESSION['username']; ?></h1>
+        <h1 class="spelertekst"><?php echo $_SESSION['username']; ?></h1>
     </div>
     <div class="speler2" id="speler2">
-    <h1><?php echo $_POST['tegenstander']?></h1>
+    <h1 class="spelertekst"><?php echo $_POST['tegenstander']?></h1>
     </div>
 </div>
 
