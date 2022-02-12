@@ -132,3 +132,23 @@ a {
     border: #F7FE72 10px solid;
     font-size: 300%;
 }
+.spelers{
+    display: flex;
+}
+.speler1spel{
+    text-align: center;
+    background-color: #44894F;
+    width: 50%;
+    height: 400px;
+    font-size: 150%;
+}
+.speler2spel{
+    text-align: center;
+    background-color: #67335F;
+    width: 50%;
+    height: 400px;
+    font-size: 150%;
+}
+.score{
+    font-size: 300%;
+}
