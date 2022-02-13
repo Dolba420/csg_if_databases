@@ -45,7 +45,7 @@ require('php/moduscontainer.php');
                 <input type="button" value="Nieuwe tegenstander" onclick="togglevisibility();">
                 <div class="nieuwe_tegenstander" id="nieuwe_tegenstander"></div>
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
-                <input type="number" min="1">
+                <input type="number" min="1" name="legs">
                 <div class="rated">
                 <h3 class="kopjeinstellingen">Rated</h3>
             <input class="ratedcheckbox" type="checkbox" checked="true">

@@ -152,3 +152,19 @@ a {
 .score{
     font-size: 300%;
 }
+.speler1spelactief{
+    text-align: center;
+    background-color: #44894F;
+    width: 50%;
+    height: 400px;
+    font-size: 150%;
+    border: #F7FE72 10px solid;
+}
+.speler2spelactief{
+    text-align: center;
+    background-color: #67335F;
+    width: 50%;
+    height: 400px;
+    font-size: 150%;
+    border: #F7FE72 10px solid;
+}
