@@ -37,6 +37,19 @@ require('php/logincheck.php');
     <input type="button" value="Ok" onclick="geworpen();">
 </div>
 
+<div class="win" id="win" hidden="hidden">
+    <h1 id="winmessage"></h1>
+    <video width="320" height="240" id="videoplay" controls loop>
+  <source src="foto/win.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+<br><br><br>
+<input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
+<a href="spelen.php">
+<input type="button" value="Terug naar hoofdmenu">
+</a>
+</div>
+
 <!--
 <table>
 <?php 
@@ -58,6 +71,7 @@ echo "</table>";
 </table>
 -->
 <script>
+var legstotwin = <?php echo $_POST['legs']?>;
 var scores = [501, 501];
 var legs = [0,0];
 var beginspeler = null;
@@ -91,28 +105,50 @@ function geworpen(){
         document.getElementById('score0').innerHTML = scores[0];
         document.getElementById('score1').innerHTML = scores[1];
         document.getElementById('puntengegooid').value = 1;
+        beurt(beginspeler * -1 + 1);
+        beginspeler = beginspeler * -1 + 1;
     }
     else{
+        if(document.getElementById('puntengegooid').value <= 180){
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
         beurt(spelerbeurt);
         document.getElementById('puntengegooid').value = 1;
     }
     else{
-    if(document.getElementById('puntengegooid').value <= 180){
         scores[spelerbeurt] = scores[spelerbeurt] - document.getElementById('puntengegooid').value;
         document.getElementById('puntengegooid').value = 1;
         document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
         beurt(spelerbeurt);
     }
-    else{
-        alert("Opgegeven waarde kan niet");
-        document.getElementById('puntengegooid').value = 1;
+
+}
+else{
+    alert("die kan niet wollah");
+    document.getElementById('puntengegooid').value = 1;
+}
+}
+if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin / 2) + 1){
+    if(legs[0] == Math.floor(legstotwin / 2) + 1){
+        document.getElementById("winmessage").innerHTML = spelers[0] + " wint";
     }
+    else{
+        document.getElementById("winmessage").innerHTML = spelers[1] + " wint";
+    }
+    document.getElementById("spelgestart").hidden = "hidden";
+    document.getElementById("win").hidden = "";
+    document.getElementById("videoplay").play();
 }
+
+
 }
 
-
-
+function restart(){
+    document.getElementById("spelerkeuze").hidden = "";
+    document.getElementById("win").hidden = "hidden";
+    document.getElementById("videoplay").pause();
+    legs[0] = 0;
+    legs[1] = 0;
+    document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
 }
 
 </script>
