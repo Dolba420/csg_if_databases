@@ -21,6 +21,7 @@ require('php/logincheck.php');
 </div>
 
 <div id="spelgestart" hidden="hidden">
+    <h1 id="bestof"></h1>
     <h1 id="stand">0 - 0</h1>
     <div class="spelers">
         <div class="speler1spel" id="speler1">
@@ -33,7 +34,7 @@ require('php/logincheck.php');
         </div>
     </div>
     <br>
-    <input type="number" id="puntengegooid" min="1" max="180" value="1" placeholder="aantal punten gegooid">
+    <input type="number" id="puntengegooid" min="1" max="180" value="" placeholder="aantal punten gegooid">
     <input type="button" value="Ok" onclick="geworpen();">
 </div>
 
@@ -75,6 +76,8 @@ var legstotwin = <?php echo $_POST['legs']?>;
 var scores = [501, 501];
 var legs = [0,0];
 var beginspeler = null;
+var puntengegooid = document.getElementById("puntengegooid").value;
+console.log(puntengegooid);
 var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
     function startspeler(speler){
         document.getElementById("spelerkeuze").hidden = "hidden";
@@ -104,19 +107,19 @@ function geworpen(){
         scores[1] = 501;
         document.getElementById('score0').innerHTML = scores[0];
         document.getElementById('score1').innerHTML = scores[1];
-        document.getElementById('puntengegooid').value = 1;
+        document.getElementById('puntengegooid').value = "";
         beurt(beginspeler * -1 + 1);
         beginspeler = beginspeler * -1 + 1;
     }
     else{
-        if(document.getElementById('puntengegooid').value <= 180){
+        if(document.getElementById('puntengegooid').value <= 180 && document.getElementById('puntengegooid').value >= 0){
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
         beurt(spelerbeurt);
-        document.getElementById('puntengegooid').value = 1;
+        document.getElementById('puntengegooid').value = "";
     }
     else{
         scores[spelerbeurt] = scores[spelerbeurt] - document.getElementById('puntengegooid').value;
-        document.getElementById('puntengegooid').value = 1;
+        document.getElementById('puntengegooid').value = "";
         document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
         beurt(spelerbeurt);
     }
@@ -124,7 +127,7 @@ function geworpen(){
 }
 else{
     alert("die kan niet wollah");
-    document.getElementById('puntengegooid').value = 1;
+    document.getElementById('puntengegooid').value = "";
 }
 }
 if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin / 2) + 1){
@@ -150,6 +153,9 @@ function restart(){
     legs[1] = 0;
     document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
 }
+
+document.getElementById("bestof").innerHTML = (Math.floor(legstotwin / 2) + 1)  + " nodig om te winnen.";
+
 
 </script>
 
