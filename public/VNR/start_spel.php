@@ -71,10 +71,12 @@ echo "</table>";
 </table>
 -->
 <script>
+var worp = 0;
 var legstotwin = <?php echo $_POST['legs']?>;
 var scores = [501, 501];
 var legs = [0,0];
 var beginspeler = null;
+var gameid = <?php echo $_POST["gameid"]?>;
 var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
     function startspeler(speler){
         document.getElementById("spelerkeuze").hidden = "hidden";
@@ -91,7 +93,7 @@ beurtarray[1] = document.getElementById('speler2');
 
 function beurt(speler){
     spelerbeurt = spelerbeurt * -1 + 1;
-    beurtarray[0].className = "speler1spel"
+    beurtarray[0].className = "speler1spel";
     beurtarray[1].className = "speler2spel";
     beurtarray[spelerbeurt].className = "speler" + (spelerbeurt + 1) + "spelactief";
 
@@ -99,46 +101,53 @@ function beurt(speler){
 function geworpen(){
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
         legs[spelerbeurt]++;
-        document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
         scores[0] = 501;
         scores[1] = 501;
-        document.getElementById('score0').innerHTML = scores[0];
-        document.getElementById('score1').innerHTML = scores[1];
-        document.getElementById('puntengegooid').value = 1;
-        beurt(beginspeler * -1 + 1);
         beginspeler = beginspeler * -1 + 1;
+        const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                    //console.log(this.responseText);
+                }
+            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value);
+            xhttp.send();
+            beurt(spelerbeurt);
+            worp++;
+            beurt(beginspeler * -1 + 1);
     }
     else{
-        if(document.getElementById('puntengegooid').value <= 180){
-    if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
-        beurt(spelerbeurt);
-        document.getElementById('puntengegooid').value = 1;
+    if(document.getElementById('puntengegooid').value <= 180){
+        if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
+            beurt(spelerbeurt);
+        }
+        else{
+            scores[spelerbeurt] = scores[spelerbeurt] - document.getElementById('puntengegooid').value;
+                const xhttp = new XMLHttpRequest();
+                    xhttp.onload = function() {
+                    //console.log(this.responseText);
+                }
+            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value);
+            xhttp.send();
+            beurt(spelerbeurt);
+            worp++;
     }
+}
     else{
-        scores[spelerbeurt] = scores[spelerbeurt] - document.getElementById('puntengegooid').value;
+        alert("die kan niet wollah");
         document.getElementById('puntengegooid').value = 1;
-        document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
-        beurt(spelerbeurt);
     }
-
-}
-else{
-    alert("die kan niet wollah");
-    document.getElementById('puntengegooid').value = 1;
-}
-}
+    }
 if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin / 2) + 1){
-    if(legs[0] == Math.floor(legstotwin / 2) + 1){
-        document.getElementById("winmessage").innerHTML = spelers[0] + " wint";
-    }
-    else{
-        document.getElementById("winmessage").innerHTML = spelers[1] + " wint";
-    }
+    document.getElementById("winmessage").innerHTML = spelers[legs.indexOf(Math.max(...legs))] + " wint"
     document.getElementById("spelgestart").hidden = "hidden";
     document.getElementById("win").hidden = "";
     document.getElementById("videoplay").play();
 }
 
+document.getElementById('puntengegooid').value = 1;
+document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
+document.getElementById('score0').innerHTML = scores[0];
+document.getElementById('score1').innerHTML = scores[1];
+document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
 
 }
 
@@ -149,6 +158,15 @@ function restart(){
     legs[0] = 0;
     legs[1] = 0;
     document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
+}
+
+function loadDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    //console.log(this.responseText);
+  }
+  xhttp.open("POST", "php/saveworp.php");
+  xhttp.send();
 }
 
 </script>

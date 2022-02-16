@@ -7,6 +7,19 @@
 
 <?php
 require('php/logincheck.php');
+$sql = "SELECT max(game_id) FROM worp";
+$records = mysqli_query($DBverbinding, $sql);
+if (mysqli_num_rows($records) > 0) {
+    while ($dbid = mysqli_fetch_assoc($records)) {
+        if($dbid["max(game_id)"] == null){
+                $gameid = 0;
+        }
+        else{
+                $gameid = $dbid["max(game_id)"] + 1;
+        }
+    }
+}
+
 ?>
 
 <nav><h3 class="username"><?php echo $_SESSION['username'];?> (1236)</h3></nav>
@@ -45,11 +58,12 @@ require('php/moduscontainer.php');
                 <input type="button" value="Nieuwe tegenstander" onclick="togglevisibility();">
                 <div class="nieuwe_tegenstander" id="nieuwe_tegenstander"></div>
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
-                <input type="number" min="1" name="legs">
+                <input type="number" min="1" name="legs" value="1">
                 <div class="rated">
                 <h3 class="kopjeinstellingen">Rated</h3>
             <input class="ratedcheckbox" type="checkbox" checked="true">
                 </div>
+                <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
                 <input type="submit" value="Spelen"><br>
 </form>
 
