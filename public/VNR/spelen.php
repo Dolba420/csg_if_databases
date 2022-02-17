@@ -42,8 +42,8 @@ require('php/moduscontainer.php');
                 <h3 class="kopjeinstellingen">Spel</h3>
                 <select name="spel" id="spel">
                         <option value="classic 501">Classic 501</option>
-                        <option value="minigame125">125 minigame</option>
-                        <option value="killer">Killer</option>
+                        <!--<option value="minigame125">125 minigame</option>
+                        <option value="killer">Killer</option><-->
                 </select>
                 <h3 class="kopjeinstellingen">Tegenstander</h3>
                 <select name="tegenstander" id="tegenstander">
@@ -60,8 +60,8 @@ require('php/moduscontainer.php');
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
                 <input type="number" min="1" name="legs" value="1">
                 <div class="rated">
-                <h3 class="kopjeinstellingen">Rated</h3>
-            <input class="ratedcheckbox" type="checkbox" checked="true">
+                <!--<h3 class="kopjeinstellingen">Rated</h3>
+            <input class="ratedcheckbox" type="checkbox" checked="true"><-->
                 </div>
                 <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
                 <input type="submit" value="Spelen"><br>

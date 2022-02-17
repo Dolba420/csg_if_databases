@@ -58,7 +58,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('Dolf','$2y$10$4xYzLLjLNz7H9NUuCT/RG.Dnx0Dbh9Z5aoHR5gaEyUDlVmC6gN.K2'),('Michel','$2y$10$rGVcXPLv/SFWR3Vcb.JbWuEQayt1NUpmuvgIL8sLqpHE50mjgNprS'),('VNR','$2y$10$L2s63iZTiqwIeIPwXCxYfeqY8dUyXYVWJf3T38dPOOuc3bLaT3Dx6'),('Dirk','$2y$10$IjevZin/cBapvDnP4862rO5HG/A91P/o4YMuZil3OMf4RqzqmFKu.');
+INSERT INTO `login` VALUES ('Dolf','$2y$10$4xYzLLjLNz7H9NUuCT/RG.Dnx0Dbh9Z5aoHR5gaEyUDlVmC6gN.K2'),('Michel','$2y$10$rGVcXPLv/SFWR3Vcb.JbWuEQayt1NUpmuvgIL8sLqpHE50mjgNprS'),('VNR','$2y$10$L2s63iZTiqwIeIPwXCxYfeqY8dUyXYVWJf3T38dPOOuc3bLaT3Dx6'),('Dirk','$2y$10$IjevZin/cBapvDnP4862rO5HG/A91P/o4YMuZil3OMf4RqzqmFKu.'),('Tim','$2y$10$U8VsE3PTyA7eSsVJWYfsVO.RIq0ji7W1kZI5bFwhXw3b9rEazfqCe'),('Thomas05t','$2y$10$88AXxusu8F8d5QMZ9nlkyeViSBNlaF2Wx.6brfNmvb5XnuOV52AY.');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `worp` (
 
 LOCK TABLES `worp` WRITE;
 /*!40000 ALTER TABLE `worp` DISABLE KEYS */;
-INSERT INTO `worp` VALUES ('0','0','Dolf','180','16/02/2022'),('0','1','VNR','180','16/02/2022'),('0','2','Dolf','180','16/02/2022'),('0','3','VNR','180','16/02/2022'),('1','0','Dolf','180','16/02/2022'),('1','1','VNR','180','16/02/2022'),('1','2','Dolf','180','16/02/2022'),('1','3','VNR','180','16/02/2022'),('1','4','Dolf','141','16/02/2022'),('2','0','Dolf','180','16/02/2022'),('2','1','VNR','180','16/02/2022'),('2','2','Dolf','180','16/02/2022'),('2','3','VNR','180','16/02/2022'),('2','4','Dolf','141','16/02/2022'),('3','0','Dolf','180','16/02/2022'),('3','1','VNR','180','16/02/2022'),('3','2','Dolf','180','16/02/2022'),('3','3','VNR','180','16/02/2022'),('3','4','Dolf','141','16/02/2022'),('4','0','Dolf','180','16/02/2022'),('4','1','Dirk','180','16/02/2022'),('4','2','Dolf','180','16/02/2022'),('4','3','Dirk','180','16/02/2022'),('4','4','Dolf','141','16/02/2022'),('5','0','Dolf','180','16/02/2022'),('6','0','Dolf','1','16/02/2022'),('6','1','Dirk','18','16/02/2022'),('6','2','Dolf','19','16/02/2022'),('6','3','Dirk','65','16/02/2022'),('6','4','Dolf','73','16/02/2022'),('6','5','Dirk','49','16/02/2022');
+INSERT INTO `worp` VALUES ('0','0','Dolf','180','16/02/2022'),('0','1','VNR','180','16/02/2022'),('0','2','Dolf','180','16/02/2022'),('0','3','VNR','180','16/02/2022'),('1','0','Dolf','180','16/02/2022'),('1','1','VNR','180','16/02/2022'),('1','2','Dolf','180','16/02/2022'),('1','3','VNR','180','16/02/2022'),('1','4','Dolf','141','16/02/2022'),('2','0','Dolf','180','16/02/2022'),('2','1','VNR','180','16/02/2022'),('2','2','Dolf','180','16/02/2022'),('2','3','VNR','180','16/02/2022'),('2','4','Dolf','141','16/02/2022'),('3','0','Dolf','180','16/02/2022'),('3','1','VNR','180','16/02/2022'),('3','2','Dolf','180','16/02/2022'),('3','3','VNR','180','16/02/2022'),('3','4','Dolf','141','16/02/2022'),('4','0','Dolf','180','16/02/2022'),('4','1','Dirk','180','16/02/2022'),('4','2','Dolf','180','16/02/2022'),('4','3','Dirk','180','16/02/2022'),('4','4','Dolf','141','16/02/2022'),('5','0','Dolf','180','16/02/2022'),('6','0','Dolf','1','16/02/2022'),('6','1','Dirk','18','16/02/2022'),('6','2','Dolf','19','16/02/2022'),('6','3','Dirk','65','16/02/2022'),('6','4','Dolf','73','16/02/2022'),('6','5','Dirk','49','16/02/2022'),('7','0','Michel','180','17/02/2022'),('7','1','Dolf','-10','17/02/2022');
 /*!40000 ALTER TABLE `worp` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -97,4 +97,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-16 20:05:22
+-- Dump completed on 2022-02-17 13:32:50

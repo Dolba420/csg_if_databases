@@ -10,7 +10,6 @@ require('php/logincheck.php');
 <div id="spelerkeuze">
 <h1>Wie gooide het dichts bij de Bullseye</h1>
 <div class="startspeler" id="startspeler">
-    
     <div class="speler1" onclick="startspeler(0)">
         <h1 class="spelertekst"><?php echo $_SESSION['username']; ?></h1>
     </div>
@@ -19,7 +18,6 @@ require('php/logincheck.php');
     </div>
 </div>
 </div>
-
 <div id="spelgestart" hidden="hidden">
     <h1 id="stand">0 - 0</h1>
     <div class="spelers">
@@ -71,6 +69,24 @@ echo "</table>";
 </table>
 -->
 <script>
+var bspeler = Math.floor(Math.random()*2);
+var beginmodus = 
+<?php
+echo '"' . $_POST["begin"] . '"';
+?>
+;
+if(beginmodus == "willekeurig"){
+if (bspeler == 0) {
+    
+}
+if (bspeler == 1) {
+
+}
+}
+
+
+
+
 var worp = 0;
 var legstotwin = <?php echo $_POST['legs']?>;
 var scores = [501, 501];
@@ -115,7 +131,7 @@ function geworpen(){
             beurt(beginspeler * -1 + 1);
     }
     else{
-    if(document.getElementById('puntengegooid').value <= 180){
+    if(document.getElementById('puntengegooid').value <= 180 && document.getElementById('puntengegooid').value >= 0){
         if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
             beurt(spelerbeurt);
         }
@@ -143,7 +159,7 @@ if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin
     document.getElementById("videoplay").play();
 }
 
-document.getElementById('puntengegooid').value = 1;
+document.getElementById('puntengegooid').value = "";
 document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
 document.getElementById('score0').innerHTML = scores[0];
 document.getElementById('score1').innerHTML = scores[1];

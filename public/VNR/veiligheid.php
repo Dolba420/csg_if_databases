@@ -9,6 +9,15 @@
 require('php/logincheck.php');
 ?>
 
+<script>
+    if (beginmodes = "ik") {
+        beginspeler = 0;
+    }
+    if (beginmodes = "tegenstander") {
+        beginspeler = 1;
+    }
+</script>
+
 <nav><h3 class="username"><?php echo $_SESSION['username'];?> (1236)</h3></nav>
 <div class="container">
 <?php
@@ -44,3 +53,6 @@ include 'php/moduscontainer.php';
 </div>
 
 </html>
+
+
+
