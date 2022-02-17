@@ -63,6 +63,7 @@ require('php/moduscontainer.php');
                 <!--<h3 class="kopjeinstellingen">Rated</h3>
             <input class="ratedcheckbox" type="checkbox" checked="true"><-->
                 </div>
+                <br>
                 <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
                 <input type="submit" value="Spelen"><br>
 </form>

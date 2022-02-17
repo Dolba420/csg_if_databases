@@ -31,8 +31,8 @@ require('php/logincheck.php');
         </div>
     </div>
     <br>
-    <input type="number" id="puntengegooid" min="1" max="180" value="1" placeholder="aantal punten gegooid">
-    <input type="button" value="Ok" onclick="geworpen();">
+    <input type="number" id="puntengegooid" min="1" max="180" value="" placeholder="aantal punten gegooid">
+    <input type="button" id="okbutton" value="Ok" onclick="geworpen();">
 </div>
 
 <div class="win" id="win" hidden="hidden">
@@ -69,24 +69,10 @@ echo "</table>";
 </table>
 -->
 <script>
-var bspeler = Math.floor(Math.random()*2);
-var beginmodus = 
-<?php
-echo '"' . $_POST["begin"] . '"';
-?>
-;
-if(beginmodus == "willekeurig"){
-if (bspeler == 0) {
-    
-}
-if (bspeler == 1) {
-
-}
-}
-
-
-
-
+var beurtarray = [];
+var spelerbeurt = 0;
+beurtarray[0] = document.getElementById('speler1');
+beurtarray[1] = document.getElementById('speler2');
 var worp = 0;
 var legstotwin = <?php echo $_POST['legs']?>;
 var scores = [501, 501];
@@ -94,6 +80,45 @@ var legs = [0,0];
 var beginspeler = null;
 var gameid = <?php echo $_POST["gameid"]?>;
 var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
+var worp = 0;
+var legstotwin = <?php echo $_POST['legs']?>;
+var scores = [501, 501];
+var legs = [0,0];
+var beginspeler = null;
+var gameid = <?php echo $_POST["gameid"]?>;
+var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
+var bspeler = Math.floor(Math.random()*2);
+var beginmodus = 
+<?php
+echo '"' . $_POST["begin"] . '"';
+?>
+;
+
+
+if(beginmodus == "willekeurig"){
+    document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = bspeler;
+        spelerbeurt = bspeler * -1 + 1;
+        beurt(spelerbeurt);
+}
+if(beginmodus == "ik"){
+        document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = 0;
+        spelerbeurt = 0 * -1 + 1;
+        beurt(spelerbeurt);
+}
+if(beginmodus == "tegenstander"){
+        document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = 1;
+        spelerbeurt = 1 * -1 + 1;
+        beurt(spelerbeurt);
+}
+
+
+
     function startspeler(speler){
         document.getElementById("spelerkeuze").hidden = "hidden";
         document.getElementById("spelgestart").hidden = "";
@@ -102,10 +127,6 @@ var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['teg
         beurt(speler);
     }
 
-var beurtarray = [];
-var spelerbeurt = 0;
-beurtarray[0] = document.getElementById('speler1');
-beurtarray[1] = document.getElementById('speler2');
 
 function beurt(speler){
     spelerbeurt = spelerbeurt * -1 + 1;
@@ -131,7 +152,7 @@ function geworpen(){
             beurt(beginspeler * -1 + 1);
     }
     else{
-    if(document.getElementById('puntengegooid').value <= 180 && document.getElementById('puntengegooid').value >= 0){
+    if(document.getElementById('puntengegooid').value <= 180 && document.getElementById('puntengegooid').value >= 0 && document.getElementById('puntengegooid').value != ""){
         if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
             beurt(spelerbeurt);
         }
@@ -148,7 +169,7 @@ function geworpen(){
     }
 }
     else{
-        alert("die kan niet wollah");
+        alert("De opgegeven waarde is onjuist ");
         document.getElementById('puntengegooid').value = 1;
     }
     }
@@ -184,6 +205,17 @@ function loadDoc() {
   xhttp.open("POST", "php/saveworp.php");
   xhttp.send();
 }
+
+
+var input = document.getElementById("puntengegooid");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("okbutton").click();
+  }
+});
+
+
 
 </script>
 
