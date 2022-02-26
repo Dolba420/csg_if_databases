@@ -24,10 +24,12 @@ require('php/logincheck.php');
         <div class="speler1spel" id="speler1">
             <h1 id="score0">501</h1>
             <h2><?php echo $_SESSION['username']; ?></h2>
+            <h3 id="gemspeler"></h3>
         </div>
         <div class="speler2spel" id="speler2">
             <h1 id="score1">501</h1>
             <h2><?php echo $_POST['tegenstander']?></h2>
+            <h3 id="gemtegenspeler"></h3>
         </div>
     </div>
     <br>
@@ -69,6 +71,14 @@ echo "</table>";
 </table>
 -->
 <script>
+var legworp = 0;
+var worpsoort = ["eerste9","eerste9"];
+var gemspeler = document.getElementById('gemspeler');
+var gemtegenspeler = document.getElementById('gemtegenspeler');
+var aantalbeurten1 = 0;
+var aantalbeurten2 = 0;
+var gemiddelde = [];
+var som = [0,0];
 var beurtarray = [];
 var spelerbeurt = 0;
 beurtarray[0] = document.getElementById('speler1');
@@ -145,10 +155,11 @@ function geworpen(){
                     xhttp.onload = function() {
                     //console.log(this.responseText);
                 }
-            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value);
+            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt]);
             xhttp.send();
             beurt(spelerbeurt);
             worp++;
+            legworp++;
             beurt(beginspeler * -1 + 1);
     }
     else{
@@ -157,15 +168,17 @@ function geworpen(){
             beurt(spelerbeurt);
         }
         else{
+            som[spelerbeurt] = som[spelerbeurt] + parseInt(document.getElementById('puntengegooid').value);
             scores[spelerbeurt] = scores[spelerbeurt] - document.getElementById('puntengegooid').value;
                 const xhttp = new XMLHttpRequest();
                     xhttp.onload = function() {
                     //console.log(this.responseText);
                 }
-            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value);
+            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value+ "&worpsoort=" + worpsoort[spelerbeurt]) ;
             xhttp.send();
             beurt(spelerbeurt);
             worp++;
+            legworp++;
     }
 }
     else{
@@ -179,13 +192,26 @@ if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin
     document.getElementById("win").hidden = "";
     document.getElementById("videoplay").play();
 }
+if(spelerbeurt == 0){
+        aantalbeurten2++;
+        if(aantalbeurten2 >= 3){
+            worpsoort[1] = "normaal";
+        }
+    }
+    if(spelerbeurt == 1){
+        aantalbeurten1++;
+        if(aantalbeurten1 >= 3){
+            worpsoort[0] = "normaal";
+        }
+    }
 
 document.getElementById('puntengegooid').value = "";
 document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
 document.getElementById('score0').innerHTML = scores[0];
 document.getElementById('score1').innerHTML = scores[1];
 document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
-
+gemspeler.innerHTML = "gemiddelde : " + Math.round((som[0] / (aantalbeurten1))*100) / 100;
+gemtegenspeler.innerHTML = "gemiddelde: " + Math.round((som[1] / (aantalbeurten2)) * 100) / 100;
 }
 
 function restart(){
@@ -195,15 +221,12 @@ function restart(){
     legs[0] = 0;
     legs[1] = 0;
     document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
-}
-
-function loadDoc() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-    //console.log(this.responseText);
-  }
-  xhttp.open("POST", "php/saveworp.php");
-  xhttp.send();
+    aantalbeurten2 = 0;
+    aantalbeurten1 = 0;
+    som[0] = 0;
+    som[1] = 0;
+    gemspeler.innerHTML = "gemiddelde : " + som[0] / (aantalbeurten1);
+    gemtegenspeler.innerHTML = "gemiddelde: " + som[1] / (aantalbeurten2);
 }
 
 
