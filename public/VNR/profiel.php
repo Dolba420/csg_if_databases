@@ -113,7 +113,7 @@ var eerste9 = <?php
 
 var someerste9 = 0;
 for (var x = 0; x < eerste9.length; x++) {
-    someerste9 += alleworpen[x];
+    someerste9 += eerste9[x];
 }
 document.getElementById("eerste9").innerHTML =  Math.round((someerste9 / eerste9.length) * 100) / 100;
 
