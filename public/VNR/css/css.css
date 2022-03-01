@@ -168,3 +168,13 @@ a {
     font-size: 150%;
     border: #F7FE72 10px solid;
 }
+table{
+    margin-left: 15%;
+    text-align: center;
+}
+td{
+    font-size: 300%;
+}
+th{
+    font-size: 300%;
+}

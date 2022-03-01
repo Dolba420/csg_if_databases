@@ -194,15 +194,25 @@ if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin
 }
 if(spelerbeurt == 0){
         aantalbeurten2++;
-        if(aantalbeurten2 >= 3){
+        if(scores[1] > 170){
+            if(aantalbeurten2 >= 3){
             worpsoort[1] = "normaal";
+        }
+        }
+        else{
+            worpsoort[1] = "uitgooi";
         }
     }
     if(spelerbeurt == 1){
         aantalbeurten1++;
-        if(aantalbeurten1 >= 3){
-            worpsoort[0] = "normaal";
+        if(scores[0] > 170){
+            if(aantalbeurten1 >= 3){
+                worpsoort[0] = "normaal";
+            }
         }
+            else{
+                worpsoort[0] = "uitgooi";
+            }
     }
 
 document.getElementById('puntengegooid').value = "";
