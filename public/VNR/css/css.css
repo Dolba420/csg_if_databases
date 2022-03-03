@@ -112,6 +112,7 @@ a {
       width: 50%;
       height: 1000px;
       font-size: 150%;
+      color: orange;
   }
   .spelertekst{
       margin-top: 45%;
@@ -131,6 +132,7 @@ a {
     height: 1000px;
     border: #F7FE72 10px solid;
     font-size: 300%;
+    color: orange;
 }
 .spelers{
     display: flex;
@@ -148,6 +150,7 @@ a {
     width: 50%;
     height: 400px;
     font-size: 150%;
+    color: orange;
 }
 .score{
     font-size: 300%;
@@ -167,6 +170,7 @@ a {
     height: 400px;
     font-size: 150%;
     border: #F7FE72 10px solid;
+    color: orange;
 }
 table{
     margin-left: 15%;

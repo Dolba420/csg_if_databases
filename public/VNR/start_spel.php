@@ -39,9 +39,8 @@ require('php/logincheck.php');
 
 <div class="win" id="win" hidden="hidden">
     <h1 id="winmessage"></h1>
-    <video width="320" height="240" id="videoplay" controls loop>
-  <source src="foto/win.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+    <video width="320" height="240" id="videoplay" controls loop id="winfilm">
+  
 </video>
 <br><br><br>
 <input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
@@ -71,6 +70,7 @@ echo "</table>";
 </table>
 -->
 <script>
+var audio = new Audio('foto/heerlijk.mp3');
 var legworp = 0;
 var worpsoort = ["eerste9","eerste9"];
 var gemspeler = document.getElementById('gemspeler');
@@ -158,11 +158,16 @@ function geworpen(){
             xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt]);
             xhttp.send();
             beurt(spelerbeurt);
+            
+            
             worp++;
             legworp++;
             beurt(beginspeler * -1 + 1);
     }
     else{
+        if(document.getElementById('puntengegooid').value == 180 && scores[spelerbeurt] - document.getElementById('puntengegooid').value > 2){
+                audio.play();
+            }
     if(document.getElementById('puntengegooid').value <= 180 && document.getElementById('puntengegooid').value >= 0 && document.getElementById('puntengegooid').value != ""){
         if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
             beurt(spelerbeurt);
@@ -180,6 +185,8 @@ function geworpen(){
             worp++;
             legworp++;
     }
+    
+ 
 }
     else{
         alert("De opgegeven waarde is onjuist ");
@@ -191,6 +198,7 @@ if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin
     document.getElementById("spelgestart").hidden = "hidden";
     document.getElementById("win").hidden = "";
     document.getElementById("videoplay").play();
+    gameid
 }
 if(spelerbeurt == 0){
         aantalbeurten2++;
@@ -220,8 +228,19 @@ document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
 document.getElementById('score0').innerHTML = scores[0];
 document.getElementById('score1').innerHTML = scores[1];
 document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
-gemspeler.innerHTML = "gemiddelde : " + Math.round((som[0] / (aantalbeurten1))*100) / 100;
-gemtegenspeler.innerHTML = "gemiddelde: " + Math.round((som[1] / (aantalbeurten2)) * 100) / 100;
+if(isNaN(Math.round((som[0] / (aantalbeurten1))*100) / 100)){
+    gemspeler.innerHTML = "gemiddelde : " + 0;
+}
+else{
+    gemspeler.innerHTML = "gemiddelde : " + Math.round((som[0] / (aantalbeurten1))*100) / 100;
+}
+if(isNaN(Math.round((som[1] / (aantalbeurten2)) * 100) / 100)){
+    gemtegenspeler.innerHTML = "gemiddelde: " + 0;
+}
+else{
+    gemtegenspeler.innerHTML = "gemiddelde: " + Math.round((som[1] / (aantalbeurten2)) * 100) / 100;
+}
+
 }
 
 function restart(){
@@ -247,7 +266,6 @@ input.addEventListener("keyup", function(event) {
    document.getElementById("okbutton").click();
   }
 });
-
 
 
 </script>
