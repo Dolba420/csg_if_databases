@@ -22,19 +22,21 @@ require('php/logincheck.php');
     <h1 id="stand">0 - 0</h1>
     <div class="spelers">
         <div class="speler1spel" id="speler1">
-            <h1 id="score0">501</h1>
-            <h2><?php echo $_SESSION['username']; ?></h2>
-            <h3 id="gemspeler"></h3>
+            <h1 id="score0" class="spelerscore">501</h1>
+            <h2 class="spelernaam"><?php echo $_SESSION['username']; ?></h2>
+            <h3 id="gemspeler" class="spelergem"></h3>
         </div>
         <div class="speler2spel" id="speler2">
-            <h1 id="score1">501</h1>
-            <h2><?php echo $_POST['tegenstander']?></h2>
-            <h3 id="gemtegenspeler"></h3>
+            <h1 id="score1" class="spelerscore">501</h1>
+            <h2 class="spelernaam"><?php echo $_POST['tegenstander']?></h2>
+            <h3 id="gemtegenspeler" class="spelergem"></h3>
         </div>
     </div>
     <br>
+    <div class="">
     <input type="number" id="puntengegooid" min="1" max="180" value="" placeholder="aantal punten gegooid">
     <input type="button" id="okbutton" value="Ok" onclick="geworpen();">
+</div>
 </div>
 
 <div class="win" id="win" hidden="hidden">
@@ -158,8 +160,6 @@ function geworpen(){
             xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt]);
             xhttp.send();
             beurt(spelerbeurt);
-            
-            
             worp++;
             legworp++;
             beurt(beginspeler * -1 + 1);
@@ -227,7 +227,7 @@ document.getElementById('puntengegooid').value = "";
 document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
 document.getElementById('score0').innerHTML = scores[0];
 document.getElementById('score1').innerHTML = scores[1];
-document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
+document.getElementById("stand").innerHTML = legs[0] + " - " +  legs[1];
 if(isNaN(Math.round((som[0] / (aantalbeurten1))*100) / 100)){
     gemspeler.innerHTML = "gemiddelde : " + 0;
 }
@@ -249,7 +249,7 @@ function restart(){
     document.getElementById("videoplay").pause();
     legs[0] = 0;
     legs[1] = 0;
-    document.getElementById("stand").innerHTML = legs[0] + "-" +  legs[1];
+    document.getElementById("stand").innerHTML = legs[0] + " - " +  legs[1];
     aantalbeurten2 = 0;
     aantalbeurten1 = 0;
     som[0] = 0;

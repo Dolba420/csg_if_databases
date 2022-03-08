@@ -22,7 +22,7 @@ if (mysqli_num_rows($records) > 0) {
 
 ?>
 
-<nav><h3 class="username"><?php echo $_SESSION['username'];?> (1236)</h3></nav>
+<nav><h3 class="username"><?php echo $_SESSION['username'];?><?php if(isset($_SESSION['speler2'])){ echo ", " . $_SESSION['speler2'];} ?> (1236)</h3></nav>
 <div class="container">
 <?php
 require('php/moduscontainer.php');
@@ -31,7 +31,7 @@ require('php/moduscontainer.php');
         <div class="spelinstellingen">
             <div class="spelinstellingeninhoud">
         <div class="instellingeninhoud">
-                <form action="start_spel.php" method="post">
+                <form action="start_spel.php" class="inhoud" method="post">
                 <h3 class="kopjeinstellingen">Beginspeler</h3>
                 <select name="begin" id="begin">
                         <option value="bull">Bullseye</option>
@@ -46,6 +46,7 @@ require('php/moduscontainer.php');
                         <option value="killer">Killer</option><-->
                 </select>
                 <h3 class="kopjeinstellingen">Tegenstander</h3>
+                <div class="nieuwe_tegenstander" id="nieuwe_tegenstander">
                 <select name="tegenstander" id="tegenstander">
                         <?php
                         if(isset($_SESSION['speler2'])){
@@ -55,23 +56,21 @@ require('php/moduscontainer.php');
                                 echo '<option value="null">Geen recente tegenstanders</option>';
                         }
                         ?>
-                <input type="button" value="Nieuwe tegenstander" onclick="togglevisibility();">
-                <div class="nieuwe_tegenstander" id="nieuwe_tegenstander"></div>
+                <input type="button" class="new_tegenstanderinput" value="Nieuwe tegenstander" onclick="togglevisibility();">
+                </div>
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
-                <input type="number" min="1" name="legs" value="1">
+                <input type="number" class="kieslegs" min="1" name="legs" value="1">
                 <div class="rated">
-                <!--<h3 class="kopjeinstellingen">Rated</h3>
-            <input class="ratedcheckbox" type="checkbox" checked="true"><-->
+
                 </div>
                 <br>
                 <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
-                <input type="submit" value="Spelen"><br>
+                <input type="submit" value="<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>" class="kieslegs" <?php if(isset($_SESSION['speler2'])){} else{ echo "disabled";}?>><br>
 </form>
 
             </div>
         </div>
-</div>
-</div>
+        </div>
 <div class="speler2login" style="visibility: hidden;" id="speler2login">
         <h1>Tegenstander</h1>
         
@@ -82,6 +81,8 @@ require('php/moduscontainer.php');
     <input type="submit" value="Log in"><br>
 </form>
         </div>
+</div>
+
 </div>
 
 <script>

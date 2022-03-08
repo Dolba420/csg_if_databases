@@ -1,3 +1,11 @@
+:root {
+    --bg-color: #33673B;
+    --accentcolor1: #D8CBC7;
+    --accentcolor2: #CC3F0C; 
+    --accentcolor3: #9A6D38; 
+    --accentcolor4: #19231A; 
+}
+
 html{
     margin: 0;
     height: 100%;
@@ -6,11 +14,11 @@ html{
 body {
     margin: 0;
     text-align: center;
-    background-color: #33673B;
+    background-color: var(--bg-color);
 }
 .logo{
-    height: 40%;
-    width: 40%;
+    height: 55%;
+    width: auto;
 }
 .container{
     display: flex;
@@ -19,7 +27,7 @@ nav{
     color: white;
     text-align: left;
     margin: 0;
-    background-color: #9a6d38;
+    background-color: var(--accentcolor3);
 }
 .sidebar{
     height: 970px;
@@ -27,7 +35,8 @@ nav{
     color: white;
     text-align: left;
     margin: 0;
-    background-color: #19231a;
+    background-color: var(--accentcolor4);
+    min-width: fit-content;
 }
 .username{
     margin-left: 15px;
@@ -48,7 +57,7 @@ nav{
 .dashboardfoto{
     margin-top: 5%;
     text-align: center;
-    width: 70%;
+    width: auto;
     height: 70%;
 }
 a {
@@ -74,11 +83,17 @@ a {
       overflow-y: scroll;
   }
   .kopjeinstellingen{
+      margin: auto;
+      margin-top: 2%;
+      margin-bottom: 5%;
+      font-size: 250%;
       color:white;
+      
   }
   .spelinstellingeninhoud{
       text-align: left;
       margin-left: 25px;
+      
   }
   .rated{
       display: flex;
@@ -88,9 +103,14 @@ a {
       margin-left: 10px;
   }
   .speler2login{
-      height: 200px;
+      height: 250px;
       background-color: white;
       width: 40%;
+      bottom: 100px;
+      left: 60%;
+      top: 0px;
+      position: absolute;
+      z-index: 1;
       /*margin-left: 60%;*/
   }
   .instellingeninhoud{
@@ -101,76 +121,77 @@ a {
   }
   .speler1{
       text-align: center;
-      background-color: #44894F;
+      background-color: var(--accentcolor1);
       width: 50%;
       height: 1000px;
       font-size: 150%;
   }
   .speler2{
       text-align: center;
-      background-color: #67335F;
+      background-color: var(--accentcolor2);
       width: 50%;
       height: 1000px;
       font-size: 150%;
-      color: orange;
+      color: black;
   }
   .spelertekst{
       margin-top: 45%;
+      font-size: 500%;
   }
   .speler1:hover{
     text-align: center;
-    background-color: #44894F;
+    background-color: var(--accentcolor1);
     width: 50%;
     height: 1000px;
-    border: #F7FE72 10px solid;
+    border: var(--accentcolor4) 10px solid;
     font-size: 300%;
 }
 .speler2:hover{
     text-align: center;
-    background-color: #67335F;
+    background-color: var(--accentcolor2);
     width: 50%;
     height: 1000px;
-    border: #F7FE72 10px solid;
+    border: var(--accentcolor4) 10px solid;
     font-size: 300%;
-    color: orange;
+    color: black;
 }
 .spelers{
     display: flex;
 }
 .speler1spel{
     text-align: center;
-    background-color: #44894F;
+    background-color: var(--accentcolor1);
     width: 50%;
-    height: 400px;
+    height: 500px;
     font-size: 150%;
 }
 .speler2spel{
     text-align: center;
-    background-color: #67335F;
+    background-color: var(--accentcolor2);
     width: 50%;
-    height: 400px;
+    height: 500px;
     font-size: 150%;
-    color: orange;
+    color: black;
 }
 .score{
     font-size: 300%;
 }
 .speler1spelactief{
     text-align: center;
-    background-color: #44894F;
+    background-color: var(--accentcolor1);
     width: 50%;
-    height: 400px;
+    height: 500px;
     font-size: 150%;
-    border: #F7FE72 10px solid;
+    border: var(--accentcolor4) 10px solid;
 }
 .speler2spelactief{
     text-align: center;
-    background-color: #67335F;
+    background-color: var(--accentcolor2);
     width: 50%;
-    height: 400px;
+    height: 500px;
     font-size: 150%;
-    border: #F7FE72 10px solid;
-    color: orange;
+    border: var(--accentcolor4) 10px solid;
+    color: black;
 }
 table{
     margin-left: 15%;
@@ -181,4 +202,64 @@ td{
 }
 th{
     font-size: 300%;
+}
+select{
+    font-size: 120%;
+    width: 70%;
+    height: 50px;
+    margin-right: 10px;
+    min-width: 300px;
+}
+.nieuwe_tegenstander{
+    width: 145%;
+    display: flex;
+}
+.new_tegenstanderinput{
+    font-size: 120%;
+    width: 70%;
+    height: 50px;
+}
+form.inhoud{
+    width: max-content;
+}
+.invoer{
+    width: 100%;
+}
+#puntengegooid{
+    height: 80px;
+    font-size: 200%;
+    width: 20%;
+    border-radius: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none
+}
+#okbutton{
+    height: 80px;
+    font-size: 200%;
+    width: 10%;
+    border-radius: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none
+    /*width: 20%;*/
+}
+.spelerscore{
+    font-size: 500%;
+}
+.spelernaam{
+    font-size: 200%;
+}
+.spelergem{
+    font-size: 170%;
+}
+input.kieslegs{
+    font-size: 120%;
+    width: 70%;
+    height: 50px;
+    margin-right: 10px;
+    min-width: 300px;
+}
+.username{
+    font-size: 200%;
 }
