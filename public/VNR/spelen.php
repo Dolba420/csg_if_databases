@@ -33,13 +33,13 @@ require('php/moduscontainer.php');
         <div class="instellingeninhoud">
                 <form action="start_spel.php" class="inhoud" method="post">
                 <h3 class="kopjeinstellingen">Beginspeler</h3>
-                <select name="begin" id="begin">
+                <select name="begin" id="begin" onchange="document.getElementById('serverbegin').value = document.getElementById('begin').value;">
                         <option value="bull">Bullseye</option>
                         <option value="willekeurig">Willekeurig</option>
                         <option value="ik">Ik</option>
                         <option value="tegenstander">Tegenstander</option>
                 </select>
-                <h3 class="kopjeinstellingen">Spel</h3>
+                <h3 class="kopjeinstellingen" id="frontendbegin" onchange="document.getElementById('serverbegin').value = document.getElementById('frontendbegin').value;">Spel</h3>
                 <select name="spel" id="spel">
                         <option value="classic 501">Classic 501</option>
                         <!--<option value="minigame125">125 minigame</option>
@@ -59,7 +59,7 @@ require('php/moduscontainer.php');
                 <input type="button" class="new_tegenstanderinput" value="Nieuwe tegenstander" onclick="togglevisibility();">
                 </div>
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
-                <input type="number" class="kieslegs" min="1" name="legs" value="1">
+                <input type="number" class="kieslegs" id="frontendlegs" min="1" onchange="document.getElementById('serverlegs').value = document.getElementById('frontendlegs').value;" name="legs" value="<?php if(isset($_SESSION['aantallegs'])){ echo $_SESSION['aantallegs']; } else{ echo 1;}?>">
                 <div class="rated">
 
                 </div>
@@ -79,6 +79,9 @@ require('php/moduscontainer.php');
     <input type="name" name="username" placeholder="Gebruikersnaam">
     <input type="password" name="password" placeholder="Wachtwoord">
     <input type="submit" value="Log in"><br>
+    <input type="tekst" value="1" id="serverlegs" name="legs">
+    <input type="tekst" value="" name="serverspel">
+    <input type="tekst" value="" name="serverbegin">
 </form>
         </div>
 </div>

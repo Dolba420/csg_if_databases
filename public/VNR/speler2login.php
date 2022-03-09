@@ -18,5 +18,5 @@ $sql = "SELECT * FROM login WHERE gebruikersnaam = '" . $_POST['username'] . "'"
                 echo '<head><meta http-equiv="refresh" content="1.5;url=spelen.php" /></head><!--';
             }
         }
-
+$_SESSION['aantallegs'] = $_POST['legs'];
 ?>
