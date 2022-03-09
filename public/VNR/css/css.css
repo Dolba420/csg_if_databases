@@ -111,6 +111,8 @@ a {
       top: 0px;
       position: absolute;
       z-index: 1;
+      /*resize: both;
+      overflow: auto;*/
       /*margin-left: 60%;*/
   }
   .instellingeninhoud{

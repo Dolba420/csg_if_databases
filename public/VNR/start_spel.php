@@ -34,7 +34,7 @@ require('php/logincheck.php');
     </div>
     <br>
     <div class="">
-    <input type="number" id="puntengegooid" min="1" max="180" value="" placeholder="aantal punten gegooid">
+    <input type="number" id="puntengegooid" min="1" max="180" value="" placeholder=" aantal punten gegooid">
     <input type="button" id="okbutton" value="Ok" onclick="geworpen();">
 </div>
 </div>
@@ -266,6 +266,17 @@ input.addEventListener("keyup", function(event) {
    document.getElementById("okbutton").click();
   }
 });
+
+var gegooidewaarde;
+
+function aftellen(n){
+    if(n > 0){
+        scores[spelerbeurt]--;
+        aftellen(n-1);
+        document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
+    }
+}
+
 
 
 </script>
