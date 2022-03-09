@@ -39,11 +39,11 @@ require('php/moduscontainer.php');
                         <option value="ik">Ik</option>
                         <option value="tegenstander">Tegenstander</option>
                 </select>
-                <h3 class="kopjeinstellingen" id="frontendbegin" onchange="document.getElementById('serverbegin').value = document.getElementById('frontendbegin').value;">Spel</h3>
-                <select name="spel" id="spel">
+                <h3 class="kopjeinstellingen" >Spel</h3>
+                <select name="spel" id="spel" id="spel" onchange="document.getElementById('serverspel').value = document.getElementById('spel').value;">
                         <option value="classic 501">Classic 501</option>
                         <!--<option value="minigame125">125 minigame</option>
-                        <option value="killer">Killer</option><-->
+                        <option value="killer">Killer</option>-->
                 </select>
                 <h3 class="kopjeinstellingen">Tegenstander</h3>
                 <div class="nieuwe_tegenstander" id="nieuwe_tegenstander">
@@ -79,9 +79,9 @@ require('php/moduscontainer.php');
     <input type="name" name="username" placeholder="Gebruikersnaam">
     <input type="password" name="password" placeholder="Wachtwoord">
     <input type="submit" value="Log in"><br>
-    <input type="tekst" value="1" id="serverlegs" name="legs">
-    <input type="tekst" value="" name="serverspel">
-    <input type="tekst" value="" name="serverbegin">
+    <input type="tekst" value="1" id="serverlegs" name="legs" hidden="hidden">
+    <input type="tekst" value="classic 501" name="serverspel" id="serverspel" hidden="hidden">
+    <input type="tekst" value="bull" name="serverbegin" id="serverbegin" hidden="hidden">
 </form>
         </div>
 </div>
@@ -100,6 +100,9 @@ function togglevisibility(){
                 vis = 0;
         }
 }
+
+
+
 
 </script>
 </html>

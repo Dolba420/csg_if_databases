@@ -8,7 +8,9 @@ require('php/logincheck.php');
 </head>
 <body>
 <div id="spelerkeuze">
+    <div class="topbar">
 <h1>Wie gooide het dichts bij de Bullseye</h1>
+</div>
 <div class="startspeler" id="startspeler">
     <div class="speler1" onclick="startspeler(0)">
         <h1 class="spelertekst"><?php echo $_SESSION['username']; ?></h1>
@@ -19,7 +21,9 @@ require('php/logincheck.php');
 </div>
 </div>
 <div id="spelgestart" hidden="hidden">
+    <div class="topbar">
     <h1 id="stand">0 - 0</h1>
+    </div>
     <div class="spelers">
         <div class="speler1spel" id="speler1">
             <h1 id="score0" class="spelerscore">501</h1>

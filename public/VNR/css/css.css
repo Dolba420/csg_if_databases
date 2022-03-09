@@ -146,7 +146,7 @@ a {
     width: 50%;
     height: 1000px;
     border: var(--accentcolor4) 10px solid;
-    font-size: 300%;
+    font-size: 150%;
 }
 .speler2:hover{
     text-align: center;
@@ -154,7 +154,7 @@ a {
     width: 50%;
     height: 1000px;
     border: var(--accentcolor4) 10px solid;
-    font-size: 300%;
+    font-size: 150%;
     color: black;
 }
 .spelers{
@@ -264,4 +264,12 @@ input.kieslegs{
 }
 .username{
     font-size: 200%;
+}
+.topbar{
+    margin: 0;
+    background-color: var(--accentcolor3);
+}
+.topbar h1{
+    margin: 0;
+    font-size: 300%;
 }
