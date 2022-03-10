@@ -11,7 +11,7 @@ session_start();
     <?php
     require 'php/database.php';
     ?>
-<img src="foto/logomooi.png" class="logo">
+<img src="media/logomooi.png" class="logo">
 <form action="dashboard.php" method="post">
     <h2>Log in</h2>
     <input type="name" name="username" placeholder="Gebruikersnaam">

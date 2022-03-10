@@ -21,6 +21,7 @@ body {
     width: auto;
 }
 .container{
+    height: 100%;
     display: flex;
 }
 nav{
@@ -52,6 +53,7 @@ nav{
     border: 2px solid white;
 }
 .scherm{
+    height: 100%;
     width: 80%;
 }
 .dashboardfoto{
@@ -65,7 +67,6 @@ a {
     text-decoration: inherit; 
   }
   .statistiekenscherm{
-      overflow: auto;
       height: 100%;
       background-color: white;
       width: 90%;
@@ -79,9 +80,7 @@ a {
       margin-left: 25px;
       font-size: 150%;
   }
-  .statinhoud{
-      overflow-y: scroll;
-  }
+
   .kopjeinstellingen{
       margin: auto;
       margin-top: 2%;
@@ -270,6 +269,27 @@ input.kieslegs{
     background-color: var(--accentcolor3);
 }
 .topbar h1{
+    justify-content: center;
+    display: flex;
     margin: 0;
     font-size: 300%;
+}
+.terugnaarhoofdmenu{
+    padding-left: 5px;
+    padding-top: 5px;
+    position: fixed;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 5px;
+    margin: 0;
+    display: flex;
+    justify-content: left;
+}
+.profielcontent{
+    /*height: 900px;*/
+    
+}
+.profielcontentinner{
+    height: 100%;
+    overflow-y: scroll;
 }

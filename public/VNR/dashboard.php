@@ -15,7 +15,7 @@ require('php/logincheck.php');
 require('php/moduscontainer.php');
 ?>
 <div class="scherm">
-        <img src="foto/logomooi.png" class="dashboardfoto">
+        <img src="media/logomooi.png" class="dashboardfoto">
 </div>
 </div>
 </html>

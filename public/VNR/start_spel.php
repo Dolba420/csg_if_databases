@@ -22,6 +22,7 @@ require('php/logincheck.php');
 </div>
 <div id="spelgestart" hidden="hidden">
     <div class="topbar">
+    <a href="dashboard.php" class="terugnaarhoofdmenu"><h2>Terug naar hoofdmenu</h2></a>
     <h1 id="stand">0 - 0</h1>
     </div>
     <div class="spelers">
@@ -76,7 +77,7 @@ echo "</table>";
 </table>
 -->
 <script>
-var audio = new Audio('foto/heerlijk.mp3');
+var audio = new Audio('media/heerlijk.mp3');
 var legworp = 0;
 var worpsoort = ["eerste9","eerste9"];
 var gemspeler = document.getElementById('gemspeler');

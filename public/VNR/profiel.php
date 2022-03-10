@@ -16,6 +16,8 @@ include 'php/moduscontainer.php';
 ?>
 <div class="scherm">
         <div class="statistiekenscherm">
+            <div class="profielcontent">
+                <div class="profielcontentinner">
             <h1>Statistieken</h1>
             <table>
                 <tr>
@@ -76,6 +78,9 @@ include 'php/moduscontainer.php';
                 ?></td>
             </tr>
 </table>
+<br><br>
+            </div>
+            </div>
         </div>
 </div>
 <script>
