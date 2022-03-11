@@ -29,12 +29,14 @@ require('php/logincheck.php');
         <div class="speler1spel" id="speler1">
             <h1 id="score0" class="spelerscore">501</h1>
             <h2 class="spelernaam"><?php echo $_SESSION['username']; ?></h2>
-            <h3 id="gemspeler" class="spelergem"></h3>
+            <h3 id="gemspeler" class="spelergem">sfsfs</h3>
+            <h3 id="uitgooi0" class="spelergem"></h3>
         </div>
         <div class="speler2spel" id="speler2">
             <h1 id="score1" class="spelerscore">501</h1>
             <h2 class="spelernaam"><?php echo $_POST['tegenstander']?></h2>
             <h3 id="gemtegenspeler" class="spelergem"></h3>
+            <h3 id="uitgooi1" class="spelergem"></h3>
         </div>
     </div>
     <br>
@@ -110,6 +112,20 @@ var beginmodus =
 echo '"' . $_POST["begin"] . '"';
 ?>
 ;
+var uitgooi = 
+<?php
+echo "{";
+$sql = "SELECT * FROM uitgooi";
+                    $records = mysqli_query($DBverbinding, $sql);
+                    if (mysqli_num_rows($records) > 0) {
+                        while ($dbid = mysqli_fetch_assoc($records)) {
+                            echo "w" . $dbid["waarde"] . " : ";
+                            echo "'" . $dbid["uitgooi"] . "',";
+                        }
+                    }
+echo "}";
+?>
+
 
 
 if(beginmodus == "willekeurig"){

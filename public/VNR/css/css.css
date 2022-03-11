@@ -248,6 +248,7 @@ form.inhoud{
     /*width: 20%;*/
 }
 .spelerscore{
+    margin: 10px;
     font-size: 500%;
 }
 .spelernaam{

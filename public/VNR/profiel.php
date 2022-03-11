@@ -147,7 +147,3 @@ gemiddelde.innerHTML =  Math.round((somalleworpen / alleworpen.length) * 100) / 
 
 
 </html>
-<?php
-//print_r($_SESSION);
-
-?>
