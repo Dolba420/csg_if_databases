@@ -124,6 +124,7 @@ a {
       text-align: center;
       background-color: var(--accentcolor1);
       width: 50%;
+      border: var(--accentcolor1) 10px solid;
       height: 1000px;
       font-size: 150%;
   }
@@ -133,6 +134,7 @@ a {
       width: 50%;
       height: 1000px;
       font-size: 150%;
+      border: var(--accentcolor2) 10px solid;
       color: black;
   }
   .spelertekst{
@@ -285,10 +287,7 @@ input.kieslegs{
     display: flex;
     justify-content: left;
 }
-.profielcontent{
-    /*height: 900px;*/
-    
-}
+
 .profielcontentinner{
     height: 100%;
     overflow-y: scroll;

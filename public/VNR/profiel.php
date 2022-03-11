@@ -77,6 +77,20 @@ include 'php/moduscontainer.php';
                 }
                 ?></td>
             </tr>
+            <td>Hoogste checkout</td>
+                <td id="honderdplus"> <?php
+                $sql = "SELECT MAX(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worpsoort = 'uitgooi'";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        echo $dbid["MAX(worp_waarde)"];
+                    }
+                }
+                else{
+                    echo 0;
+                }
+                ?></td>
+            </tr>
 </table>
 <br><br>
             </div>
