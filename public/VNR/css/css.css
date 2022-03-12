@@ -6,6 +6,11 @@
     --accentcolor4: #19231A; 
 }
 
+
+   
+
+
+
 html{
     margin: 0;
     height: 100%;
@@ -15,6 +20,7 @@ body {
     margin: 0;
     text-align: center;
     background-color: var(--bg-color);
+    font-family: "Roboto";
 }
 .logo{
     height: 55%;
@@ -31,7 +37,7 @@ nav{
     background-color: var(--accentcolor3);
 }
 .sidebar{
-    height: 970px;
+    height: 100%;
     width: 20%;
     color: white;
     text-align: left;

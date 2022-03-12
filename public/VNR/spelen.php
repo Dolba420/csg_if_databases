@@ -2,7 +2,7 @@
 <head>
 
     <link rel="stylesheet" href="css/css.css">
-
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 </head>
 
 <?php
@@ -31,19 +31,20 @@ require('php/moduscontainer.php');
         <div class="spelinstellingen">
             <div class="spelinstellingeninhoud">
         <div class="instellingeninhoud">
-                <form action="start_spel.php" class="inhoud" method="post">
+                <form id="form" action="start_spel.php" class="inhoud" method="post">
                 <h3 class="kopjeinstellingen">Beginspeler</h3>
-                <select name="begin" id="begin" onchange="document.getElementById('serverbegin').value = document.getElementById('begin').value;">
+                <select name="begin" id="begin" onchange="">
                         <option value="bull">Bullseye</option>
                         <option value="willekeurig">Willekeurig</option>
                         <option value="ik">Ik</option>
                         <option value="tegenstander">Tegenstander</option>
                 </select>
                 <h3 class="kopjeinstellingen" >Spel</h3>
-                <select name="spel" id="spel" id="spel" onchange="document.getElementById('serverspel').value = document.getElementById('spel').value;">
+                <select name="spel" id="spel" id="spel" onchange="speltype();">
                         <option value="classic 501">Classic 501</option>
-                        <!--<option value="minigame125">125 minigame</option>
-                        <option value="killer">Killer</option>-->
+                        <option value="minigame125">125 minigame</option>
+                        <!--<option value="minigame125">Oefening</option>-->
+                        <!--<option value="killer">Killer</option>-->
                 </select>
                 <h3 class="kopjeinstellingen">Tegenstander</h3>
                 <div class="nieuwe_tegenstander" id="nieuwe_tegenstander">
@@ -100,7 +101,14 @@ function togglevisibility(){
                 vis = 0;
         }
 }
-
+function speltype(){
+        if(document.getElementById('spel').value == 'Classic 501'){
+                document.getElementById('form').action = 'start_spel.php';
+        }
+        if(document.getElementById('spel').value == 'minigame125'){
+                document.getElementById('form').action = '125uitgooi.php';
+        }
+}
 
 
 
