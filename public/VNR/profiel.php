@@ -124,10 +124,8 @@ include 'php/moduscontainer.php';
 
 <?php
 $allegame = array();
-$naam = array();
-$class;
-$datum;
-$spelsoort;
+
+
     $sql = "SELECT DISTINCT  game_id FROM worp WHERE speler = '" . $_SESSION['username'] . "'";
     $records = mysqli_query($DBverbinding, $sql);
     if (mysqli_num_rows($records) > 0) {
@@ -137,6 +135,10 @@ $spelsoort;
         $x = count($allegame) - 1;
         while($x > 0){
             $legs = array();
+            $naam = array();
+            $class;
+            $datum;
+            $spelsoort;
             $sql = "SELECT DISTINCT  speler FROM worp WHERE game_id = " . $allegame[$x];
             $records = mysqli_query($DBverbinding, $sql);
             if (mysqli_num_rows($records) > 0) {

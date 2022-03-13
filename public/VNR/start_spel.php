@@ -169,6 +169,7 @@ function beurt(speler){
 
 }
 function geworpen(){
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 ) return;
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
         legs[spelerbeurt]++;
         scores[0] = 501;
@@ -209,10 +210,7 @@ function geworpen(){
     
  
 }
-    else{
-        alert("De opgegeven waarde is onjuist ");
-        document.getElementById('puntengegooid').value = 1;
-    }
+
     }
 if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin / 2) + 1){
     document.getElementById("winmessage").innerHTML = spelers[legs.indexOf(Math.max(...legs))] + " wint"
