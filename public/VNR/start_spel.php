@@ -178,7 +178,7 @@ function geworpen(){
                     xhttp.onload = function() {
                     //console.log(this.responseText);
                 }
-            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt]);
+            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt] + "&spelsoort=Classic 501legwin");
             xhttp.send();
             beurt(spelerbeurt);
             worp++;

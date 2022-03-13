@@ -117,7 +117,7 @@ $sql = "SELECT * FROM uitgooi";
                             echo "'" . $dbid["uitgooi"] . "',";
                         }
                     }
-echo "}";
+echo "};";
 ?>
 
 
@@ -173,11 +173,12 @@ function geworpen(){
                     xhttp.onload = function() {
                     //console.log(this.responseText);
                 }
-            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt]);
+            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt] + "&spelsoort=125 uitgooienlegwin");
             xhttp.send();
-            beurt(spelerbeurt);
+            //beurt(spelerbeurt);
             worp++;
             legworp++;
+            som[spelerbeurt] = som[spelerbeurt] + parseInt(document.getElementById('puntengegooid').value);
             beurt(beginspeler * -1 + 1);
     }
     else{
@@ -209,9 +210,9 @@ function geworpen(){
         document.getElementById('puntengegooid').value = 1;
     }
     }
-if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin / 2) + 1){
+if(scores[0] > 130 || scores[1] > 130){
     gameid++;
-    document.getElementById("winmessage").innerHTML = spelers[legs.indexOf(Math.max(...legs))] + " wint"
+    document.getElementById("winmessage").innerHTML = spelers[scores.indexOf(Math.max(...scores))] + " wint"
     document.getElementById("spelgestart").hidden = "hidden";
     document.getElementById("win").hidden = "";
     document.getElementById("videoplay").play();

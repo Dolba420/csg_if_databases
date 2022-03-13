@@ -299,3 +299,6 @@ input.kieslegs{
     height: 100%;
     overflow-y: scroll;
 }
+.header{
+    font-size: 400%;
+}

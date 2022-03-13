@@ -18,7 +18,7 @@ include 'php/moduscontainer.php';
         <div class="statistiekenscherm">
             <div class="profielcontent">
                 <div class="profielcontentinner">
-            <h1>Statistieken</h1>
+            <h1 class="header">Statistieken Classic 501</h1>
             <table>
                 <tr>
                 <th>Soort</th>
@@ -35,7 +35,7 @@ include 'php/moduscontainer.php';
             <tr>
                 <td>aantal keer 100+ gegooid</td>
                 <td id="honderdplus"> <?php
-                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde > 100";
+                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde > 100 AND (spelsoort = 'Classic 501' OR spelsoort = 'Classic 501legwin')";
                 $records = mysqli_query($DBverbinding, $sql);
                 if (mysqli_num_rows($records) > 0) {
                     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -50,7 +50,7 @@ include 'php/moduscontainer.php';
             <tr>
                 <td>aantal keer 140+ gegooid</td>
                 <td id="honderdplus"> <?php
-                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde > 140";
+                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde > 140 AND (spelsoort = 'Classic 501' OR spelsoort = 'Classic 501legwin')";
                 $records = mysqli_query($DBverbinding, $sql);
                 if (mysqli_num_rows($records) > 0) {
                     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -65,7 +65,7 @@ include 'php/moduscontainer.php';
             <tr>
                 <td>aantal keer 180 gegooid</td>
                 <td id="honderdplus"> <?php
-                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde = 180";
+                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde = 180 AND (spelsoort = 'Classic 501' OR spelsoort = 'Classic 501legwin')";
                 $records = mysqli_query($DBverbinding, $sql);
                 if (mysqli_num_rows($records) > 0) {
                     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -79,7 +79,7 @@ include 'php/moduscontainer.php';
             </tr>
             <td>Hoogste checkout</td>
                 <td id="honderdplus"> <?php
-                $sql = "SELECT MAX(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worpsoort = 'uitgooi'";
+                $sql = "SELECT MAX(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worpsoort = 'uitgooi' AND (spelsoort = 'Classic 501' OR spelsoort = 'Classic 501legwin')";
                 $records = mysqli_query($DBverbinding, $sql);
                 if (mysqli_num_rows($records) > 0) {
                     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -93,15 +93,90 @@ include 'php/moduscontainer.php';
             </tr>
 </table>
 <br><br>
+<h1 class="header">Statistieken 125 uitgooien</h1>
+<table>
+                <tr>
+                <th>Soort</th>
+                <th>Gemiddelde</th>
+            </tr>
+            <tr>
+                <td>Gemiddelde per drie darts</td>
+                <td id="gemiddelde125">Centro comercial Moctezuma</td>
+            </tr>
+            <tr>
+                <td>Eerste negen darts gemiddelde</td>
+                <td id="eerste9125">Francisco Chang</td>
+            </tr>
+            <tr>
+                <td>aantal keer 100+ gegooid</td>
+                <td id="honderdplus"> <?php
+                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde > 100 AND (spelsoort = '125 uitgooien' OR spelsoort = '125 uitgooienlegwin')";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        echo $dbid["count(worp_waarde)"];
+                    }
+                }
+                else{
+                    echo 0;
+                }
+                ?></td>
+            </tr>
+            <tr>
+                <td>aantal keer 140+ gegooid</td>
+                <td id="honderdplus"> <?php
+                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde > 140 AND (spelsoort = '125 uitgooien' OR spelsoort = '125 uitgooienlegwin')";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        echo $dbid["count(worp_waarde)"];
+                    }
+                }
+                else{
+                    echo 0;
+                }
+                ?></td>
+            </tr>
+            <tr>
+                <td>aantal keer 180 gegooid</td>
+                <td id="honderdplus"> <?php
+                $sql = "SELECT count(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worp_waarde = 180 AND (spelsoort = '125 uitgooien' OR spelsoort = '125 uitgooienlegwin')";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        echo $dbid["count(worp_waarde)"];
+                    }
+                }
+                else{
+                    echo 0;
+                }
+                ?></td>
+            </tr>
+            <td>Hoogste checkout</td>
+                <td id="honderdplus"> <?php
+                $sql = "SELECT MAX(worp_waarde) FROM worp WHERE speler = '" . $_SESSION['username'] . "'  AND spelsoort = '125 uitgooienlegwin'";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        echo $dbid["MAX(worp_waarde)"];
+                    }
+                }
+                else{
+                    echo 0;
+                }
+                ?></td>
+            </tr>
+</table>
+<br><br><br>
             </div>
             </div>
         </div>
 </div>
 <script>
 var gemiddelde = document.getElementById("gemiddelde");
-var alleworpen = <?php  
+var alleworpen501 = <?php  
                     echo "[";
-                    $sql = "SELECT * FROM worp WHERE speler = '" . $_SESSION['username'] . "'";
+                    $sql = "SELECT * FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND (spelsoort = 'Classic 501' OR spelsoort = 'Classic 501legwin')";
                     $records = mysqli_query($DBverbinding, $sql);
                     if (mysqli_num_rows($records) > 0) {
                         while ($dbid = mysqli_fetch_assoc($records)) {
@@ -138,10 +213,19 @@ document.getElementById("eerste9").innerHTML =  Math.round((someerste9 / eerste9
 
 
 var somalleworpen = 0;
-for (var x = 0; x < alleworpen.length; x++) {
-    somalleworpen += alleworpen[x];
+for (var x = 0; x < alleworpen501.length; x++) {
+    somalleworpen += alleworpen501[x];
 }
-gemiddelde.innerHTML =  Math.round((somalleworpen / alleworpen.length) * 100) / 100;
+gemiddelde.innerHTML =  Math.round((somalleworpen / alleworpen501.length) * 100) / 100;
+
+
+// 125 uitgooien
+
+
+
+
+
+
 </script>
 
 
