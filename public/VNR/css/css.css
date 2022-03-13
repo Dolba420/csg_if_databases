@@ -302,3 +302,8 @@ input.kieslegs{
 .header{
     font-size: 400%;
 }
+canvas{
+    border: 5px solid black;
+    /*width: 80%;*/
+    position: relative;
+}
