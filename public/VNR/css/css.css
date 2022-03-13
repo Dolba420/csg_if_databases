@@ -307,3 +307,33 @@ canvas{
     /*width: 80%;*/
     position: relative;
 }
+.potjeGewonnen{
+    border: 4px solid black;
+    background-color: #30c296;
+}
+.potjeVerloren{
+    border: 4px solid black;
+    background-color: #fd315b;
+}
+.potjeGelijkspel{
+    border: 4px solid black;
+    background-color: grey;
+}
+/*
+#fd315b
+
+*/
+.tegen{
+    margin-left: 10px;
+    text-align: left;
+}
+.date{
+    margin-right: 10px;
+    margin-left: auto;
+    align-items: right;
+    justify-content: right;
+    align-self: flex-end;
+}
+.horizontaal{
+    display: flex;
+}
