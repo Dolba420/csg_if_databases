@@ -29,219 +29,89 @@ include 'php/moduscontainer.php';
                         }
             echo $naam[0] . " vs. " . $naam[1];
             ?></h1>
-            
+            <h2>
+                    <?php
+                        $sql = "SELECT DISTINCT  spelsoort FROM worp WHERE game_id = " . $_GET['game'];
+                        $records = mysqli_query($DBverbinding, $sql);
+                        if (mysqli_num_rows($records) > 0) {
+                            while ($dbid = mysqli_fetch_assoc($records)) {
+                                if($dbid['spelsoort'] == 'Classic 501legwin' OR $dbid['spelsoort'] == '125 uitgooienlegwin'){
 
-<?php
-$allegame = array();
+                                }
+                                else{
+                                    $spelsoort = $dbid['spelsoort'];
+                                }
+                            }
+                            echo $spelsoort;
+                        }
+                    ?>
+            </h2>
+            <p>
+                <?php
+                            $sql = "SELECT DISTINCT datum FROM worp WHERE game_id = " . $_GET['game'];
+                            $records = mysqli_query($DBverbinding, $sql);
+                            if (mysqli_num_rows($records) > 0) {
+                                while ($dbid = mysqli_fetch_assoc($records)) {
+                                    $datum = $dbid['datum'];
+                                }
+                            }
+                            echo $datum;
+                
+                ?>
+            </p>
+
+    <table class="zie">
+  <tr>
+    <th>Speler</th>
+    <th>Worpwaarde</th>
+    <th>Score</th>
+  </tr>
+  <tr>
+    <td><?php echo $naam[0]; ?></td>
+    <td></td>
+    <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125;}?></td>
+  </tr>
+  <tr>
+    <td><?php echo $naam[1]; ?></td>
+    <td></td>
+    <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125;}?></td>
+  </tr>
+  <?php
+                            $scores = array($naam[0] => $spel, $naam[1] => $spel);
+                            $sql = "SELECT * FROM worp WHERE game_id = " . $_GET['game'];
+                            $records = mysqli_query($DBverbinding, $sql);
+                            if (mysqli_num_rows($records) > 0) {
+                                while ($dbid = mysqli_fetch_assoc($records)) {
+                                    if($spel == 501){
+                                        $scores[$dbid['speler']] = $scores[$dbid['speler']] - $worp_waarde = $dbid['worp_waarde'];
+                                        if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] == $dbid['speler']){
+                                            $class = "uit";
+                                            $scores[$naam[0]] = $spel;
+                                            $scores[$naam[1]] = $spel;
+                                        }
+                                    }
+                                    echo '<tr class="' . $class . '">';
+                                    $speler = $dbid['speler'];
+                                    $worp_waarde = $dbid['worp_waarde'];
+                                    $worp_id = $dbid['worp_id'];
+                                    echo '<td>' . $speler .  '</td><td>' . $worp_waarde . '</td><td>' .  $scores[$dbid['speler']] . '</td>';
+                                    echo '</tr>';
+                                    $class = '';
+                                }
+                                echo "<br><br><br><br>";
+                            }
+                
+                ?>
 
 
-    $sql = "SELECT DISTINCT  game_id FROM worp WHERE speler = '" . $_SESSION['username'] . "'";
-    $records = mysqli_query($DBverbinding, $sql);
-    if (mysqli_num_rows($records) > 0) {
-        while ($dbid = mysqli_fetch_assoc($records)) {
-            array_push($allegame, $dbid["game_id"]);
-        }
-        $x = count($allegame) - 1;
-        while($x > 0){
-            $legs = array();
-            $naam = array();
-            $class;
-            $datum;
-            $spelsoort;
-            $sql = "SELECT DISTINCT  speler FROM worp WHERE game_id = " . $allegame[$x];
-            $records = mysqli_query($DBverbinding, $sql);
-            if (mysqli_num_rows($records) > 0) {
-                while ($dbid = mysqli_fetch_assoc($records)) {
-                    array_push($naam, $dbid["speler"]);
-                }
-            }
-            $sql = "SELECT DISTINCT datum FROM worp WHERE game_id = " . $allegame[$x];
-            $records = mysqli_query($DBverbinding, $sql);
-            if (mysqli_num_rows($records) > 0) {
-                while ($dbid = mysqli_fetch_assoc($records)) {
-                    $datum = $dbid['datum'];
-                }
-            }
-            $sql = "SELECT DISTINCT spelsoort FROM worp WHERE game_id = " . $allegame[$x] . " AND NOT spelsoort = 'Classic 501legwin'";
-            $records = mysqli_query($DBverbinding, $sql);
-            if (mysqli_num_rows($records) > 0) {
-                while ($dbid = mysqli_fetch_assoc($records)) {
-                    $spelsoort = $dbid['spelsoort'];
-                }
-            }
-            $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[0] . "' AND spelsoort = 'Classic 501legwin'";
-            $records = mysqli_query($DBverbinding, $sql);
-            if (mysqli_num_rows($records) > 0) {
-                while ($dbid = mysqli_fetch_assoc($records)) {
-                    array_push($legs, $dbid['COUNT(speler)']);
-                }
-            }
-            $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[1] . "' AND spelsoort = 'Classic 501legwin'";
-            $records = mysqli_query($DBverbinding, $sql);
-            if (mysqli_num_rows($records) > 0) {
-                while ($dbid = mysqli_fetch_assoc($records)) {
-                    array_push($legs, $dbid['COUNT(speler)']);
-                }
-            }
-            if(count($legs) <= 1 || count($naam) <= 1){
-                $x--;
-            }
-            else{
-            if($legs[0] > $legs[1] AND $naam[0] == $_SESSION['username']){
-                $win = 'Gewonnen';
-            }
-            else if($legs[0] < $legs[1] AND $naam[0] == $_SESSION['username']){
-                $win = 'Verloren';
-            }
-            else if($legs[0] > $legs[1] AND $naam[1] == $_SESSION['username']){
-                $win = 'Verloren';
-            }
-            else if($legs[0] < $legs[1] AND $naam[1] == $_SESSION['username']){
-                $win = 'Gewonnen';
-            }
-            if($legs[0] == $legs[1]){
-                $win = 'Gelijkspel';
-            }
-            echo '<a href="ziegame.php?game=' . $allegame[$x] . '"><div class="potje' . $win . '">
-            <div class="horizontaal">
-            <h2 class="tegen">' . $naam[0] . ' vs. ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
-            </div>
-            <h3 class="tegen">' . $spelsoort . '</h3>
-        </div></a>';
-            $x--;
-        }
-        }
-    }
-    else{
-        echo "<h2>Geen eerdere spellen.</h2>";
-    }
 
-?>
-<br><br><br>
+
+</table>
+
             </div>
             </div>
         </div>
 </div>
-<script>
-var gemiddelde = document.getElementById("gemiddelde");
-var gem125 = document.getElementById('gemiddelde125');
-var alleworpen501 = <?php  
-                    echo "[";
-                    $sql = "SELECT * FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND (spelsoort = 'Classic 501' OR spelsoort = 'Classic 501legwin')";
-                    $records = mysqli_query($DBverbinding, $sql);
-                    if (mysqli_num_rows($records) > 0) {
-                        while ($dbid = mysqli_fetch_assoc($records)) {
-                            echo $dbid["worp_waarde"] . ",";
-                        }
-                    }
-                    else{
-                        echo 0;
-                    }
-                    echo "];";
-            ?>
-var eerste9 = <?php  
-                    echo "[";
-                    $sql = "SELECT * FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND worpsoort = 'eerste9'";
-                    $records = mysqli_query($DBverbinding, $sql);
-                    if (mysqli_num_rows($records) > 0) {
-                        while ($dbid = mysqli_fetch_assoc($records)) {
-                            echo $dbid["worp_waarde"] . ",";
-                        }
-                    }
-                    else{
-                        echo 0;
-                    }
-                    echo "];";
-            ?>
-
-
-
-var someerste9 = 0;
-for (var x = 0; x < eerste9.length; x++) {
-    someerste9 += eerste9[x];
-}
-document.getElementById("eerste9").innerHTML =  Math.round((someerste9 / eerste9.length) * 100) / 100;
-
-
-var somalleworpen = 0;
-for (var x = 0; x < alleworpen501.length; x++) {
-    somalleworpen += alleworpen501[x];
-}
-gemiddelde.innerHTML =  Math.round((somalleworpen / alleworpen501.length) * 100) / 100;
-
-
-// 125 uitgooien
-var alleworpen125 = <?php  
-                    echo "[";
-                    $sql = "SELECT * FROM worp WHERE speler = '" . $_SESSION['username'] . "' AND (spelsoort = '125 uitgooien' OR spelsoort = '125 uitgooienlegwin')";
-                    $records = mysqli_query($DBverbinding, $sql);
-                    if (mysqli_num_rows($records) > 0) {
-                        while ($dbid = mysqli_fetch_assoc($records)) {
-                            echo $dbid["worp_waarde"] . ",";
-                        }
-                    }
-                    else{
-                        echo 0;
-                    }
-                    echo "];";
-            ?>
-
-var somalleworpen125 = 0;
-for (var x = 0; x < alleworpen125.length; x++) {
-    somalleworpen125 += alleworpen125[x];
-}
-gem125.innerHTML = Math.round((somalleworpen125 / alleworpen125.length) * 100) / 100;
-
-var grafiek1 = document.getElementById('chart1');
-var grafiekeen = grafiek1.getContext('2d');
-grafiek1.width = (document.getElementById("profielcontentinner").clientWidth * 0.8);
-grafiek1.height = (document.getElementById("profielcontentinner").clientWidth * 0.4);
-var grafiek2 = document.getElementById('chart2');
-var grafiektwee = grafiek2.getContext('2d');
-grafiek2.width = (document.getElementById("profielcontentinner").clientWidth * 0.8);
-grafiek2.height = (document.getElementById("profielcontentinner").clientWidth * 0.4);
-function chart(p){
-
-    if(p == 0){
-        grafiekeen.lineWidth = 2;
-        grafiekeen.clearRect(0,0,10000,10000);
-        grafiekeen.beginPath();
-        grafiekeen.strokeStyle = "#000000";
-        grafiekeen.moveTo(-100,0);
-        for(var x = 0; x < alleworpen501.length; x++){
-        grafiekeen.lineTo((grafiek1.width / alleworpen501.length) * x , grafiek1.height - ((alleworpen501[x] - Math.min(...alleworpen501)) * (grafiek1.height / (Math.max(...alleworpen501) - Math.min(...alleworpen501)))));
-        }
-        grafiekeen.stroke();
-        grafiek1.hidden = "";
-    }
-    if(p == 1){
-        grafiekeen.lineWidth = 2;
-        grafiekeen.clearRect(0,0,10000,10000);
-        grafiekeen.beginPath();
-        grafiekeen.strokeStyle = "#000000";
-        grafiekeen.moveTo(-100,0);
-        for(var x = 0; x < eerste9.length; x++){
-            grafiekeen.lineTo((grafiek1.width / eerste9.length) * x , grafiek1.height - ((eerste9[x] - Math.min(...eerste9)) * (grafiek1.height / (Math.max(...eerste9) - Math.min(...eerste9)))));
-        }
-        grafiekeen.stroke();
-        grafiek1.hidden = "";
-    }
-    if(p == 2){
-        grafiektwee.lineWidth = 2;
-        grafiektwee.clearRect(0,0,10000,10000);
-        grafiektwee.beginPath();
-        grafiektwee.strokeStyle = "#000000";
-        grafiektwee.moveTo(-100,0);
-        for(var x = 0; x < alleworpen125.length; x++){
-        grafiektwee.lineTo((grafiek2.width / alleworpen125.length) * x , grafiek2.height - ((alleworpen125[x] - Math.min(...alleworpen125)) * (grafiek2.height / (Math.max(...alleworpen125) - Math.min(...alleworpen125)))));
-        }
-        grafiektwee.stroke();
-        grafiek2.hidden = "";
-    }
-
-}
-
-</script>
 
 
 

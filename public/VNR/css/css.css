@@ -337,3 +337,15 @@ canvas{
 .horizontaal{
     display: flex;
 }
+.zie{
+    margin-bottom: 100px;
+}
+.zie th{
+    width: 25%;
+}
+.uit{
+    background-color: #30c296;
+}
+.tegenuit{
+    background-color: #fd315b;
+}
