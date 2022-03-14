@@ -20,4 +20,8 @@ require 'php/database.php';
                 echo '<head><meta http-equiv="refresh" content="1.5;url=index.php" /></head><!--';
             }
         }
+        else if(!(isset($_SESSION['username']))){
+            echo "Geen gebruiker gevonden, u wordt doorverwezen.";
+            echo '<head><meta http-equiv="refresh" content="1.5;url=index.php" /></head><!--';
+        }
         

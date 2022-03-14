@@ -6,7 +6,7 @@ $sql = "SELECT * FROM login WHERE gebruikersnaam = '" . $_POST['username'] . "'"
             while ($dbid = mysqli_fetch_assoc($records)) {
                 $password = $dbid["wachtwoord"];
             }
-            if (password_verify($_POST['password'], $password)) {
+            if (password_verify($_POST['password'], $password) AND $_SESSION['username'] != $_POST['username']) {
                 $_SESSION['ingelogt'] = true;
                 if(isset($_POST['username'])){
                     $_SESSION['speler2'] = $_POST['username'];
@@ -17,6 +17,10 @@ $sql = "SELECT * FROM login WHERE gebruikersnaam = '" . $_POST['username'] . "'"
                 echo "Wachtwoord onjuist, u wordt doorverwezen.";
                 echo '<head><meta http-equiv="refresh" content="1.5;url=spelen.php" /></head><!--';
             }
+        }
+        else{
+            echo "Geen gebruiker gevonden, u wordt doorverwezen.";
+            echo '<head><meta http-equiv="refresh" content="1.5;url=spelen.php" /></head><!--';
         }
         
 $_SESSION['aantallegs'] = $_POST['legs'];

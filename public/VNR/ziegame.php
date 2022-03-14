@@ -74,7 +74,7 @@ include 'php/moduscontainer.php';
   <tr>
     <td><?php echo $naam[1]; ?></td>
     <td></td>
-    <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125;}?></td>
+    <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125; $std = Array($naam[0] => 125, $naam[1] =>  125);}?></td>
   </tr>
   <?php
                             $scores = array($naam[0] => $spel, $naam[1] => $spel);
@@ -86,8 +86,22 @@ include 'php/moduscontainer.php';
                                         $scores[$dbid['speler']] = $scores[$dbid['speler']] - $worp_waarde = $dbid['worp_waarde'];
                                         if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] == $dbid['speler']){
                                             $class = "uit";
-                                            $scores[$naam[0]] = $spel;
-                                            $scores[$naam[1]] = $spel;
+                                            $reset = true;
+                                        }
+                                        else if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] != $dbid['speler']){
+                                            $class = "tegenuit";
+                                            $reset = true;
+                                        }
+                                    }
+                                    if($spel == 125){
+                                        $scores[$dbid['speler']] = $scores[$dbid['speler']] - $worp_waarde = $dbid['worp_waarde'];
+                                        if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] == $dbid['speler']){
+                                            $class = "uit";
+                                            $reset = true;
+                                        }
+                                        else if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] != $dbid['speler']){
+                                            $class = "tegenuit";
+                                            $reset = true;
                                         }
                                     }
                                     echo '<tr class="' . $class . '">';
@@ -97,6 +111,28 @@ include 'php/moduscontainer.php';
                                     echo '<td>' . $speler .  '</td><td>' . $worp_waarde . '</td><td>' .  $scores[$dbid['speler']] . '</td>';
                                     echo '</tr>';
                                     $class = '';
+                                    if($reset == true){
+                                        if($spel == 501){
+                                        $scores[$naam[0]] = $spel;
+                                        $scores[$naam[1]] = $spel;
+                                        $reset = false;
+                                        }
+                                        else{
+                                            if($speler == $naam[0]){
+                                                $scores[$naam[0]] = $std[$naam[0]] + 2;
+                                                $scores[$naam[1]] = $std[$naam[1]] - 2;
+                                                $std[$naam[0]] = $std[$naam[0]] + 2;
+                                                $std[$naam[1]] = $std[$naam[1]] - 2;
+                                            }
+                                            else{
+                                                $scores[$naam[1]] = $std[$naam[1]] + 2;
+                                                $scores[$naam[0]] = $std[$naam[0]] - 2;
+                                                $std[$naam[0]] = $std[$naam[0]] - 2;
+                                                $std[$naam[1]] = $std[$naam[1]] + 2;
+                                            }
+                                            $reset = false;
+                                        }
+                                    }
                                 }
                                 echo "<br><br><br><br>";
                             }

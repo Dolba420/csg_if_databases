@@ -3,8 +3,8 @@
 <?php
 require('php/logincheck.php');
 ?>
-    <link rel="stylesheet" href="css/css.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="stylesheet" href="css/css.css">
 </head>
 <body>
 <div id="spelerkeuze">
@@ -27,16 +27,16 @@ require('php/logincheck.php');
     </div>
     <div class="spelers">
         <div class="speler1spel" id="speler1">
-            <h1 id="score0" class="spelerscore">125</h1>
+            <h1 id="score0" class="spelerscore">501</h1>
             <h2 class="spelernaam"><?php echo $_SESSION['username']; ?></h2>
             <h3 id="gemspeler" class="spelergem"></h3>
-            <h3 id="uitgooi0" class="spelergem">T18 T13 D16</h3>
+            <h3 id="uitgooi0" class="spelergem"></h3>
         </div>
         <div class="speler2spel" id="speler2">
-            <h1 id="score1" class="spelerscore">125</h1>
+            <h1 id="score1" class="spelerscore">501</h1>
             <h2 class="spelernaam"><?php echo $_POST['tegenstander']?></h2>
             <h3 id="gemtegenspeler" class="spelergem"></h3>
-            <h3 id="uitgooi1" class="spelergem">T18 T13 D16</h3>
+            <h3 id="uitgooi1" class="spelergem"></h3>
         </div>
     </div>
     <br>
@@ -81,7 +81,7 @@ echo "</table>";
 <script>
 var audio = new Audio('media/heerlijk.mp3');
 var legworp = 0;
-var worpsoort = ["125 uitgooien","125 uitgooien"];
+var worpsoort = ["eerste9","eerste9"];
 var gemspeler = document.getElementById('gemspeler');
 var gemtegenspeler = document.getElementById('gemtegenspeler');
 var aantalbeurten1 = 0;
@@ -90,22 +90,20 @@ var gemiddelde = [];
 var som = [0,0];
 var beurtarray = [];
 var spelerbeurt = 0;
-beurtarray[0] = document.getElementById('speler1');
-beurtarray[1] = document.getElementById('speler2');
 var worp = 0;
 var legstotwin = <?php echo $_POST['legs']?>;
-var stand = [125, 125];
-var scores = [125, 125];
+var scores = [501, 501];
 var legs = [0,0];
 var beginspeler = null;
 var gameid = <?php echo $_POST["gameid"]?>;
 var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
-var bspeler = Math.floor(Math.random()*2);
-var beginmodus = 
-<?php
-echo '"' . $_POST["begin"] . '"';
-?>
-;
+var worp = 0;
+var legstotwin = <?php echo $_POST['legs']?>;
+var scores = [501];
+
+
+var spelers = [<?php echo "'" . $_SESSION['username'] . "'"; ?>];
+
 var uitgooi = 
 <?php
 echo "{";
@@ -117,7 +115,7 @@ $sql = "SELECT * FROM uitgooi";
                             echo "'" . $dbid["uitgooi"] . "',";
                         }
                     }
-echo "};";
+echo "}";
 ?>
 
 
@@ -163,23 +161,15 @@ function beurt(speler){
 
 }
 function geworpen(){
-    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0) return;
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 || document.getElementById('puntengegooid').value % 1 !== 0) return;
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
-        stand[spelerbeurt] += 2;
-        stand[spelerbeurt * -1 + 1] -= 2;
-        scores[0] = stand[0];
-        scores[1] = stand[1];
+        legs[spelerbeurt]++;
+        scores[0] = 501;
+        scores[1] = 501;
         beginspeler = beginspeler * -1 + 1;
-        const xhttp = new XMLHttpRequest();
-                    xhttp.onload = function() {
-                    //console.log(this.responseText);
-                }
-            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=" + worpsoort[spelerbeurt] + "&spelsoort=125 uitgooienlegwin");
-            xhttp.send();
-            //beurt(spelerbeurt);
+            beurt(spelerbeurt);
             worp++;
             legworp++;
-            som[spelerbeurt] = som[spelerbeurt] + parseInt(document.getElementById('puntengegooid').value);
             beurt(beginspeler * -1 + 1);
     }
     else{
@@ -193,12 +183,6 @@ function geworpen(){
         else{
             som[spelerbeurt] = som[spelerbeurt] + parseInt(document.getElementById('puntengegooid').value);
             scores[spelerbeurt] = scores[spelerbeurt] - document.getElementById('puntengegooid').value;
-                const xhttp = new XMLHttpRequest();
-                    xhttp.onload = function() {
-                    //console.log(this.responseText);
-                }
-            xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value+ "&worpsoort=" + worpsoort[spelerbeurt] + "&spelsoort=125 uitgooien") ;
-            xhttp.send();
             beurt(spelerbeurt);
             worp++;
             legworp++;
@@ -206,24 +190,36 @@ function geworpen(){
     
  
 }
-    else{
-        alert("De opgegeven waarde is onjuist ");
-        document.getElementById('puntengegooid').value = 1;
+
     }
-    }
-if(scores[0] > 130 || scores[1] > 130){
-    gameid++;
-    document.getElementById("winmessage").innerHTML = spelers[scores.indexOf(Math.max(...scores))] + " wint"
+if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin / 2) + 1){
+    document.getElementById("winmessage").innerHTML = spelers[legs.indexOf(Math.max(...legs))] + " wint"
     document.getElementById("spelgestart").hidden = "hidden";
     document.getElementById("win").hidden = "";
     document.getElementById("videoplay").play();
+    gameid++;
 }
 if(spelerbeurt == 0){
         aantalbeurten2++;
-
+        if(scores[1] > 170){
+            if(aantalbeurten2 >= 3){
+            worpsoort[1] = "normaal";
+        }
+        }
+        else{
+            worpsoort[1] = "uitgooi";
+        }
     }
     if(spelerbeurt == 1){
         aantalbeurten1++;
+        if(scores[0] > 170){
+            if(aantalbeurten1 >= 3){
+                worpsoort[0] = "normaal";
+            }
+        }
+            else{
+                worpsoort[0] = "uitgooi";
+            }
     }
 
 document.getElementById('puntengegooid').value = "";
@@ -256,6 +252,7 @@ if(scores[1] < 170){
 }
 
 function restart(){
+    
     document.getElementById("spelerkeuze").hidden = "";
     document.getElementById("win").hidden = "hidden";
     document.getElementById("videoplay").pause();
@@ -266,9 +263,9 @@ function restart(){
     aantalbeurten1 = 0;
     som[0] = 0;
     som[1] = 0;
-    stand = [125, 125];
     gemspeler.innerHTML = "gemiddelde : " + som[0] / (aantalbeurten1);
     gemtegenspeler.innerHTML = "gemiddelde: " + som[1] / (aantalbeurten2);
+    worp = 0;
 }
 
 

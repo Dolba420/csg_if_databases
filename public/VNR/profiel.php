@@ -153,21 +153,21 @@ $allegame = array();
                     $datum = $dbid['datum'];
                 }
             }
-            $sql = "SELECT DISTINCT spelsoort FROM worp WHERE game_id = " . $allegame[$x] . " AND NOT spelsoort = 'Classic 501legwin'";
+            $sql = "SELECT DISTINCT spelsoort FROM worp WHERE game_id = " . $allegame[$x] . " AND NOT spelsoort = 'Classic 501legwin' AND NOT spelsoort = '125 uitgooienlegwin'";
             $records = mysqli_query($DBverbinding, $sql);
             if (mysqli_num_rows($records) > 0) {
                 while ($dbid = mysqli_fetch_assoc($records)) {
                     $spelsoort = $dbid['spelsoort'];
                 }
             }
-            $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[0] . "' AND spelsoort = 'Classic 501legwin'";
+            $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[0] . "' AND (spelsoort = 'Classic 501legwin' OR spelsoort = '125 uitgooienlegwin')";
             $records = mysqli_query($DBverbinding, $sql);
             if (mysqli_num_rows($records) > 0) {
                 while ($dbid = mysqli_fetch_assoc($records)) {
                     array_push($legs, $dbid['COUNT(speler)']);
                 }
             }
-            $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[1] . "' AND spelsoort = 'Classic 501legwin'";
+            $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[1] . "' AND (spelsoort = 'Classic 501legwin' OR spelsoort = '125 uitgooienlegwin')";
             $records = mysqli_query($DBverbinding, $sql);
             if (mysqli_num_rows($records) > 0) {
                 while ($dbid = mysqli_fetch_assoc($records)) {

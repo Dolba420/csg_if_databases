@@ -43,6 +43,8 @@ require('php/moduscontainer.php');
                 <select name="spel" id="spel" id="spel" onchange="speltype();">
                         <option value="classic 501">Classic 501</option>
                         <option value="minigame125">125 minigame</option>
+                        <option value="oefen501">501 classic oefenen</option>
+                        <option value="oefen125">125 minigame oefenen</option>
                         <!--<option value="minigame125">Oefening</option>-->
                         <!--<option value="killer">Killer</option>-->
                 </select>
@@ -66,7 +68,7 @@ require('php/moduscontainer.php');
                 </div>
                 <br>
                 <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
-                <input type="submit" value="<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>" class="kieslegs" <?php if(isset($_SESSION['speler2'])){} else{ echo "disabled";}?>><br>
+                <input id="submitknop" type="submit" value="<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>" class="kieslegs" <?php if(isset($_SESSION['speler2'])){} else{ echo "disabled";}?>><br>
 </form>
 
             </div>
@@ -102,11 +104,37 @@ function togglevisibility(){
         }
 }
 function speltype(){
-        if(document.getElementById('spel').value == 'Classic 501'){
+        if(document.getElementById('spel').value == 'classic 501'){
                 document.getElementById('form').action = 'start_spel.php';
+                if(document.getElementById('tegenstander').value == 'null'){
+                        document.getElementById('submitknop').disabled = true;
+                        document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
+                }
+                else{
+                        document.getElementById('submitknop').disabled = false;
+                        document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
+                }
         }
         if(document.getElementById('spel').value == 'minigame125'){
                 document.getElementById('form').action = '125uitgooi.php';
+                if(document.getElementById('tegenstander').value == 'null'){
+                        document.getElementById('submitknop').disabled = true;
+                        document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
+                }
+                else{
+                        document.getElementById('submitknop').disabled = false;
+                        document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
+                }
+        }
+        if(document.getElementById('spel').value == 'oefen501'){
+                document.getElementById('submitknop').disabled = false;
+                document.getElementById('form').action = 'oefening501.php';
+                document.getElementById('submitknop').value = 'Oefenen';
+        }
+        if(document.getElementById('spel').value == 'oefen125'){
+                document.getElementById('form').action = 'oefening125.php';
+                document.getElementById('submitknop').disabled = false;
+                document.getElementById('submitknop').value = 'Oefenen';
         }
 }
 
