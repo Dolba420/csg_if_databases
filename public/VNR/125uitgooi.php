@@ -173,8 +173,13 @@ function beurt(speler){
     beurtarray[spelerbeurt].className = "spelernaam" + spelerbeurt + "active";
 }
 function geworpen(){
-    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0) return;
-    if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
+    if(scores[0] - document.getElementById('puntengegooid').value < 0) return
+    scores[0] = scores[0] - document.getElementById('puntengegooid').value;
+    document.getElementById('puntengegooid').value = '';
+    document.getElementById('score0').innerHTML = scores[0];
+    beurt();
+    /*if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
         stand[spelerbeurt] += 2;
         stand[spelerbeurt * -1 + 1] -= 2;
         scores[0] = stand[0];
@@ -249,7 +254,7 @@ document.getElementById("uitgooi0").innerHTML = "";
 
 if(scores[0] < 170){
     document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
-}
+}*/
 }
 
 function restart(){
