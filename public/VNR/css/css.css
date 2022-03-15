@@ -254,7 +254,8 @@ form.inhoud{
     /*width: 20%;*/
 }
 .spelerscore{
-    margin: 10px;
+    margin: 0;
+    margin-bottom: 10px;
     font-size: 500%;
 }
 .spelernaam{
@@ -348,4 +349,58 @@ canvas{
 }
 .tegenuit{
     background-color: #fd315b;
+}
+.gezamelijkescore{
+    text-align: center;
+    background-color: var(--accentcolor2);
+    width: 100%;
+    height: 500px;
+    font-size: 150%;
+}
+
+.oefenscore{
+    text-align: center;
+    background-color: var(--accentcolor2);
+    width: 100%;
+    height: 500px;
+    font-size: 150%;
+}
+.spelernaamlinks{
+    padding: 5px;
+    margin-left: 42.5%;
+    font-size: 200%;
+    text-align: center;
+    justify-content: center;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.spelernaamrechts{
+    padding: 5px;
+    margin-left: 5%;
+    font-size: 200%;
+    text-align: center;
+    justify-content: center;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.spelernaam0active{
+    padding: 5px;
+    border: var(--accentcolor1) 3px solid;
+    margin-left: 42.5%;
+    font-size: 200%;
+    text-align: center;
+    justify-content: center;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.spelernaam1active{
+    padding: 5px;
+    border: var(--accentcolor1) 3px solid;
+    margin-left: 5%;
+    font-size: 200%;
+   margin-right: 10px;
+
 }

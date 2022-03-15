@@ -25,6 +25,16 @@ require('php/logincheck.php');
     <a href="dashboard.php" class="terugnaarhoofdmenu"><h2>Terug naar hoofdmenu</h2></a>
     <h1 id="stand">0 - 0</h1>
     </div>
+    <div class="gezamelijkescore">
+    <h1 id="score0" class="spelerscore">125</h1>
+    <div class="horizontaal">
+            <h2 id="speler1" class="spelernaamlinks"><?php echo " " . $_SESSION['username'] . " "; ?></h2>
+            <h2 id="speler2" class="spelernaamrechts"><?php echo " " . $_POST['tegenstander'] . " "; ?></h2>
+    </div>
+            <h3 id="gemspeler" class="spelergem"></h3>
+            <h3 id="uitgooi0" class="spelergem">T18 T13 D16</h3>
+    </div>
+    <!--
     <div class="spelers">
         <div class="speler1spel" id="speler1">
             <h1 id="score0" class="spelerscore">125</h1>
@@ -38,6 +48,7 @@ require('php/logincheck.php');
             <h3 id="gemtegenspeler" class="spelergem"></h3>
             <h3 id="uitgooi1" class="spelergem">T18 T13 D16</h3>
         </div>
+-->
     </div>
     <br>
     <div class="">
@@ -81,22 +92,22 @@ echo "</table>";
 <script>
 var audio = new Audio('media/heerlijk.mp3');
 var legworp = 0;
-var worpsoort = ["125 uitgooien","125 uitgooien"];
+var worpsoort = ["125 uitgooien"];
 var gemspeler = document.getElementById('gemspeler');
 var gemtegenspeler = document.getElementById('gemtegenspeler');
 var aantalbeurten1 = 0;
 var aantalbeurten2 = 0;
 var gemiddelde = [];
-var som = [0,0];
+var som = [0];
 var beurtarray = [];
 var spelerbeurt = 0;
 beurtarray[0] = document.getElementById('speler1');
 beurtarray[1] = document.getElementById('speler2');
 var worp = 0;
 var legstotwin = <?php echo $_POST['legs']?>;
-var stand = [125, 125];
-var scores = [125, 125];
-var legs = [0,0];
+var stand = [125];
+var scores = [125];
+var legs = [0];
 var beginspeler = null;
 var gameid = <?php echo $_POST["gameid"]?>;
 var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
@@ -157,10 +168,9 @@ if(beginmodus == "tegenstander"){
 
 function beurt(speler){
     spelerbeurt = spelerbeurt * -1 + 1;
-    beurtarray[0].className = "speler1spel";
-    beurtarray[1].className = "speler2spel";
-    beurtarray[spelerbeurt].className = "speler" + (spelerbeurt + 1) + "spelactief";
-
+    beurtarray[0].className = "spelernaamlinks";
+    beurtarray[1].className = "spelernaamrechts";
+    beurtarray[spelerbeurt].className = "spelernaam" + spelerbeurt + "active";
 }
 function geworpen(){
     if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0) return;
@@ -168,7 +178,6 @@ function geworpen(){
         stand[spelerbeurt] += 2;
         stand[spelerbeurt * -1 + 1] -= 2;
         scores[0] = stand[0];
-        scores[1] = stand[1];
         beginspeler = beginspeler * -1 + 1;
         const xhttp = new XMLHttpRequest();
                     xhttp.onload = function() {
@@ -229,30 +238,18 @@ if(spelerbeurt == 0){
 document.getElementById('puntengegooid').value = "";
 document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
 document.getElementById('score0').innerHTML = scores[0];
-document.getElementById('score1').innerHTML = scores[1];
-document.getElementById("stand").innerHTML = legs[0] + " - " +  legs[1];
 if(isNaN(Math.round((som[0] / (aantalbeurten1))*100) / 100)){
     gemspeler.innerHTML = "gemiddelde : " + 0;
 }
 else{
     gemspeler.innerHTML = "gemiddelde : " + Math.round((som[0] / (aantalbeurten1))*100) / 100;
 }
-if(isNaN(Math.round((som[1] / (aantalbeurten2)) * 100) / 100)){
-    gemtegenspeler.innerHTML = "gemiddelde: " + 0;
-}
-else{
-    gemtegenspeler.innerHTML = "gemiddelde: " + Math.round((som[1] / (aantalbeurten2)) * 100) / 100;
-}
+
 document.getElementById("uitgooi0").innerHTML = "";
-document.getElementById("uitgooi1").innerHTML = "";
 
 if(scores[0] < 170){
     document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
 }
-if(scores[1] < 170){
-    document.getElementById("uitgooi1").innerHTML = uitgooi["w" + scores[1]];
-}
-
 }
 
 function restart(){
@@ -260,15 +257,12 @@ function restart(){
     document.getElementById("win").hidden = "hidden";
     document.getElementById("videoplay").pause();
     legs[0] = 0;
-    legs[1] = 0;
-    document.getElementById("stand").innerHTML = legs[0] + " - " +  legs[1];
+    document.getElementById("stand").innerHTML = legs[0] + " - ";
     aantalbeurten2 = 0;
     aantalbeurten1 = 0;
     som[0] = 0;
-    som[1] = 0;
-    stand = [125, 125];
+    stand = [125];
     gemspeler.innerHTML = "gemiddelde : " + som[0] / (aantalbeurten1);
-    gemtegenspeler.innerHTML = "gemiddelde: " + som[1] / (aantalbeurten2);
 }
 
 

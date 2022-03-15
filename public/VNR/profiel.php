@@ -300,7 +300,7 @@ function chart(p){
         grafiekeen.strokeStyle = "#000000";
         grafiekeen.moveTo(-100,0);
         for(var x = 0; x < alleworpen501.length; x++){
-        grafiekeen.lineTo((grafiek1.width / alleworpen501.length) * x , grafiek1.height - ((alleworpen501[x] - Math.min(...alleworpen501)) * (grafiek1.height / (Math.max(...alleworpen501) - Math.min(...alleworpen501)))));
+        grafiekeen.lineTo((grafiek1.width / alleworpen501.length) * x , grafiek1.height - ((alleworpen501[x] - (Math.min(...alleworpen501) - 5)) * (grafiek1.height / ((Math.max(...alleworpen501)+5) - (Math.min(...alleworpen501) - 5)))));
         }
         grafiekeen.stroke();
         grafiek1.hidden = "";
@@ -312,7 +312,7 @@ function chart(p){
         grafiekeen.strokeStyle = "#000000";
         grafiekeen.moveTo(-100,0);
         for(var x = 0; x < eerste9.length; x++){
-            grafiekeen.lineTo((grafiek1.width / eerste9.length) * x , grafiek1.height - ((eerste9[x] - Math.min(...eerste9)) * (grafiek1.height / (Math.max(...eerste9) - Math.min(...eerste9)))));
+            grafiekeen.lineTo((grafiek1.width / eerste9.length) * x , grafiek1.height - ((eerste9[x] - (Math.min(...eerste9) - 5)) * (grafiek1.height / ((Math.max(...eerste9) + 5) - (Math.min(...eerste9) - 5)))));
         }
         grafiekeen.stroke();
         grafiek1.hidden = "";
@@ -324,7 +324,7 @@ function chart(p){
         grafiektwee.strokeStyle = "#000000";
         grafiektwee.moveTo(-100,0);
         for(var x = 0; x < alleworpen125.length; x++){
-        grafiektwee.lineTo((grafiek2.width / alleworpen125.length) * x , grafiek2.height - ((alleworpen125[x] - Math.min(...alleworpen125)) * (grafiek2.height / (Math.max(...alleworpen125) - Math.min(...alleworpen125)))));
+        grafiektwee.lineTo((grafiek2.width / alleworpen125.length) * x , grafiek2.height - ((alleworpen125[x] - (Math.min(...alleworpen125) - 5)) * (grafiek2.height / ((Math.max(...alleworpen125) + 5) - (Math.min(...alleworpen125) - 5)))));
         }
         grafiektwee.stroke();
         grafiek2.hidden = "";

@@ -169,7 +169,7 @@ function beurt(speler){
 
 }
 function geworpen(){
-    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 || document.getElementById('puntengegooid').value % 1 !== 0) return;
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
         legs[spelerbeurt]++;
         scores[0] = 501;
