@@ -108,10 +108,12 @@ var legstotwin = <?php echo $_POST['legs']?>;
 var stand = [125];
 var scores = [125];
 var legs = [0];
+var aantalworpen = 0;
 var beginspeler = null;
 var gameid = <?php echo $_POST["gameid"]?>;
 var spelers = [<?php echo "'" . $_SESSION['username'] . "'" . ",'" . $_POST['tegenstander'] . "'"; ?>];
 var bspeler = Math.floor(Math.random()*2);
+var std = 125;
 var beginmodus = 
 <?php
 echo '"' . $_POST["begin"] . '"';
@@ -174,11 +176,20 @@ function beurt(speler){
 }
 function geworpen(){
     if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
-    if(scores[0] - document.getElementById('puntengegooid').value < 0) return
+    if((scores[0] - document.getElementById('puntengegooid').value) < 0){ console.log( beurt(); document.getElementById('puntengegooid').value = ''; return;}
+    if(scores[0] - document.getElementById('puntengegooid').value <= 0){win(); return}
+    if(aantalworpen == 2){lose(); return;}
     scores[0] = scores[0] - document.getElementById('puntengegooid').value;
+    aantalworpen++;
+    beurt();
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {}
+    xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=125 uitgooien"  + "&spelsoort=125 uitgooien");
+    xhttp.send();
+
     document.getElementById('puntengegooid').value = '';
     document.getElementById('score0').innerHTML = scores[0];
-    beurt();
     /*if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
         stand[spelerbeurt] += 2;
         stand[spelerbeurt * -1 + 1] -= 2;
@@ -256,6 +267,36 @@ if(scores[0] < 170){
     document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
 }*/
 }
+function lose(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {}
+    xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=125 uitgooien"  + "&spelsoort=125 uitgooienleglose");
+    xhttp.send();
+    aantalworpen = 0;
+    std -= 2;
+    scores[0] = std;
+    if(scores[0] < 120){
+        alert('lose');
+    }
+    document.getElementById('puntengegooid').value = '';
+    document.getElementById('score0').innerHTML = scores[0];
+}
+
+function win(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {}
+    xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=125 uitgooien"  + "&spelsoort=125 uitgooienlegwin");
+    xhttp.send();
+    aantalworpen = 0;
+    std += 2;
+    scores[0] = std;
+    if(scores[0] > 130){
+        alert('win');
+    }
+    document.getElementById('puntengegooid').value = '';
+    document.getElementById('score0').innerHTML = scores[0];
+}
+
 
 function restart(){
     document.getElementById("spelerkeuze").hidden = "";
@@ -280,14 +321,6 @@ input.addEventListener("keyup", function(event) {
 });
 
 var gegooidewaarde;
-
-function aftellen(n){
-    if(n > 0){
-        scores[spelerbeurt]--;
-        aftellen(n-1);
-        document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
-    }
-}
 
 
 
