@@ -262,10 +262,10 @@ else{
 document.getElementById("uitgooi0").innerHTML = "";
 document.getElementById("uitgooi1").innerHTML = "";
 
-if(scores[0] < 170){
+if(scores[0] < 170 && uitgooi["w" + scores[0]] != undefined){
     document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
 }
-if(scores[1] < 170){
+if(scores[1] < 170 && uitgooi["w" + scores[0]] != undefined){
     document.getElementById("uitgooi1").innerHTML = uitgooi["w" + scores[1]];
 }
 
