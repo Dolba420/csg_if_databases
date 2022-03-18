@@ -77,11 +77,16 @@ include 'php/moduscontainer.php';
     <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125; $std = 125;}?></td>
   </tr>
   <?php
+                            $worpaantal = 0;
                             $scores = array($naam[0] => $spel, $naam[1] => $spel);
+                            $gezscore = 125;
                             $sql = "SELECT * FROM worp WHERE game_id = " . $_GET['game'];
                             $records = mysqli_query($DBverbinding, $sql);
                             if (mysqli_num_rows($records) > 0) {
                                 while ($dbid = mysqli_fetch_assoc($records)) {
+                                    $speler = $dbid['speler'];
+                                    $worp_waarde = $dbid['worp_waarde'];
+                                    $worp_id = $dbid['worp_id'];
                                     if($spel == 501){
                                         $scores[$dbid['speler']] = $scores[$dbid['speler']] - $worp_waarde = $dbid['worp_waarde'];
                                         if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] == $dbid['speler']){
@@ -96,19 +101,24 @@ include 'php/moduscontainer.php';
                                     if($spel == 125){
                                         $worp_waarde = $dbid['worp_waarde'];
                                         $scores[$naam[0]] = $scores[$naam[0]] - $worp_waarde;
-                                        if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] == $dbid['speler']){
+                                        $scores[$naam[1]] = $scores[$naam[0]];
+
+                                        if($scores[$naam[0]] == 0){
+                                            $worpaantal = -1;
                                             $class = "uit";
                                             $reset = true;
                                         }
-                                        else if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] != $dbid['speler']){
+                                        if($worpaantal == 2){
+                                            $worpaantal = 0;
                                             $class = "tegenuit";
-                                            $reset = true;
+                                            $std = $std - 2;
+                                            $scores[$naam[0]] = $std;
+                                        }
+                                        else{
+                                            $worpaantal++;
                                         }
                                     }
                                     echo '<tr class="' . $class . '">';
-                                    $speler = $dbid['speler'];
-                                    $worp_waarde = $dbid['worp_waarde'];
-                                    $worp_id = $dbid['worp_id'];
                                     echo '<td>' . $speler .  '</td><td>' . $worp_waarde . '</td><td>' .  $scores[$dbid['speler']] . '</td>';
                                     echo '</tr>';
                                     $class = '';
@@ -119,7 +129,9 @@ include 'php/moduscontainer.php';
                                         $reset = false;
                                         }
                                         else{
-                                            //$scores[$naam[0]] = $spel;
+                                            $std = $std + 2;
+                                            $scores[$naam[0]] = $std;
+                                            $scores[$naam[1]] = $scores[$naam[0]];
                                             $reset = false;
                                         }
                                     }
