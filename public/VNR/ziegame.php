@@ -35,7 +35,7 @@ include 'php/moduscontainer.php';
                         $records = mysqli_query($DBverbinding, $sql);
                         if (mysqli_num_rows($records) > 0) {
                             while ($dbid = mysqli_fetch_assoc($records)) {
-                                if($dbid['spelsoort'] == 'Classic 501legwin' OR $dbid['spelsoort'] == '125 uitgooienlegwin'){
+                                if($dbid['spelsoort'] == 'Classic 501legwin' OR $dbid['spelsoort'] == '125 uitgooienlegwin' OR $dbid['spelsoort'] == '125 uitgooienleglose'){
 
                                 }
                                 else{
@@ -74,7 +74,7 @@ include 'php/moduscontainer.php';
   <tr>
     <td><?php echo $naam[1]; ?></td>
     <td></td>
-    <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125; $std = Array($naam[0] => 125, $naam[1] =>  125);}?></td>
+    <td><?php if($spelsoort == 'Classic 501'){ echo 501; $spel = 501;} else{ echo 125; $spel = 125; $std = 125;}?></td>
   </tr>
   <?php
                             $scores = array($naam[0] => $spel, $naam[1] => $spel);
@@ -94,7 +94,8 @@ include 'php/moduscontainer.php';
                                         }
                                     }
                                     if($spel == 125){
-                                        $scores[$dbid['speler']] = $scores[$dbid['speler']] - $worp_waarde = $dbid['worp_waarde'];
+                                        $worp_waarde = $dbid['worp_waarde'];
+                                        $scores[$naam[0]] = $scores[$naam[0]] - $worp_waarde;
                                         if($scores[$dbid['speler']] == 0 AND $_SESSION['username'] == $dbid['speler']){
                                             $class = "uit";
                                             $reset = true;
@@ -118,18 +119,7 @@ include 'php/moduscontainer.php';
                                         $reset = false;
                                         }
                                         else{
-                                            if($speler == $naam[0]){
-                                                $scores[$naam[0]] = $std[$naam[0]] + 2;
-                                                $scores[$naam[1]] = $std[$naam[1]] - 2;
-                                                $std[$naam[0]] = $std[$naam[0]] + 2;
-                                                $std[$naam[1]] = $std[$naam[1]] - 2;
-                                            }
-                                            else{
-                                                $scores[$naam[1]] = $std[$naam[1]] + 2;
-                                                $scores[$naam[0]] = $std[$naam[0]] - 2;
-                                                $std[$naam[0]] = $std[$naam[0]] - 2;
-                                                $std[$naam[1]] = $std[$naam[1]] + 2;
-                                            }
+                                            //$scores[$naam[0]] = $spel;
                                             $reset = false;
                                         }
                                     }
