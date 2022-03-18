@@ -11,10 +11,10 @@ require('php/logincheck.php');
 <div id="spelgestart">
     <div class="topbar">
     <a href="dashboard.php" class="terugnaarhoofdmenu"><h2>Terug naar hoofdmenu</h2></a>
-    <h1>Uitgooien</h1>
+    <h1>125 Uitgooien</h1>
     </div>
     <div class="gezamelijkescore">
-    <h1 id="score0" class="spelerscore">501</h1>
+    <h1 id="score0" class="spelerscore">125</h1>
     <h3 id="gemspeler" class="spelergem"></h3>
             <h3 id="uitgooi0" class="spelergem"></h3>
     </div>
@@ -89,8 +89,8 @@ beurtarray[0] = document.getElementById('speler1');
 beurtarray[1] = document.getElementById('speler2');
 var worp = 0;
 var legstotwin = <?php echo $_POST['legs']?>;
-var stand = [501];
-var scores = [501];
+var stand = [125];
+var scores = [125];
 var legs = 0;
 var aantalworpen = 0;
 var beginspeler = null;
@@ -118,13 +118,11 @@ echo "};";
 ?>
 
 
-
-
-
 function geworpen(){
     if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
     if((scores[0] - document.getElementById('puntengegooid').value) < 0){  document.getElementById('puntengegooid').value = ''; return;}
-    if(scores[0] - document.getElementById('puntengegooid').value == 0){ win(); return}
+    if(scores[0] - document.getElementById('puntengegooid').value == 0){ worp = 0; win(); return}
+    if(worp >= 2){ worp = 0; lose();  return;}
     scores[0] = scores[0] - document.getElementById('puntengegooid').value;
     worp++;
     gem(parseInt(document.getElementById('puntengegooid').value));
@@ -133,21 +131,39 @@ function geworpen(){
     }
     document.getElementById('puntengegooid').value = '';
     document.getElementById('score0').innerHTML = scores[0];
-   
 }
 
 
 
 function win(){
-    worp++;
-    legs++;
-    if(legs == <?php echo $_POST['legs'];?>){
+    std = std + 2;
+    scores[0] = std;
+    if(std > 130){
         document.getElementById('spelgestart').hidden = "hidden";
         document.getElementById('win').hidden = "";
     }
+
     document.getElementById('puntengegooid').value = '';
     document.getElementById('score0').innerHTML = scores[0];
+    if(scores[0] < 170){
+        document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
+    }
     
+}
+function lose(){
+    aantalworpen = 0;
+    std -= 2;
+    scores[0] = std;
+    if(scores[0] < 120){
+        document.getElementById('spelgestart').hidden = "hidden";
+        document.getElementById('lose').hidden = "";
+    }
+    
+    document.getElementById('puntengegooid').value = '';
+    document.getElementById('score0').innerHTML = scores[0];
+    if(scores[0] < 170){
+        document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
+    }
 }
 
 
@@ -183,8 +199,6 @@ input.addEventListener("keyup", function(event) {
    document.getElementById("okbutton").click();
   }
 });
-
-
 
 
 </script>

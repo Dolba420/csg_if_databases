@@ -45,8 +45,6 @@ require('php/moduscontainer.php');
                         <option value="minigame125">125 minigame</option>
                         <option value="oefen501">501 classic oefenen</option>
                         <option value="oefen125">125 minigame oefenen</option>
-                        <!--<option value="minigame125">Oefening</option>-->
-                        <!--<option value="killer">Killer</option>-->
                 </select>
                 <h3 class="kopjeinstellingen">Tegenstander</h3>
                 <div class="nieuwe_tegenstander" id="nieuwe_tegenstander">
