@@ -268,7 +268,6 @@ if(scores[0] < 170 && uitgooi["w" + scores[0]] != undefined){
 if(scores[1] < 170 && uitgooi["w" + scores[0]] != undefined){
     document.getElementById("uitgooi1").innerHTML = uitgooi["w" + scores[1]];
 }
-
 }
 
 function restart(){
@@ -306,7 +305,15 @@ function aftellen(n){
         document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
     }
 }
-
+function tesw(){
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    console.log(this.responseText);
+  }
+  xhttp.open("POST", "php/newrating.php");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>");
+}
 
 
 </script>
