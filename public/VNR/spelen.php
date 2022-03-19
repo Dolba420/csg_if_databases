@@ -19,10 +19,30 @@ if (mysqli_num_rows($records) > 0) {
         }
     }
 }
+$sql = "SELECT `naam`, `rating` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
+$records = mysqli_query($DBverbinding, $sql);
+if (mysqli_num_rows($records) > 0) {
+    while ($dbid = mysqli_fetch_assoc($records)) {
+        $s1rating = $dbid['rating'];
+    }
+}
+
+
+
+if(isset($_SESSION['speler2'])){
+        $sql = "SELECT `naam`, `rating` FROM `elo` WHERE naam = '" . $_SESSION['speler2'] . "'";
+        $records = mysqli_query($DBverbinding, $sql);
+if (mysqli_num_rows($records) > 0) {
+    while ($dbid = mysqli_fetch_assoc($records)) {
+        $s2rating = $dbid['rating'];
+    }
+}
+}
+
 
 ?>
 
-<nav><h3 class="username"><?php echo $_SESSION['username'];?><?php if(isset($_SESSION['speler2'])){ echo ", " . $_SESSION['speler2'];} ?> (1236)</h3></nav>
+<nav><h3 class="username"><?php echo $_SESSION['username'] . ' (' . $s1rating . ')';?><?php if(isset($_SESSION['speler2'])){ echo ", " . $_SESSION['speler2'] . '(' . $s2rating . ')';} ?> </h3></nav>
 <div class="container">
 <?php
 require('php/moduscontainer.php');
@@ -61,8 +81,9 @@ require('php/moduscontainer.php');
                 </div>
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
                 <input type="number" class="kieslegs" id="frontendlegs" min="1" onchange="document.getElementById('serverlegs').value = document.getElementById('frontendlegs').value;" name="legs" value="<?php if(isset($_SESSION['aantallegs'])){ echo $_SESSION['aantallegs']; } else{ echo 1;}?>">
+                <h3 id="warning" hidden="hidden" class="warning">Let op: oefeningen tellen niet mee voor je gemiddelde</h3>
                 <div class="rated">
-
+                
                 </div>
                 <br>
                 <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
@@ -107,8 +128,10 @@ function speltype(){
                 if(document.getElementById('tegenstander').value == 'null'){
                         document.getElementById('submitknop').disabled = true;
                         document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
+                        document.getElementById('warning').hidden = "hidden";
                 }
                 else{
+                        document.getElementById('warning').hidden = "hidden";
                         document.getElementById('submitknop').disabled = false;
                         document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
                 }
@@ -116,20 +139,24 @@ function speltype(){
         if(document.getElementById('spel').value == 'minigame125'){
                 document.getElementById('form').action = '125uitgooi.php';
                 if(document.getElementById('tegenstander').value == 'null'){
+                        document.getElementById('warning').hidden = "hidden";
                         document.getElementById('submitknop').disabled = true;
                         document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
                 }
                 else{
+                        document.getElementById('warning').hidden = "hidden";
                         document.getElementById('submitknop').disabled = false;
                         document.getElementById('submitknop').value = '<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>';
                 }
         }
         if(document.getElementById('spel').value == 'oefen501'){
+                document.getElementById('warning').hidden = "";
                 document.getElementById('submitknop').disabled = false;
                 document.getElementById('form').action = 'oefening501.php';
                 document.getElementById('submitknop').value = 'Oefenen';
         }
         if(document.getElementById('spel').value == 'oefen125'){
+                document.getElementById('warning').hidden = "";
                 document.getElementById('form').action = 'oefening125.php';
                 document.getElementById('submitknop').disabled = false;
                 document.getElementById('submitknop').value = 'Oefenen';
