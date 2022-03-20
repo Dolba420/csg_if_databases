@@ -49,7 +49,7 @@ require('php/logincheck.php');
 <div class="win" id="win" hidden="hidden">
     <h1 id="winmessage"></h1>
     <video width="320" height="240" id="videoplay" controls loop id="winfilm">
-  
+    <source id="filmsrc" src="media/win/win.mp4" type="video/mp4">
 </video>
 <br><br><br>
 <input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
@@ -299,13 +299,7 @@ input.addEventListener("keyup", function(event) {
 
 var gegooidewaarde;
 
-function aftellen(n){
-    if(n > 0){
-        scores[spelerbeurt]--;
-        aftellen(n-1);
-        document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
-    }
-}
+
 function rating(speler){
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
@@ -316,6 +310,20 @@ function rating(speler){
   xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win='" + speler + "'");
 }
 
+var winfilmpjes = [];
+<?php
+        $directory = 'media/win';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        foreach ($scanned_directory as &$value) {
+            echo 'winfilmpjes.push("' . $value . '");';
+        }
+        ?>
+function winfilm(){
+    document.getElementById("filmsrc").src = "media/win/" + winfilmpjes[1];
+}
+function maxscore(){
+
+}
 
 </script>
 
