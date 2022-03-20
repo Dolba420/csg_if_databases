@@ -217,6 +217,7 @@ if(legs[0] == Math.floor(legstotwin / 2) + 1 || legs[1] == Math.floor(legstotwin
     document.getElementById("spelgestart").hidden = "hidden";
     document.getElementById("win").hidden = "";
     document.getElementById("videoplay").play();
+    rating(spelers[legs.indexOf(Math.max(...legs))]);
     gameid++;
 }
 if(spelerbeurt == 0){
@@ -305,14 +306,14 @@ function aftellen(n){
         document.getElementById('score' + spelerbeurt).innerHTML = scores[spelerbeurt];
     }
 }
-function tesw(){
+function rating(speler){
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function() {
     console.log(this.responseText);
   }
   xhttp.open("POST", "php/newrating.php");
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win='VNR'");
+  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win='" + speler + "'");
 }
 
 

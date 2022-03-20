@@ -255,6 +255,9 @@ function restart(){
 }
 
 
+
+
+
 var input = document.getElementById("puntengegooid");
 input.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
