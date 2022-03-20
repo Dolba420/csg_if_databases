@@ -19,22 +19,22 @@ if (mysqli_num_rows($records) > 0) {
         }
     }
 }
-$sql = "SELECT `naam`, `rating` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
+$sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
-        $s1rating = $dbid['rating'];
+        $s1rating = $dbid['rating501'];
     }
 }
 
 
 
 if(isset($_SESSION['speler2'])){
-        $sql = "SELECT `naam`, `rating` FROM `elo` WHERE naam = '" . $_SESSION['speler2'] . "'";
+        $sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_SESSION['speler2'] . "'";
         $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
-        $s2rating = $dbid['rating'];
+        $s2rating = $dbid['rating501'];
     }
 }
 }

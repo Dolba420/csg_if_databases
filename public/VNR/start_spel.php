@@ -312,7 +312,7 @@ function tesw(){
   }
   xhttp.open("POST", "php/newrating.php");
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>");
+  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win='VNR'");
 }
 
 

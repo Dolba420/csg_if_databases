@@ -13,7 +13,7 @@ else{
     $_SESSION["username"] = $_POST['username'];
     echo "Nieuw account aangemaakt! U wordt doorverwezen.";
     echo '<head><meta http-equiv="refresh" content="2;url=dashboard.php" /></head>';
-    $sql = 'INSERT INTO `elo`(`naam`, `rating`) VALUES ("' . $_POST['username'] . '",1000)';
+    $sql = 'INSERT INTO `elo`(`naam`, `rating501`, `rating125`) VALUES ("' . $_POST['username'] . '",1000,1000)';
     $records = mysqli_query($DBverbinding, $sql);
 }
 
