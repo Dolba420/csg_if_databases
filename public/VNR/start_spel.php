@@ -166,7 +166,7 @@ function beurt(speler){
     beurtarray[0].className = "speler1spel";
     beurtarray[1].className = "speler2spel";
     beurtarray[spelerbeurt].className = "speler" + (spelerbeurt + 1) + "spelactief";
-
+    
 }
 function geworpen(){
     if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
@@ -262,13 +262,15 @@ else{
 }
 document.getElementById("uitgooi0").innerHTML = "";
 document.getElementById("uitgooi1").innerHTML = "";
-
 if(scores[0] < 170 && uitgooi["w" + scores[0]] != undefined){
     document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
 }
-if(scores[1] < 170 && uitgooi["w" + scores[0]] != undefined){
+if(scores[1] < 170 && uitgooi["w" + scores[1]] != undefined){
     document.getElementById("uitgooi1").innerHTML = uitgooi["w" + scores[1]];
 }
+
+
+
 }
 
 function restart(){
@@ -307,7 +309,7 @@ function rating(speler){
   }
   xhttp.open("POST", "php/newrating.php");
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win='" + speler + "'");
+  xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win=" + speler + "");
 }
 
 var winfilmpjes = [];

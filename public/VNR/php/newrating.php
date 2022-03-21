@@ -37,21 +37,23 @@ if (mysqli_num_rows($records) > 0) {
 
 
 $winkansa = 1/(1+ pow(10, (($s2rating - $s1rating)/400)));
-if($POST['username'] == $_POST['win']){
-    $s1rating = $s1rating + $k * (1 - $winkansa);
-    $s2rating = $s2rating - $k * (1 - $winkansa);
+$winkansb = 1 - $winkansa;
+$username = trim($_POST['username']);
+$winner = trim($_POST['win']);
 
+if($username == $winner){
+    $s1rating = $s1rating + ($k * (1 - $winkansa));
+    $s2rating = $s2rating + ($k * (0 - $winkansb));
 }
 else{
-    $s1rating = $s1rating - $k * $winkansa;
-    $s2rating = $s2rating + $k * $winkansa;
-    
+    $s1rating = $s1rating + ($k * (0 - $winkansa));
+    $s2rating = $s2rating + ($k * (1 - $winkansb));
 }
+
 
 $sql = $sql . $s1rating . " WHERE naam = '" . $_POST['username'] . "'";
 $sqladd = $sqladd . $s2rating . " WHERE naam = '" . $_POST['tegenstander'] . "'";
-echo $sql;
-echo $sqladd;
+
 $records = mysqli_query($DBverbinding, $sql);
 $records = mysqli_query($DBverbinding, $sqladd);
 
