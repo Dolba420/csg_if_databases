@@ -49,7 +49,11 @@ require('php/logincheck.php');
 <div class="win" id="win" hidden="hidden">
     <h1 id="winmessage"></h1>
     <video width="320" height="240" id="videoplay" controls loop id="winfilm">
-    <source id="filmsrc" src="media/win/win.mp4" type="video/mp4">
+    <source id="filmsrc" src="<?php
+        $directory = 'media/win/filmpjes/';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        echo  $directory . $scanned_directory[array_rand( $scanned_directory)];
+        ?>" type="video/mp4">
 </video>
 <br><br><br>
 <input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
@@ -313,16 +317,8 @@ function rating(speler){
 }
 
 var winfilmpjes = [];
-<?php
-        $directory = 'media/win';
-        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-        foreach ($scanned_directory as &$value) {
-            echo 'winfilmpjes.push("' . $value . '");';
-        }
-        ?>
-function winfilm(){
-    document.getElementById("filmsrc").src = "media/win/" + winfilmpjes[1];
-}
+
+
 function maxscore(){
 
 }
