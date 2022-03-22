@@ -4,7 +4,7 @@ require('database.php');
 /*echo $_POST['username'];
 echo $_POST['tegenstander'];*/
 
-$sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_POST['username'] . "'";
+$sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_POST['username'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -18,7 +18,7 @@ if (mysqli_num_rows($records) > 0) {
 }
 
 
-$sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_POST['tegenstander'] . "'";
+$sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_POST['tegenstander'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -26,10 +26,6 @@ if (mysqli_num_rows($records) > 0) {
             $s2rating = $dbid['rating501'];
             $sql = "UPDATE `elo` SET `rating501`=";
             $sqladd = "UPDATE `elo` SET `rating501`=";
-        }
-        else{
-            $sql = "UPDATE `elo` SET `rating125`=";
-            $sqladd = "UPDATE `elo` SET `rating125`=";
         }
     }
 }

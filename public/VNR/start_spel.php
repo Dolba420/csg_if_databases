@@ -192,7 +192,7 @@ function geworpen(){
     }
     else{
         if(document.getElementById('puntengegooid').value == 180 && scores[spelerbeurt] - document.getElementById('puntengegooid').value > 2){
-                //audio.play();
+                maxscore();
             }
     if(document.getElementById('puntengegooid').value <= 180 && document.getElementById('puntengegooid').value >= 0 && document.getElementById('puntengegooid').value != ""){
         if(scores[spelerbeurt] - document.getElementById('puntengegooid').value < 2){
@@ -316,11 +316,22 @@ function rating(speler){
   xhttp.send("username=<?php echo $_SESSION['username'];?>&tegenstander=<?php echo $_POST['tegenstander'];?>&game=501&win=" + speler + "");
 }
 
-var winfilmpjes = [];
+
+var geluidjes = [];
+<?php
+$directory = 'media/win/geluidjes/';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        $x = 0;
+        foreach ($scanned_directory as list($a)) {
+            echo  "geluidjes.push(new Audio('" . $directory . $scanned_directory[$x] . "'));";
+            $x++;
+        }
+        
+    ?>
 
 
 function maxscore(){
-
+    geluidjes[Math.floor(Math.random()*geluidjes.length)].play();
 }
 
 </script>

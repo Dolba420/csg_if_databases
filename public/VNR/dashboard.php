@@ -7,7 +7,7 @@
 
 <?php
 require('php/logincheck.php');
-$sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
+$sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {

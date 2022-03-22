@@ -7,7 +7,7 @@
 
 <?php
 require('php/logincheck.php');
-$sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
+$sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -32,11 +32,12 @@ include 'php/moduscontainer.php';
                 <th>Gemiddelde</th>
             </tr>
             <tr onclick="chart(0)">
-                <td>Gemiddelde per drie darts</td>
+                <td class="marked">Gemiddelde per drie darts</td>
                 <td id="gemiddelde"></td>
             </tr>
             <tr onclick="chart(1)">
-                <td>Eerste negen darts gemiddelde</td>
+            
+                <td class="marked">Eerste negen darts gemiddelde</td>
                 <td id="eerste9"></td>
             </tr>
             <tr>
@@ -107,7 +108,7 @@ include 'php/moduscontainer.php';
                 <th>Gemiddelde</th>
             </tr>
             <tr onclick="chart(2)">
-                <td>Gemiddelde per drie darts</td>
+                <td class="marked">Gemiddelde per drie darts</td>
                 <td id="gemiddelde125"></td>
             </tr>
             <td>Hoogste checkout</td>
@@ -148,6 +149,7 @@ $allegame = array();
             $spelsoort;
             $lost = 0;
             $won = 0;
+            $vs = 'vs';
             $sql = "SELECT DISTINCT  speler FROM worp WHERE game_id = " . $allegame[$x];
             $records = mysqli_query($DBverbinding, $sql);
             if (mysqli_num_rows($records) > 0) {
@@ -170,28 +172,7 @@ $allegame = array();
                     
                 }
             }
-            /*if($spelsoort == '125 uitgooien'){
-                $sql = "SELECT * FROM worp WHERE game_id = " . $allegame[$x] .  "' AND  spelsoort = '125 uitgooienlegwin' OR spelsoort = '125 uitgooienleglose'";
-                $records = mysqli_query($DBverbinding, $sql);
-                if (mysqli_num_rows($records) > 0) {
-                    while ($dbid = mysqli_fetch_assoc($records)) {
-                        if($dbid['spelsoort'] == '125 uitgooienlegwin'){
-                            $won++;
-                        }
-                        else if($dbid['spelsoort'] == '125 uitgooienleglose'){
-                            $lost++;
-                        }
-                        array_push($legs, 0);
-                    }
-                }
-                if($won > $lost){
-                    $win = 'Gewonnen';
-                }
-                else{
-                    $win = 'Verloren';
-                }
-                echo "sfsddfsfddfsdfsdfs";
-            }*/
+
             if($spelsoort == '125 uitgooienlegwin' OR $spelsoort == '125 uitgooienleglose' OR $spelsoort == '125 uitgooien'){
                 $spelsoort = "125 Uitgooien";
                 $win = 'Gewonnen';
@@ -218,7 +199,7 @@ $allegame = array();
 
                 echo '<a href="ziegame.php?game=' . $allegame[$x] . '"><div class="potje' . $win . '">
                 <div class="horizontaal">
-                <h2 class="tegen">' . $naam[0] . ' vs. ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
+                <h2 class="tegen">' . $naam[0] . ' && ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
                 </div>
                 <h3 class="tegen">' . $spelsoort . '</h3>
             </div></a>';
@@ -262,7 +243,7 @@ $allegame = array();
             }
             echo '<a href="ziegame.php?game=' . $allegame[$x] . '"><div class="potje' . $win . '">
             <div class="horizontaal">
-            <h2 class="tegen">' . $naam[0] . ' vs. ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
+            <h2 class="tegen">' . $naam[0] . ' Vs. ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
             </div>
             <h3 class="tegen">' . $spelsoort . '</h3>
         </div></a>';

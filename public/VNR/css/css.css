@@ -407,3 +407,14 @@ canvas{
 .warning {
     color: white;
 }
+.marked{
+    text-decoration: underline;
+}
+.table a
+{
+    display:block;
+    /*text-decoration:none;*/
+}
+.link{
+    text-decoration: underline;
+}

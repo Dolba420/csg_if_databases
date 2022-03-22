@@ -44,7 +44,11 @@ require('php/logincheck.php');
 <div class="win" id="win" hidden="hidden">
     <h1 id="winmessage">GEWONNEN</h1>
     <video width="320" height="240" id="videoplay" controls loop id="winfilm">
-  
+    <source id="filmsrc" src="<?php
+        $directory = 'media/win/filmpjes/';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        echo  $directory . $scanned_directory[array_rand( $scanned_directory)];
+        ?>" type="video/mp4">
 </video>
 <br><br><br>
 <input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
@@ -57,7 +61,11 @@ require('php/logincheck.php');
 <div class="win" id="lose" hidden="hidden">
     <h1 id="winmessage">VERLOREN</h1>
     <video width="320" height="240" id="videoplay" controls loop id="winfilm">
-  
+    <source id="filmsrc" src="<?php
+        $directory = 'media/lose/filmpjes/';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        echo  $directory . $scanned_directory[array_rand( $scanned_directory)];
+        ?>" type="video/mp4">
 </video>
 <br><br><br>
 <input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
@@ -265,6 +273,25 @@ input.addEventListener("keyup", function(event) {
    document.getElementById("okbutton").click();
   }
 });
+
+var geluidjes = [];
+<?php
+$directory = 'media/win/geluidjes/';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        $x = 0;
+        foreach ($scanned_directory as list($a)) {
+            echo  "geluidjes.push(new Audio('" . $directory . $scanned_directory[$x] . "'));";
+            $x++;
+        }
+        
+    ?>
+
+
+
+
+function maxscore(){
+    geluidjes[Math.floor(Math.random()*geluidjes.length)].play();
+}
 
 
 

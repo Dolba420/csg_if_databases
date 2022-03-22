@@ -19,7 +19,7 @@ if (mysqli_num_rows($records) > 0) {
         }
     }
 }
-$sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
+$sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -30,7 +30,7 @@ if (mysqli_num_rows($records) > 0) {
 
 
 if(isset($_SESSION['speler2'])){
-        $sql = "SELECT `naam`, `rating501`, `rating125` FROM `elo` WHERE naam = '" . $_SESSION['speler2'] . "'";
+        $sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_SESSION['speler2'] . "'";
         $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
@@ -42,7 +42,7 @@ if (mysqli_num_rows($records) > 0) {
 
 ?>
 
-<nav><h3 class="username"><?php echo $_SESSION['username'] . ' (' . $s1rating . ')';?><?php if(isset($_SESSION['speler2'])){ echo ", " . $_SESSION['speler2'] . '(' . $s2rating . ')';} ?> </h3></nav>
+<nav><h3 class="username"><?php echo $_SESSION['username'] . ' (' . $s1rating . ')';?><?php if(isset($_SESSION['speler2'])){ echo ", " . $_SESSION['speler2'] . ' (' . $s2rating . ')';} ?> </h3></nav>
 <div class="container">
 <?php
 require('php/moduscontainer.php');
