@@ -418,3 +418,15 @@ canvas{
 .link{
     text-decoration: underline;
 }
+.checkbox{
+    margin-left: 5%;
+    height: 5%;
+    width: 5%;
+    padding-top: 10px;
+}
+.s2login{
+    font-size: 120%;
+    width: 20%;
+    height: 50px;
+    margin-right: 10px;
+}

@@ -43,7 +43,7 @@ require('php/logincheck.php');
 
 <div class="win" id="win" hidden="hidden">
     <h1 id="winmessage">GEWONNEN</h1>
-    <video width="320" height="240" id="videoplay" controls loop id="winfilm">
+    <video width="640" height="480" id="videoplay" controls loop id="winfilm">
     <source id="filmsrc" src="<?php
         $directory = 'media/win/filmpjes/';
         $scanned_directory = array_diff(scandir($directory), array('..', '.'));
@@ -60,7 +60,7 @@ require('php/logincheck.php');
 
 <div class="win" id="lose" hidden="hidden">
     <h1 id="winmessage">VERLOREN</h1>
-    <video width="320" height="240" id="videoplay" controls loop id="winfilm">
+    <video width="640" height="480" id="videoplay" controls loop id="winfilm">
     <source id="filmsrc" src="<?php
         $directory = 'media/lose/filmpjes/';
         $scanned_directory = array_diff(scandir($directory), array('..', '.'));
@@ -182,7 +182,7 @@ function beurt(speler){
     beurtarray[spelerbeurt].className = "spelernaam" + spelerbeurt + "active";
 }
 function geworpen(){
-    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0 || document.getElementById('puntengegooid').value == '') return;
     if((scores[0] - document.getElementById('puntengegooid').value) < 0){beurt(); aantalworpen++; document.getElementById('puntengegooid').value = ''; return;}
     if(scores[0] - document.getElementById('puntengegooid').value <= 0){beurt(); win(); return}
     if(aantalworpen == 2){lose(); return;}
@@ -231,7 +231,7 @@ function win(){
     xhttp.open("GET", "php/saveworp.php?game=" + gameid + "&worp=" + worp + "&speler=" + spelers[spelerbeurt] + "&aantal=" + document.getElementById('puntengegooid').value + "&worpsoort=125 uitgooien"  + "&spelsoort=125 uitgooienlegwin");
     xhttp.send();
     aantalworpen = 0;
-    std += 2;
+    std += 1;
     scores[0] = std;
     if(scores[0] > 130){
         document.getElementById('spelgestart').hidden = "hidden";
@@ -250,6 +250,29 @@ function restart(){
     document.getElementById("win").hidden = "hidden";
     document.getElementById("lose").hidden = "hidden";
     document.getElementById("videoplay").pause();
+    document.getElementById("spelerkeuze").hidden = "";
+    spelerbeurt = 0;
+    if(beginmodus == "willekeurig"){
+    document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = bspeler;
+        spelerbeurt = bspeler * -1 + 1;
+        beurt(spelerbeurt);
+}
+if(beginmodus == "ik"){
+        document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = 0;
+        spelerbeurt = 0 * -1 + 1;
+        beurt(spelerbeurt);
+}
+if(beginmodus == "tegenstander"){
+        document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = 1;
+        spelerbeurt = 1 * -1 + 1;
+        beurt(spelerbeurt);
+}
     legs[0] = 0;
     worp = 0;
     std = 125;
@@ -258,7 +281,7 @@ function restart(){
     document.getElementById("uitgooi0").innerHTML = uitgooi["w" + scores[0]];
     document.getElementById('puntengegooid').value = '';
     document.getElementById('score0').innerHTML = 125;
-    document.getElementById("spelerkeuze").hidden = "";
+
 
 }
 
@@ -273,28 +296,6 @@ input.addEventListener("keyup", function(event) {
    document.getElementById("okbutton").click();
   }
 });
-
-var geluidjes = [];
-<?php
-$directory = 'media/win/geluidjes/';
-        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-        $x = 0;
-        foreach ($scanned_directory as list($a)) {
-            echo  "geluidjes.push(new Audio('" . $directory . $scanned_directory[$x] . "'));";
-            $x++;
-        }
-        
-    ?>
-
-
-
-
-function maxscore(){
-    geluidjes[Math.floor(Math.random()*geluidjes.length)].play();
-}
-
-
-
 
 </script>
 

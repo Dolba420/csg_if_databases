@@ -79,16 +79,19 @@ require('php/moduscontainer.php');
                         ?>
                 <input type="button" class="new_tegenstanderinput" value="Nieuwe tegenstander" onclick="togglevisibility();">
                 </div>
+                <h3 class="kopjeinstellingen">geluidjes<input class="checkbox" type="checkbox" name="geluid" checked="true"></h3>
                 <h3 class="kopjeinstellingen">Aantal Legs voor winst</h3>
                 <input type="number" class="kieslegs" id="frontendlegs" min="1" onchange="document.getElementById('serverlegs').value = document.getElementById('frontendlegs').value;" name="legs" value="<?php if(isset($_SESSION['aantallegs'])){ echo $_SESSION['aantallegs']; } else{ echo 1;}?>">
                 <h3 id="warning" hidden="hidden" class="warning">Let op: oefeningen tellen niet mee voor je gemiddelde</h3>
+                
                 <div class="rated">
                 
                 </div>
                 <br>
                 <input type="text" value=<?php echo '"' . $gameid . '"'?> name="gameid" hidden="hidden">
                 <input id="submitknop" type="submit" value="<?php if(isset($_SESSION['speler2'])){ echo "spelen";} else{ echo "Laat de tegenstander eerst inloggen";}?>" class="kieslegs" <?php if(isset($_SESSION['speler2'])){} else{ echo "disabled";}?>><br>
-</form>
+
+        </form>
 
             </div>
         </div>
@@ -98,9 +101,9 @@ require('php/moduscontainer.php');
         
         <form action="speler2login.php" method="post">
     <h2>Log in</h2>
-    <input type="name" name="username" placeholder="Gebruikersnaam">
-    <input type="password" name="password" placeholder="Wachtwoord">
-    <input type="submit" value="Log in"><br>
+    <input type="name" class="s2login" name="username" placeholder="Gebruikersnaam">
+    <input type="password" class="s2login" name="password" placeholder="Wachtwoord">
+    <input type="submit" class="s2login" value="Log in"><br>
     <input type="tekst" value="1" id="serverlegs" name="legs" hidden="hidden">
     <input type="tekst" value="classic 501" name="serverspel" id="serverspel" hidden="hidden">
     <input type="tekst" value="bull" name="serverbegin" id="serverbegin" hidden="hidden">

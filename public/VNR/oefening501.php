@@ -41,8 +41,12 @@ require('php/logincheck.php');
 
 <div class="win" id="lose" hidden="hidden">
     <h1 id="winmessage">VERLOREN</h1>
-    <video width="320" height="240" id="videoplay" controls loop id="winfilm">
-  
+    <video width="640" height="480" id="videoplay" controls loop id="winfilm">
+    <source id="filmsrc" src="<?php
+        $directory = 'media/win/filmpjes/';
+        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        echo  $directory . $scanned_directory[array_rand( $scanned_directory)];
+        ?>" type="video/mp4">
 </video>
 <br><br><br>
 <input type="button" value="Speel opniew met zelfde instellingen" onclick="restart();">
@@ -122,7 +126,7 @@ echo "};";
 
 
 function geworpen(){
-    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159  || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0 || document.getElementById('puntengegooid').value == '') return;
     if((scores[0] - document.getElementById('puntengegooid').value) < 0){  document.getElementById('puntengegooid').value = ''; return;}
     if(scores[0] - document.getElementById('puntengegooid').value == 0){ win(); return}
     scores[0] = scores[0] - document.getElementById('puntengegooid').value;

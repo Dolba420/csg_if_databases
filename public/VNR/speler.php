@@ -10,6 +10,7 @@ require('php/logincheck.php');
 ?>
 <?php
 require('php/logincheck.php');
+$allegame = array();
 $sql = "SELECT `naam`, `rating501` FROM `elo` WHERE naam = '" . $_SESSION['username'] . "'";
 $records = mysqli_query($DBverbinding, $sql);
 if (mysqli_num_rows($records) > 0) {
@@ -24,8 +25,10 @@ if (mysqli_num_rows($records) > 0) {
     while ($dbid = mysqli_fetch_assoc($records)) {
         if($vorigegame == $dbid['game_id']){
             $extraquery = $extraquery . "game_id = " . $dbid['game_id'] . " OR ";
+            array_push($allegame, $dbid["game_id"]);
         }
         $vorigegame = $dbid['game_id'];
+        
     }
     $extraquery = $extraquery . "1 = 2)";
 }
@@ -143,7 +146,133 @@ include 'php/moduscontainer.php';
                 ?></td>
             </tr>
 </table>
+<h1 class="header">Vorige spellen</h1>
 
+<?php
+
+
+
+    $sql = "SELECT DISTINCT  game_id FROM worp WHERE speler = '" . $_SESSION['username'] . "'";
+    $records = mysqli_query($DBverbinding, $sql);
+    if (mysqli_num_rows($records) > 0) {
+        
+        $x = count($allegame) - 1;
+        while($x >= 0){
+            $legs = array();
+            $naam = array();
+            $class;
+            $datum;
+            $spelsoort;
+            $lost = 0;
+            $won = 0;
+            $vs = 'vs';
+            $sql = "SELECT DISTINCT  speler FROM worp WHERE game_id = " . $allegame[$x];
+            $records = mysqli_query($DBverbinding, $sql);
+            if (mysqli_num_rows($records) > 0) {
+                while ($dbid = mysqli_fetch_assoc($records)) {
+                    array_push($naam, $dbid["speler"]);
+                }
+            }
+            $sql = "SELECT DISTINCT datum FROM worp WHERE game_id = " . $allegame[$x];
+            $records = mysqli_query($DBverbinding, $sql);
+            if (mysqli_num_rows($records) > 0) {
+                while ($dbid = mysqli_fetch_assoc($records)) {
+                    $datum = $dbid['datum'];
+                }
+            }
+            $sql = "SELECT DISTINCT spelsoort FROM worp WHERE game_id = " . $allegame[$x] . " AND NOT spelsoort = 'Classic 501legwin'";
+            $records = mysqli_query($DBverbinding, $sql);
+            if (mysqli_num_rows($records) > 0) {
+                while ($dbid = mysqli_fetch_assoc($records)) {
+                    $spelsoort = $dbid['spelsoort'];
+                    
+                }
+            }
+
+            if($spelsoort == '125 uitgooienlegwin' OR $spelsoort == '125 uitgooienleglose' OR $spelsoort == '125 uitgooien'){
+                $spelsoort = "125 Uitgooien";
+                $win = 'Gewonnen';
+                $sql = "SELECT COUNT(spelsoort) FROM worp WHERE game_id = " . $allegame[$x] . " AND spelsoort = '125 uitgooienleglose' ";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        $lost = $dbid['COUNT(spelsoort)'];
+                    }
+                }
+                $sql = "SELECT COUNT(spelsoort) FROM worp WHERE game_id = " . $allegame[$x] . " AND spelsoort = '125 uitgooienlegwin' ";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        $won = $dbid['COUNT(spelsoort)'];
+                    }
+                }
+                if($won > $lost){
+                    $win = 'Gewonnen';
+                }
+                if($won < $lost){
+                    $win = 'Verloren';
+                }
+
+                echo '<a href="ziegame.php?game=' . $allegame[$x] . '"><div class="potje' . $win . '">
+                <div class="horizontaal">
+                <h2 class="tegen">' . $naam[0] . ' && ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
+                </div>
+                <h3 class="tegen">' . $spelsoort . '</h3>
+            </div></a>';
+            }
+            if($spelsoort == 'Classic 501'){
+                $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[0] . "' AND (spelsoort = 'Classic 501legwin' OR spelsoort = '125 uitgooienlegwin')";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        array_push($legs, $dbid['COUNT(speler)']);
+                    }
+                }
+                $sql = "SELECT COUNT(speler) FROM worp WHERE game_id = " . $allegame[$x] . " AND speler = '" . $naam[1] . "' AND (spelsoort = 'Classic 501legwin' OR spelsoort = '125 uitgooienlegwin')";
+                $records = mysqli_query($DBverbinding, $sql);
+                if (mysqli_num_rows($records) > 0) {
+                    while ($dbid = mysqli_fetch_assoc($records)) {
+                        array_push($legs, $dbid['COUNT(speler)']);
+                    }
+                }
+            }
+
+            if(count($legs) <= 1 || count($naam) <= 1){
+                $x--;
+            }
+            else{
+                
+            if($legs[0] > $legs[1] AND $naam[0] == $_SESSION['username']){
+                $win = 'Gewonnen';
+            }
+            else if($legs[0] < $legs[1] AND $naam[0] == $_SESSION['username']){
+                $win = 'Verloren';
+            }
+            else if($legs[0] > $legs[1] AND $naam[1] == $_SESSION['username']){
+                $win = 'Verloren';
+            }
+            else if($legs[0] < $legs[1] AND $naam[1] == $_SESSION['username']){
+                $win = 'Gewonnen';
+            }
+            if($legs[0] == $legs[1]){
+                $win = 'Gelijkspel';
+            }
+            echo '<a href="ziegame.php?game=' . $allegame[$x] . '"><div class="potje' . $win . '">
+            <div class="horizontaal">
+            <h2 class="tegen">' . $naam[0] . ' Vs. ' . $naam[1] . ' (' . $win . ')</h2><h2 class="date">' . $datum . '</h2>
+            </div>
+            <h3 class="tegen">' . $spelsoort . '</h3>
+        </div></a>';
+            $x--;
+        }
+        }
+    }
+    else{
+        echo "<h2>Geen eerdere spellen.</h2>";
+    }
+
+?>
+<br><br><br><br>
             </div>
             </div>
         </div>

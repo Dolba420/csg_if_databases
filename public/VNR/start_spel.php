@@ -48,7 +48,7 @@ require('php/logincheck.php');
 
 <div class="win" id="win" hidden="hidden">
     <h1 id="winmessage"></h1>
-    <video width="320" height="240" id="videoplay" controls loop id="winfilm">
+    <video width="640" height="480" id="videoplay" controls loop id="winfilm">
     <source id="filmsrc" src="<?php
         $directory = 'media/win/filmpjes/';
         $scanned_directory = array_diff(scandir($directory), array('..', '.'));
@@ -173,7 +173,7 @@ function beurt(speler){
     
 }
 function geworpen(){
-    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0) return;
+    if(document.getElementById('puntengegooid').value > 180 || document.getElementById('puntengegooid').value == 169 || document.getElementById('puntengegooid').value == 168 || document.getElementById('puntengegooid').value == 166 || document.getElementById('puntengegooid').value == 165 || document.getElementById('puntengegooid').value == 163 || document.getElementById('puntengegooid').value == 162 || document.getElementById('puntengegooid').value == 159 || document.getElementById('puntengegooid').value % 1 !== 0 || document.getElementById('puntengegooid').value < 0 || document.getElementById('puntengegooid').value == '') return;
     if(scores[spelerbeurt] - document.getElementById('puntengegooid').value == 0){
         legs[spelerbeurt]++;
         scores[0] = 501;
@@ -278,10 +278,32 @@ if(scores[1] < 170 && uitgooi["w" + scores[1]] != undefined){
 }
 
 function restart(){
-    
     document.getElementById("spelerkeuze").hidden = "";
     document.getElementById("win").hidden = "hidden";
     document.getElementById("videoplay").pause();
+    var spelerbeurt = 0;
+if(beginmodus == "willekeurig"){
+    document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = bspeler;
+        spelerbeurt = bspeler * -1 + 1;
+        beurt(spelerbeurt);
+}
+if(beginmodus == "ik"){
+        document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = 0;
+        spelerbeurt = 0 * -1 + 1;
+        beurt(spelerbeurt);
+}
+if(beginmodus == "tegenstander"){
+        document.getElementById("spelerkeuze").hidden = "hidden";
+        document.getElementById("spelgestart").hidden = "";
+        beginspeler = 1;
+        spelerbeurt = 1 * -1 + 1;
+        beurt(spelerbeurt);
+}
+
     legs[0] = 0;
     legs[1] = 0;
     document.getElementById("stand").innerHTML = legs[0] + " - " +  legs[1];
@@ -289,8 +311,8 @@ function restart(){
     aantalbeurten1 = 0;
     som[0] = 0;
     som[1] = 0;
-    gemspeler.innerHTML = "gemiddelde : " + som[0] / (aantalbeurten1);
-    gemtegenspeler.innerHTML = "gemiddelde: " + som[1] / (aantalbeurten2);
+    gemspeler.innerHTML = "gemiddelde : 0";
+    gemtegenspeler.innerHTML = "gemiddelde: 0";
     worp = 0;
 }
 
@@ -331,7 +353,13 @@ $directory = 'media/win/geluidjes/';
 
 
 function maxscore(){
-    geluidjes[Math.floor(Math.random()*geluidjes.length)].play();
+    <?php
+        if($_POST['geluid'] == true){
+            echo "geluidjes[Math.floor(Math.random()*geluidjes.length)].play();";
+        }
+        
+        ?>
+    
 }
 
 </script>
